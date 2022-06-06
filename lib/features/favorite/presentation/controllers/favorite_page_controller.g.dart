@@ -25,15 +25,41 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
+  late final _$temperatureAtom =
+      Atom(name: '_FavoritePageControllerBase.temperature', context: context);
+
+  @override
+  double get temperature {
+    _$temperatureAtom.reportRead();
+    return super.temperature;
+  }
+
+  @override
+  set temperature(double value) {
+    _$temperatureAtom.reportWrite(value, super.temperature, () {
+      super.temperature = value;
+    });
+  }
+
+  late final _$returnCityValuesAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.returnCityValues',
+      context: context);
+
+  @override
+  Future<void> returnCityValues(String city) {
+    return _$returnCityValuesAsyncAction
+        .run(() => super.returnCityValues(city));
+  }
+
   late final _$_FavoritePageControllerBaseActionController =
       ActionController(name: '_FavoritePageControllerBase', context: context);
 
   @override
-  void searchCity(String newValue) {
+  void storeCityTyped(String newValue) {
     final _$actionInfo = _$_FavoritePageControllerBaseActionController
-        .startAction(name: '_FavoritePageControllerBase.searchCity');
+        .startAction(name: '_FavoritePageControllerBase.storeCityTyped');
     try {
-      return super.searchCity(newValue);
+      return super.storeCityTyped(newValue);
     } finally {
       _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -42,7 +68,8 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   @override
   String toString() {
     return '''
-city: ${city}
+city: ${city},
+temperature: ${temperature}
     ''';
   }
 }

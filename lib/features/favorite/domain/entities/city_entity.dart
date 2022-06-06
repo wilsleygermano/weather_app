@@ -1,4 +1,4 @@
-class ListApi {
+class CityEntity {
   double? temperature;
   double? feelsLike;
   int? humidity;
@@ -7,9 +7,9 @@ class ListApi {
   String? cityName;
   String? countryName;
 
-  ListApi({this.temperature, this.feelsLike, this.humidity, this.windSpeed, this.dateTime, this.cityName, this.countryName});
+  CityEntity({this.temperature, this.feelsLike, this.humidity, this.windSpeed, this.dateTime, this.cityName, this.countryName});
 
-  ListApi.fromJson(Map<String, dynamic> json) {
+  CityEntity.fromJson(Map<String, dynamic> json) {
     temperature = json['list']['main']['temp'];
     feelsLike = json['list']['main']['feels_like'];
     humidity = json['list']['main']['humidity'];
