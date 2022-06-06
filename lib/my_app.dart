@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:weather_app/features/favorite/presentation/view/favorite_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -9,7 +11,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Weather App',
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: FavoritePage(),
     );
+    // return MaterialApp.router(
+    //   routeInformationParser: Modular.routeInformationParser,
+    //   routerDelegate: Modular.routerDelegate
+    // );
   }
 }
