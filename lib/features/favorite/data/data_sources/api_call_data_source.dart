@@ -1,21 +1,30 @@
-// import 'package:dio/dio.dart';
-// import 'package:weather_app/core/constants/api_routes.dart';
-// import 'package:weather_app/features/favorite/domain/entities/city_entity.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:weather_app/core/adapters/remote_client.dart';
+import 'package:weather_app/core/constants/api_routes.dart';
+import 'package:weather_app/core/generics/resource.dart';
+import 'package:weather_app/features/favorite/data/api_acess_error.dart';
+abstract class AcessRemoteDataSource {
+  Future<Resource<Map<String, dynamic>, ApiAcessError>> returnCityValue(
+      String city);
+}
 
-// abstract class ApiCallDataSource{
-//   Future<void> returnCityValues(String city);
-// }
+class ApiAcessRemoteDataSource implements AcessRemoteDataSource {
+  final _remoteClient = Modular.get<RemoteClient>();
 
-// class FetchCityData implements ApiCallDataSource{
-//   @override
-//   Future<void> returnCityValues(String city) async{
-//     try {
-//       CityEntity cityModel;
-//       final dio = Dio();
-//       var response = await dio.get(ApiRoutes.urlApi + "q=$city" + ApiRoutes.apiKey);
-//       final json = Map<String, dynamic>.from(response.data);
-//       cityModel = CityEntity.fromJson(json);
-//     } on DioError catch (e) {
-//     }
-//   }
-// }
+  @override
+  Future<Resource<Map<String, dynamic>, ApiAcessError>> returnCityValue(
+      String city) async {
+    final response = await _remoteClient.get(
+      ApiRoutes.urlApi + "q=$city" + ApiRoutes.apiKey);
+    if (response.statusCode != 200) {
+      return Resource.failed(error: ApiAcessError.unknown);
+    }
+    if (response.statusCode == 500){
+      return Resource.failed(error: ApiAcessError.dioError);
+    }
+    if (response.statusCode == 400){
+      return Resource.failed(error: ApiAcessError.badRequest);
+    }
+    return Resource.success(data: response.data);
+  }
+}

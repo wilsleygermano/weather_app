@@ -12,8 +12,12 @@ void main() async {
   options: DefaultFirebaseOptions.currentPlatform,
 );
   runApp(ModularApp(
+    
       module: AppModule(),
-      child: const MyApp(),
-    ),);
+      child: const MyApp(
+        
+      ),
+    ),
+    );
 }
 

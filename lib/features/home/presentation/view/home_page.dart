@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:weather_app/features/home/presentation/view/controller/home_page_controller.dart';
+import 'package:weather_app/features/home/presentation/controller/home_page_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({

@@ -4,11 +4,10 @@ class CityEntity {
   // int? humidity;
   // double? windSpeed;
   // String? dateTime;
-  // String? cityName;
-  // String? countryName;
+  String? cityName;
+  String? countryName;
 
-  // CityEntity({this.temperature, this.feelsLike, this.humidity, this.windSpeed, this.dateTime, this.cityName, this.countryName});
-  CityEntity({this.temperature});
+  CityEntity({this.temperature, this.cityName, this.countryName});
 
   CityEntity.fromJson(Map<String, dynamic> json) {
     temperature = json['list'][0]['main']['temp'];
@@ -16,19 +15,26 @@ class CityEntity {
     // humidity = json['list']['main']['humidity'];
     // windSpeed = json['list']['wind']['speed'];
     // dateTime = json['list']['dt_txt'];
-    // cityName = json['city']['name'];
-    // countryName = json['city']['country'];
+    cityName = json['city']['name'];
+    countryName = json['city']['country'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['list'][0]['main']['temp'] = temperature;
-    // data['feelsLike'] = feelsLike;
-    // data['humidity'] = humidity;
-    // data['windSpeed'] = windSpeed;
-    // data['dateTime'] = dateTime;
-    // data['cityName'] = cityName;
-    // data['countryName'] = countryName;
-    return data;
-  }
 }
+// class CityEntity {
+//   double? temperature;
+
+
+//   CityEntity(
+//       {this.temperature});
+
+//   factory CityEntity.fromMap(Map<String, dynamic> map) {
+//     return CityEntity(
+//         temperature: map['list'][0]['main']['temp']);
+//   }
+
+//   Map<String, dynamic> toMap(CityEntity entity) {
+//     return {
+//       "temperature": entity.temperature,
+//     };
+//   }
+// }
