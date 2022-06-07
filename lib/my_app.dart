@@ -8,14 +8,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Weather App',
-      home: FavoritePage(),
-    );
-    // return MaterialApp.router(
-    //   routeInformationParser: Modular.routeInformationParser,
-    //   routerDelegate: Modular.routerDelegate
+    // return MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   title: 'Weather App',
+    //   home: FavoritePage(),
     // );
+    return MaterialApp.router(
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate
+    );
   }
 }

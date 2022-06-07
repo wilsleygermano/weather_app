@@ -14,7 +14,6 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   final _controller = Modular.get<FavoritePageController>();
-  final _dataSource = Modular.get<FetchApi>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +26,25 @@ class _FavoritePageState extends State<FavoritePage> {
             TextField(
               onChanged: _controller.storeCityTyped,
               decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(
-                              city: _controller.city,
-                              temperature: _controller.temperature,
-                            ),
-                          ),
-                        );
-                      },
-                      icon: Icon(Icons.send))),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => HomePage(
+                    //       city: _controller.city,
+                    //     ),
+                    //   ),
+                    // );
+                   Modular.to.pushNamed('/home/',
+                   arguments: {'city': _controller.city}
+                   );
+                  },
+                  icon: const Icon(
+                    Icons.send,
+                  ),
+                ),
+              ),
             )
           ],
         );

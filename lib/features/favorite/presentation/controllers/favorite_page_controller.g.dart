@@ -25,32 +25,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
-  late final _$temperatureAtom =
-      Atom(name: '_FavoritePageControllerBase.temperature', context: context);
-
-  @override
-  double get temperature {
-    _$temperatureAtom.reportRead();
-    return super.temperature;
-  }
-
-  @override
-  set temperature(double value) {
-    _$temperatureAtom.reportWrite(value, super.temperature, () {
-      super.temperature = value;
-    });
-  }
-
-  late final _$returnCityValuesAsyncAction = AsyncAction(
-      '_FavoritePageControllerBase.returnCityValues',
-      context: context);
-
-  @override
-  Future<void> returnCityValues(String city) {
-    return _$returnCityValuesAsyncAction
-        .run(() => super.returnCityValues(city));
-  }
-
   late final _$_FavoritePageControllerBaseActionController =
       ActionController(name: '_FavoritePageControllerBase', context: context);
 
@@ -68,8 +42,7 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   @override
   String toString() {
     return '''
-city: ${city},
-temperature: ${temperature}
+city: ${city}
     ''';
   }
 }
