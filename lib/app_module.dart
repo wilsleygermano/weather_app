@@ -1,5 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:weather_app/features/register/register_module.dart';
+import 'package:weather_app/features/login/login_module.dart';
+
+import 'features/register/register_module.dart';
 
 class AppModule extends Module {
   // @override
@@ -10,20 +12,17 @@ class AppModule extends Module {
   //       Bind<RegisterController>((i) => RegisterController()),
   //     ];
 
-   @override
+  @override
   List<ModularRoute> get routes => [
         ModuleRoute(
           Modular.initialRoute,
+          module: LoginModule(),
+        ),
+
+        ModuleRoute(
+          '/register/',
           module: RegisterModule(),
         ),
-        // ModuleRoute(
-        //   '/register/',
-        //   module: RegisterModule(),
-        // ),
-        // ModuleRoute(
-        //   '/onboarding/',
-        //   module: OnboardingModule(),
-        // ),
+        
       ];
-
 }
