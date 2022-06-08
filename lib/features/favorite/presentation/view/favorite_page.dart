@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -53,7 +55,7 @@ class _FavoritePageState extends State<FavoritePage> {
                     cornerRadius: 20.0,
                     activeBgColor: [Colors.purple],
                     activeFgColor: Colors.white,
-                    inactiveBgColor: Color(0XFFC2AFEC),
+                    inactiveBgColor: const Color(0XFFC2AFEC),
                     inactiveFgColor: Colors.white,
                     initialLabelIndex: _controller.initialLabelIndex,
                     totalSwitches: 2,
