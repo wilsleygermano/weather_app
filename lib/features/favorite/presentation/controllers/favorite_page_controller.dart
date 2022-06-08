@@ -20,13 +20,32 @@ abstract class _FavoritePageControllerBase with Store {
   void storeCityTyped(String newValue) => city = newValue;
 
   @observable
+  num temperature = 0;
+
+  @observable
+  num feelsLike = 0;
+
+  @observable
+  num tempMin = 0;
+
+  @observable
+  num tempMax = 0;
+
+  @observable
+  num humidity = 0;
+
+  @observable
+  num windSpeed = 0;
+
+  @observable
+  String dateTime = '';
+
+  @observable
   String cityName = 'Pesquise um local';
 
   @observable
   String countryName = '...';
 
-  @observable
-  num temperature = 0;
 
   @action
   Future<Resource<void, ApiCallError>> returnCityValues(String city) async {
@@ -35,9 +54,15 @@ abstract class _FavoritePageControllerBase with Store {
     if (resource.hasError) {
       return Resource.failed(error: ApiCallError.apiError);
     }
+    temperature = cityModel.data!.temperature!;
+    feelsLike = cityModel.data!.feelsLike!;
+    tempMin = cityModel.data!.tempMin!;
+    tempMax = cityModel.data!.tempMax!;
+    humidity = cityModel.data!.humidity!;
+    windSpeed = cityModel.data!.windSpeed!;
+    dateTime = cityModel.data!.dateTime!;
     cityName = cityModel.data!.cityName!;
     countryName = cityModel.data!.countryName!;
-    temperature = cityModel.data!.temperature!;
     return Resource.success();
   }
 }

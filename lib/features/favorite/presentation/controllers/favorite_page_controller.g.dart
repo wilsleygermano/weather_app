@@ -25,6 +25,118 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
+  late final _$temperatureAtom =
+      Atom(name: '_FavoritePageControllerBase.temperature', context: context);
+
+  @override
+  num get temperature {
+    _$temperatureAtom.reportRead();
+    return super.temperature;
+  }
+
+  @override
+  set temperature(num value) {
+    _$temperatureAtom.reportWrite(value, super.temperature, () {
+      super.temperature = value;
+    });
+  }
+
+  late final _$feelsLikeAtom =
+      Atom(name: '_FavoritePageControllerBase.feelsLike', context: context);
+
+  @override
+  num get feelsLike {
+    _$feelsLikeAtom.reportRead();
+    return super.feelsLike;
+  }
+
+  @override
+  set feelsLike(num value) {
+    _$feelsLikeAtom.reportWrite(value, super.feelsLike, () {
+      super.feelsLike = value;
+    });
+  }
+
+  late final _$tempMinAtom =
+      Atom(name: '_FavoritePageControllerBase.tempMin', context: context);
+
+  @override
+  num get tempMin {
+    _$tempMinAtom.reportRead();
+    return super.tempMin;
+  }
+
+  @override
+  set tempMin(num value) {
+    _$tempMinAtom.reportWrite(value, super.tempMin, () {
+      super.tempMin = value;
+    });
+  }
+
+  late final _$tempMaxAtom =
+      Atom(name: '_FavoritePageControllerBase.tempMax', context: context);
+
+  @override
+  num get tempMax {
+    _$tempMaxAtom.reportRead();
+    return super.tempMax;
+  }
+
+  @override
+  set tempMax(num value) {
+    _$tempMaxAtom.reportWrite(value, super.tempMax, () {
+      super.tempMax = value;
+    });
+  }
+
+  late final _$humidityAtom =
+      Atom(name: '_FavoritePageControllerBase.humidity', context: context);
+
+  @override
+  num get humidity {
+    _$humidityAtom.reportRead();
+    return super.humidity;
+  }
+
+  @override
+  set humidity(num value) {
+    _$humidityAtom.reportWrite(value, super.humidity, () {
+      super.humidity = value;
+    });
+  }
+
+  late final _$windSpeedAtom =
+      Atom(name: '_FavoritePageControllerBase.windSpeed', context: context);
+
+  @override
+  num get windSpeed {
+    _$windSpeedAtom.reportRead();
+    return super.windSpeed;
+  }
+
+  @override
+  set windSpeed(num value) {
+    _$windSpeedAtom.reportWrite(value, super.windSpeed, () {
+      super.windSpeed = value;
+    });
+  }
+
+  late final _$dateTimeAtom =
+      Atom(name: '_FavoritePageControllerBase.dateTime', context: context);
+
+  @override
+  String get dateTime {
+    _$dateTimeAtom.reportRead();
+    return super.dateTime;
+  }
+
+  @override
+  set dateTime(String value) {
+    _$dateTimeAtom.reportWrite(value, super.dateTime, () {
+      super.dateTime = value;
+    });
+  }
+
   late final _$cityNameAtom =
       Atom(name: '_FavoritePageControllerBase.cityName', context: context);
 
@@ -57,22 +169,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
-  late final _$temperatureAtom =
-      Atom(name: '_FavoritePageControllerBase.temperature', context: context);
-
-  @override
-  num get temperature {
-    _$temperatureAtom.reportRead();
-    return super.temperature;
-  }
-
-  @override
-  set temperature(num value) {
-    _$temperatureAtom.reportWrite(value, super.temperature, () {
-      super.temperature = value;
-    });
-  }
-
   late final _$returnCityValuesAsyncAction = AsyncAction(
       '_FavoritePageControllerBase.returnCityValues',
       context: context);
@@ -101,9 +197,15 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   String toString() {
     return '''
 city: ${city},
+temperature: ${temperature},
+feelsLike: ${feelsLike},
+tempMin: ${tempMin},
+tempMax: ${tempMax},
+humidity: ${humidity},
+windSpeed: ${windSpeed},
+dateTime: ${dateTime},
 cityName: ${cityName},
-countryName: ${countryName},
-temperature: ${temperature}
+countryName: ${countryName}
     ''';
   }
 }

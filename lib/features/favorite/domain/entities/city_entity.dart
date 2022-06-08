@@ -1,9 +1,11 @@
 class CityEntity {
   num? temperature;
-  // double? feelsLike;
-  // int? humidity;
-  // double? windSpeed;
-  // String? dateTime;
+  num? feelsLike;
+  num? tempMin;
+  num? tempMax;
+  num? humidity;
+  num? windSpeed;
+  String? dateTime;
   String? cityName;
   String? countryName;
 
@@ -11,29 +13,13 @@ class CityEntity {
 
   CityEntity.fromJson(Map<String, dynamic> json) {
     temperature = json['list'][0]['main']['temp'];
-    // feelsLike = json['list']['main']['feels_like'];
-    // humidity = json['list']['main']['humidity'];
-    // windSpeed = json['list']['wind']['speed'];
-    // dateTime = json['list']['dt_txt'];
+    feelsLike = json['list'][0]['main']['feels_like'];
+    tempMin = json['list'][0]['main']['temp_min'];
+    tempMax = json['list'][0]['main']['temp_max'];
+    humidity = json['list'][0]['main']['humidity'];
+    windSpeed = json['list'][0]['wind']['speed'];
+    dateTime = json['list'][0]['dt_txt'];
     cityName = json['city']['name'];
     countryName = json['city']['country'];
   }
 }
-// class CityEntity {
-//   double? temperature;
-
-
-//   CityEntity(
-//       {this.temperature});
-
-//   factory CityEntity.fromMap(Map<String, dynamic> map) {
-//     return CityEntity(
-//         temperature: map['list'][0]['main']['temp']);
-//   }
-
-//   Map<String, dynamic> toMap(CityEntity entity) {
-//     return {
-//       "temperature": entity.temperature,
-//     };
-//   }
-// }

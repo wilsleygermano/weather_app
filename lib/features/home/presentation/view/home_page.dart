@@ -15,25 +15,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _controller = Modular.get<FavoritePageController>();
 
-  // getCity() {
-  //   final arguments = (ModalRoute.of(context)?.settings.arguments ??
-  //       <String, dynamic>{}) as Map;
-  //   _controller.returnCityValues(arguments['city']);
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance!.addPostFrameCallback((_) {
-  //     getCity();
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
-      return Center(
-        child: Text(_controller.temperature.toString()),
+      return Scaffold(
+        body: Column(
+          children: [
+            Text(_controller.temperature.toString()),
+            Text( _controller.feelsLike.toString()),
+            Text(_controller.tempMin.toString()),
+            Text(_controller.tempMax.toString()),
+            Text(_controller.humidity.toString()),
+            Text(_controller.windSpeed.toString()),
+            Text(_controller.dateTime),
+            Text(_controller.cityName),
+            Text(_controller.countryName),
+          ],
+        )
       );
     });
   }
