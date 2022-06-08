@@ -8,7 +8,7 @@ import 'package:weather_app/features/favorite/presentation/view/favorite_page.da
 class FavoriteModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind<FavoritePageController>((i) => FavoritePageController(),),
+        // Bind<FavoritePageController>((i) => FavoritePageController(),),
         Bind<ApiCallUseCase>((i) => DefaultApiCallUseCase()),
         Bind<ApiCallRepository>((i) => DefaultApiCall()),
         Bind<CallRemoteDataSource>((i) => ApiCallRemoteDataSource()),
