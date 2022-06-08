@@ -46,6 +46,25 @@ abstract class _FavoritePageControllerBase with Store {
   @observable
   String countryName = '...';
 
+  @observable
+  String temperatureUnit = "imperial";
+
+  @action
+  void changeTemperatureUnitToMetric() {
+    temperatureUnit = "metric";
+    initialLabelIndex = 0;
+  }
+
+  @action
+  void changeTemperatureUnitToImperial() {
+    temperatureUnit = "imperial";
+    initialLabelIndex = 1;
+
+  }
+
+@observable
+int initialLabelIndex = 1;
+
   @action
   removeAccents(String wordWithAccents) {
     var _comAcento =
@@ -53,20 +72,20 @@ abstract class _FavoritePageControllerBase with Store {
     var _semAcento =
         'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
     for (int i = 0; i < _comAcento.length; i++) {
-      wordWithAccents = wordWithAccents.replaceAll(_comAcento[i], _semAcento[i]);
+      wordWithAccents =
+          wordWithAccents.replaceAll(_comAcento[i], _semAcento[i]);
     }
     return wordWithAccents;
   }
 
   @action
   Future<Resource<void, ApiCallError>> returnCityValues(String city) async {
-
     final String _provisoryCity = removeAccents(city);
 
     final _newCity = _provisoryCity.replaceAll(" ", '%20').toLowerCase();
 
-    final resource = await _useCase.returnCityValues(_newCity);
-    final cityModel = await _repository.returnCityValues(_newCity);
+    final resource = await _useCase.returnCityValues(_newCity, temperatureUnit);
+    final cityModel = await _repository.returnCityValues(_newCity, temperatureUnit);
     if (resource.hasError) {
       return Resource.failed(error: ApiCallError.apiError);
     }
