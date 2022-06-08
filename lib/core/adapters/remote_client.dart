@@ -14,12 +14,12 @@ class DioRemoteClient implements RemoteClient {
       String url) async {
     try {
       final response = await _dio.get<Map<String, dynamic>>(url);
-      if (response.statusCode != 201) {
+      if (response.statusCode != 200) {
         return ApiResponse(
             statusCode: response.statusCode!,
             error: RemoteClientError.badRequest);
       }
-      return ApiResponse(statusCode: 201, data: response.data);
+      return ApiResponse(statusCode: 200, data: response.data);
     } on DioError catch (_) {
       return ApiResponse(statusCode: 500, error: RemoteClientError.badRequest);
     }

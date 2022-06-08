@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:weather_app/features/home/presentation/controller/home_page_controller.dart';
+import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _controller = Modular.get<HomePageController>();
+  final _controller = Modular.get<FavoritePageController>();
 
   getCity(){
     final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;

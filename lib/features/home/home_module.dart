@@ -9,7 +9,7 @@ class HomeModule extends Module {
   
   @override
   List<Bind> get binds => [
-    Bind<HomePageController>((i) => HomePageController()),
+    Bind<FavoritePageController>((i) => FavoritePageController()),
       ];
 
   @override

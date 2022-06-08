@@ -15,7 +15,7 @@ class DefaultApiAcessUseCase implements ApiAcessUseCase {
       String city) async {
     final _repository = Modular.get<ApiCallRepository>();
 
-    final resource = await _repository.returnCityValue(city);
+    final resource = await _repository.returnCityValues(city);
     if (resource.hasError) {
       return Resource.failed(error: ApiAcessError.apiError);
     }

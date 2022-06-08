@@ -4,7 +4,7 @@ import 'package:weather_app/core/constants/api_routes.dart';
 import 'package:weather_app/core/generics/resource.dart';
 import 'package:weather_app/features/favorite/data/api_acess_error.dart';
 abstract class AcessRemoteDataSource {
-  Future<Resource<Map<String, dynamic>, ApiAcessError>> returnCityValue(
+  Future<Resource<Map<String, dynamic>, ApiAcessError>> returnCityValues(
       String city);
 }
 
@@ -12,7 +12,7 @@ class ApiAcessRemoteDataSource implements AcessRemoteDataSource {
   final _remoteClient = Modular.get<RemoteClient>();
 
   @override
-  Future<Resource<Map<String, dynamic>, ApiAcessError>> returnCityValue(
+  Future<Resource<Map<String, dynamic>, ApiAcessError>> returnCityValues(
       String city) async {
     final response = await _remoteClient.get(
       ApiRoutes.urlApi + "q=$city" + ApiRoutes.apiKey);

@@ -16,7 +16,9 @@ class FavoritePageController = _FavoritePageControllerBase
     with _$FavoritePageController;
 
 abstract class _FavoritePageControllerBase with Store {
-  final _apiAcess = Modular.get<ApiAcessUseCase>();
+  final _useCase = Modular.get<ApiAcessUseCase>();
+  final _repository = Modular.get<ApiCallRepository>();
+
   @observable
   String city = '';
 
@@ -32,42 +34,16 @@ abstract class _FavoritePageControllerBase with Store {
   @observable
   double temperature = 0;
 
-  // @action
-  // Future<void> returnCityValues(String city) async {
-  //   try {
-  //     CityEntity cityModel;
-  //     final dio = Dio();
-  //     var response = await dio.get(ApiRoutes.urlApi + "q=$city" + ApiRoutes.apiKey);
-  //     final json = Map<String, dynamic>.from(response.data);
-  //     cityModel = CityEntity.fromJson(json);
-  //     cityName = cityModel.cityName!;
-  //     countryName = cityModel.countryName!;
-  //     temperature = cityModel.temperature!;
-  //   } on DioError catch (e) {
-  //   }
-  // }
   @action
   Future<Resource<void, ApiAcessError>> returnCityValues(String city) async {
-    final _repository = Modular.get<ApiCallRepository>();
-
-    final resource = await _repository.returnCityValue(city);
-    CityEntity cityModel;
-    if(resource.hasError){
+    final resource = await _useCase.returnCityValues(city);
+    final cityModel = await _repository.returnCityValues(city);
+    if (resource.hasError) {
       return Resource.failed(error: ApiAcessError.apiError);
     }
-    cityName = resource.data!.cityName!;
-    countryName = resource.data!.cityName!;
-    temperature = resource.data!.temperature!;
+    cityName = cityModel.data!.cityName!;
+    countryName = cityModel.data!.countryName!;
+    temperature = cityModel.data!.temperature!;
     return Resource.success();
   }
-  // @action
-  // Future<Resource<void, LoginError>> loginUser() async {
-  //   final resource = await _loginWithCredentials.loginUser(email, password);
-  //   if (resource.hasError) {
-  //     return Resource.failed(error: LoginError.invalidCredentials);
-  //   }
-  //   user = resource;
-  //   return Resource.success();
-  // }
 }
-
