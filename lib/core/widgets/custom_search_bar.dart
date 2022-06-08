@@ -31,11 +31,6 @@ class CustomSearchBar extends StatelessWidget {
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
                   suffixIcon: IconButton(
-                    // onPressed: () {
-                    //  Modular.to.pushNamed('/home/',
-                    //  arguments: {'city': _controller.city}
-                    //  );
-                    // },
                     onPressed: () {
                       _controller.returnCityValues(_controller.city);
                     },

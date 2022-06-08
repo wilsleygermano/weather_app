@@ -1,14 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/core/design/my_colors.dart';
-import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 
 class CustomFavoriteCard extends StatelessWidget {
   final String cityName;
   final String countryName;
-  final double temperature;
+  final num temperature;
   const CustomFavoriteCard(
       {Key? key,
       required this.cityName,

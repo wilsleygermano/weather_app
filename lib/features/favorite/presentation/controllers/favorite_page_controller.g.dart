@@ -61,13 +61,13 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
       Atom(name: '_FavoritePageControllerBase.temperature', context: context);
 
   @override
-  double get temperature {
+  num get temperature {
     _$temperatureAtom.reportRead();
     return super.temperature;
   }
 
   @override
-  set temperature(double value) {
+  set temperature(num value) {
     _$temperatureAtom.reportWrite(value, super.temperature, () {
       super.temperature = value;
     });
@@ -78,7 +78,7 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
       context: context);
 
   @override
-  Future<Resource<void, ApiAcessError>> returnCityValues(String city) {
+  Future<Resource<void, ApiCallError>> returnCityValues(String city) {
     return _$returnCityValuesAsyncAction
         .run(() => super.returnCityValues(city));
   }

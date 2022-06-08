@@ -3,13 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather_app/core/design/my_colors.dart';
 import 'package:weather_app/core/widgets/custom_search_bar.dart';
-import 'package:weather_app/features/favorite/data/data_sources/api_call_data_source.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 import 'package:weather_app/features/favorite/presentation/view/widgets/custom_favorite_card.dart';
-import 'package:weather_app/features/home/presentation/view/home_page.dart';
 
 class FavoritePage extends StatefulWidget {
-  FavoritePage({Key? key}) : super(key: key);
+  const FavoritePage({Key? key}) : super(key: key);
 
   @override
   State<FavoritePage> createState() => _FavoritePageState();

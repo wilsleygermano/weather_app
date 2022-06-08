@@ -1,3 +1,3 @@
-enum ApiAcessError { 
+enum ApiCallError { 
   dioError, apiError, unknown, badRequest
 }

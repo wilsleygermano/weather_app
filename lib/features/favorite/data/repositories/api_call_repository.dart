@@ -1,19 +1,18 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather_app/core/generics/resource.dart';
-import 'package:weather_app/features/favorite/data/api_acess_error.dart';
-import 'package:weather_app/features/favorite/data/data_sources/api_call_data_source.dart';
+import 'package:weather_app/features/favorite/data/api_call_error.dart';
+import 'package:weather_app/features/favorite/data/data_sources/call_data_source.dart';
 import 'package:weather_app/features/favorite/domain/entities/city_entity.dart';
 
 abstract class ApiCallRepository {
-  Future<Resource<CityEntity, ApiAcessError>> returnCityValues(
-      String city);
+  Future<Resource<CityEntity, ApiCallError>> returnCityValues(String city);
 }
 
 class DefaultApiCall implements ApiCallRepository {
-  final _dataSource = Modular.get<AcessRemoteDataSource>();
+  final _dataSource = Modular.get<CallRemoteDataSource>();
 
   @override
-  Future<Resource<CityEntity, ApiAcessError>> returnCityValues(
+  Future<Resource<CityEntity, ApiCallError>> returnCityValues(
       String city) async {
     final resource = await _dataSource.returnCityValues(city);
     if (resource.hasError) {

@@ -1,5 +1,5 @@
 class CityEntity {
-  double? temperature;
+  num? temperature;
   // double? feelsLike;
   // int? humidity;
   // double? windSpeed;
@@ -18,7 +18,6 @@ class CityEntity {
     cityName = json['city']['name'];
     countryName = json['city']['country'];
   }
-
 }
 // class CityEntity {
 //   double? temperature;
