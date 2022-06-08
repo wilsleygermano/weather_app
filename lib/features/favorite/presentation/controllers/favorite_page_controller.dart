@@ -46,11 +46,27 @@ abstract class _FavoritePageControllerBase with Store {
   @observable
   String countryName = '...';
 
+  @action
+  removeAccents(String wordWithAccents) {
+    var _comAcento =
+        'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+    var _semAcento =
+        'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
+    for (int i = 0; i < _comAcento.length; i++) {
+      wordWithAccents = wordWithAccents.replaceAll(_comAcento[i], _semAcento[i]);
+    }
+    return wordWithAccents;
+  }
 
   @action
   Future<Resource<void, ApiCallError>> returnCityValues(String city) async {
-    final resource = await _useCase.returnCityValues(city);
-    final cityModel = await _repository.returnCityValues(city);
+
+    final String _provisoryCity = removeAccents(city);
+
+    final _newCity = _provisoryCity.replaceAll(" ", '%20').toLowerCase();
+
+    final resource = await _useCase.returnCityValues(_newCity);
+    final cityModel = await _repository.returnCityValues(_newCity);
     if (resource.hasError) {
       return Resource.failed(error: ApiCallError.apiError);
     }
