@@ -56,6 +56,22 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     });
   }
 
+  late final _$isPasswordVisibleAtom =
+      Atom(name: '_RegisterControllerBase.isPasswordVisible', context: context);
+
+  @override
+  bool get isPasswordVisible {
+    _$isPasswordVisibleAtom.reportRead();
+    return super.isPasswordVisible;
+  }
+
+  @override
+  set isPasswordVisible(bool value) {
+    _$isPasswordVisibleAtom.reportWrite(value, super.isPasswordVisible, () {
+      super.isPasswordVisible = value;
+    });
+  }
+
   late final _$passwordConfirmationAtom = Atom(
       name: '_RegisterControllerBase.passwordConfirmation', context: context);
 
@@ -70,6 +86,24 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     _$passwordConfirmationAtom.reportWrite(value, super.passwordConfirmation,
         () {
       super.passwordConfirmation = value;
+    });
+  }
+
+  late final _$isPasswordConfirmationVisibleAtom = Atom(
+      name: '_RegisterControllerBase.isPasswordConfirmationVisible',
+      context: context);
+
+  @override
+  bool get isPasswordConfirmationVisible {
+    _$isPasswordConfirmationVisibleAtom.reportRead();
+    return super.isPasswordConfirmationVisible;
+  }
+
+  @override
+  set isPasswordConfirmationVisible(bool value) {
+    _$isPasswordConfirmationVisibleAtom
+        .reportWrite(value, super.isPasswordConfirmationVisible, () {
+      super.isPasswordConfirmationVisible = value;
     });
   }
 
@@ -107,6 +141,17 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
   }
 
   @override
+  void setPasswordVisibility() {
+    final _$actionInfo = _$_RegisterControllerBaseActionController.startAction(
+        name: '_RegisterControllerBase.setPasswordVisibility');
+    try {
+      return super.setPasswordVisibility();
+    } finally {
+      _$_RegisterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void changePasswordConfirmation(String newValue) {
     final _$actionInfo = _$_RegisterControllerBaseActionController.startAction(
         name: '_RegisterControllerBase.changePasswordConfirmation');
@@ -118,11 +163,24 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
   }
 
   @override
+  void setPasswordConfirmationVisibility() {
+    final _$actionInfo = _$_RegisterControllerBaseActionController.startAction(
+        name: '_RegisterControllerBase.setPasswordConfirmationVisibility');
+    try {
+      return super.setPasswordConfirmationVisibility();
+    } finally {
+      _$_RegisterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 email: ${email},
 password: ${password},
+isPasswordVisible: ${isPasswordVisible},
 passwordConfirmation: ${passwordConfirmation},
+isPasswordConfirmationVisible: ${isPasswordConfirmationVisible},
 isEmailValid: ${isEmailValid},
 isPasswordValid: ${isPasswordValid}
     ''';

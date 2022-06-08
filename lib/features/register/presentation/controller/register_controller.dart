@@ -23,15 +23,32 @@ abstract class _RegisterControllerBase with Store {
   void changePassword(String newValue) => password = newValue;
 
   @observable
+  bool isPasswordVisible = true;
+
+  @action
+  void setPasswordVisibility() => isPasswordVisible = !isPasswordVisible;
+
+
+  @observable
   String passwordConfirmation = '';
 
   @action
   void changePasswordConfirmation(String newValue) =>
       passwordConfirmation = newValue;
 
+@observable
+  bool isPasswordConfirmationVisible = true;
+
+  @action
+  void setPasswordConfirmationVisibility() => isPasswordConfirmationVisible = !isPasswordConfirmationVisible;
+
+
   @computed
   bool get isPasswordValid =>
       password.length > 4 && password == passwordConfirmation;
+      
+
+  
 
   @action
   Future registerUser(BuildContext context) async {
