@@ -89,6 +89,7 @@ class RegisterPage extends StatelessWidget {
                   GenericTextButton(
                       buttonPressed: () async {
                         await _controller.registerUser(context);
+                        await Modular.to.pushNamed('/favorites/');
                       },
                       buttonText: "REGISTER")
                 ],

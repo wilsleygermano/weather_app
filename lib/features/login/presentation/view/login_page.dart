@@ -98,7 +98,7 @@ class LoginPage extends StatelessWidget {
               TextButton(
                 onPressed: () async {
                   await Modular.to.pushNamed('/register/');
-                                  },
+                },
                 child: Text(
                   "Need an account? Sign Up",
                   style: TextStyle(

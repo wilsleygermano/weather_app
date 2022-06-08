@@ -55,5 +55,6 @@ abstract class _RegisterControllerBase with Store {
     final _defaultRegisterUseCase =
         Modular.get<RegisterWithMailAndPasswordUseCase>();
     await _defaultRegisterUseCase.registerUser(email, password, context);
+    await Modular.to.pushNamed('/favorites/');
   }
 }

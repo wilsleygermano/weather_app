@@ -43,6 +43,7 @@ abstract class _LoginControllerBase with Store {
         Modular.get<LoginUserWithEmailAndPasswordUseCase>();
     try {
       await _defaultLoginUseCase.loginUser(email, password, context);
+      await Modular.to.pushNamed('/favorites/');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return AwesomeDialog(
