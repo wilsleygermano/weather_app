@@ -6,71 +6,77 @@ class CustomFavoriteCard extends StatelessWidget {
   final String cityName;
   final String countryName;
   final num temperature;
+  final Function() onTap;
   const CustomFavoriteCard(
       {Key? key,
       required this.cityName,
       required this.countryName,
-      required this.temperature})
+      required this.temperature,
+      required this.onTap,
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 15, left: 15),
-      child: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: Container(
-              height: 100,
-              decoration: MyColors.gradientCard,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20, left: 20),
-                child: Row(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(cityName,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2!
-                                    .copyWith(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(countryName,
-                                style: Theme.of(context).textTheme.headline4),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
+      child: InkWell(
+        onTap: onTap,
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+            child: Container(
+                height: 100,
+                decoration: MyColors.gradientCard,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20, left: 20),
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
-                              Text(
-                                temperature.toString(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline3!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              )
+                              Text(cityName,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline2!
+                                      .copyWith(fontWeight: FontWeight.bold)),
                             ],
                           ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              )),
+                          Row(
+                            children: [
+                              Text(countryName,
+                                  style: Theme.of(context).textTheme.headline4),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  temperature.toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline3!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                )),
+          ),
         ),
       ),
     );

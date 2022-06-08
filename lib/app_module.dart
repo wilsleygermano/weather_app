@@ -21,9 +21,5 @@ class AppModule extends Module {
           '/home/',
           module: HomeModule(),
         ),
-        // ModuleRoute(
-        //   '/onboarding/',
-        //   module: OnboardingModule(),
-        // ),
       ];
 }

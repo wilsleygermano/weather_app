@@ -5,7 +5,7 @@ import 'package:weather_app/features/home/presentation/view/home_page.dart';
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind<FavoritePageController>((i) => FavoritePageController()),
+        Bind<FavoritePageController>((i) => FavoritePageController(),),
       ];
 
   @override

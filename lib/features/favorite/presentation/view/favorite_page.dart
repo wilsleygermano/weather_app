@@ -40,7 +40,11 @@ class _FavoritePageState extends State<FavoritePage> {
             CustomFavoriteCard(
                 cityName: _controller.cityName,
                 countryName: _controller.countryName,
-                temperature: _controller.temperature)
+                temperature: _controller.temperature,
+                onTap: (){
+                  Modular.to.pushNamed('/home/');
+                },
+                )
           ],
         );
       }),

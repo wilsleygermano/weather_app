@@ -15,19 +15,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _controller = Modular.get<FavoritePageController>();
 
-  getCity() {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
-        <String, dynamic>{}) as Map;
-    _controller.returnCityValues(arguments['city']);
-  }
+  // getCity() {
+  //   final arguments = (ModalRoute.of(context)?.settings.arguments ??
+  //       <String, dynamic>{}) as Map;
+  //   _controller.returnCityValues(arguments['city']);
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      getCity();
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance!.addPostFrameCallback((_) {
+  //     getCity();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
