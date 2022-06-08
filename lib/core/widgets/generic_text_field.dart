@@ -3,18 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/core/widgets/glassmorphism.dart';
 
 class GenericTextField extends StatelessWidget {
-  final String hintText;
+  final String? hintText;
   final TextInputAction textInputAction;
-  final IconData prefixIcon;
+  final IconData? prefixIcon;
   final void Function(String) onChanged;
   final IconData? suffixIconButton;
   final Function()? iconButtonPressed;
 
   const GenericTextField(
       {Key? key,
-      required this.hintText,
+      this.hintText,
       required this.textInputAction,
-      required this.prefixIcon,
+      this.prefixIcon,
       required this.onChanged,
       this.suffixIconButton,
       this.iconButtonPressed})
@@ -59,6 +59,7 @@ class GenericTextField extends StatelessWidget {
       ),
       start: 0.3,
       end: 0.1,
+      borderRadius: 10,
     );
   }
 }
