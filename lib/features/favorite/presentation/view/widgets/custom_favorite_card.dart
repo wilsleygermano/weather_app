@@ -1,6 +1,4 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:weather_app/core/design/my_colors.dart';
 import 'package:weather_app/core/widgets/glassmorphism.dart';
 
 class CustomFavoriteCard extends StatelessWidget {
