@@ -17,6 +17,7 @@ class GenericTextButton extends StatelessWidget {
     return GlassMorphism(
       start: 0.3,
       end: 0.1,
+      borderRadius: 10,
       child: TextButton(
         onPressed: buttonPressed,
         child: Text(

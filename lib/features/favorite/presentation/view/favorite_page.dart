@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather_app/core/design/my_colors.dart';
-import 'package:weather_app/core/widgets/custom_search_bar.dart';
+import 'package:weather_app/core/widgets/generic_text_field.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 import 'package:weather_app/features/favorite/presentation/view/widgets/custom_favorite_card.dart';
 
@@ -23,7 +23,10 @@ class _FavoritePageState extends State<FavoritePage> {
       body: Observer(builder: (context) {
         return Column(
           children: [
-            const CustomSearchBar(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 80, 120, 32),
+              child: GenericTextField(textInputAction: TextInputAction.done, onChanged: _controller.storeCityTyped, suffixIconButton: Icons.search, iconButtonPressed: (){_controller.returnCityValues(_controller.city);}),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Row(
