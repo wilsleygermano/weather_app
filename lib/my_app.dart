@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       theme: theme(),
+      title: 'Flutter Demo',
     );
   }
 }
