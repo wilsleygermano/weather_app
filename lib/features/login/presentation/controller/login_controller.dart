@@ -55,14 +55,14 @@ abstract class _LoginControllerBase with Store {
           titleTextStyle: TextStyle(
             fontFamily: GoogleFonts.lato().fontFamily,
             fontSize: 16,
-            color: Color(0xFFC2AFEC),
+            color: const Color(0xFFC2AFEC),
             fontWeight: FontWeight.w600,
           ),
           desc: "Please, try again",
           descTextStyle: TextStyle(
             fontFamily: GoogleFonts.lato().fontFamily,
             fontSize: 16,
-            color: Color(0xFFC2AFEC),
+            color: const Color(0xFFC2AFEC),
             fontWeight: FontWeight.w600,
           ),
         )..show();
@@ -76,14 +76,14 @@ abstract class _LoginControllerBase with Store {
           titleTextStyle: TextStyle(
             fontFamily: GoogleFonts.lato().fontFamily,
             fontSize: 16,
-            color: Color(0xFFC2AFEC),
+            color: const Color(0xFFC2AFEC),
             fontWeight: FontWeight.w600,
           ),
           desc: "Please, try again",
           descTextStyle: TextStyle(
             fontFamily: GoogleFonts.lato().fontFamily,
             fontSize: 16,
-            color: Color(0xFFC2AFEC),
+            color: const Color(0xFFC2AFEC),
             fontWeight: FontWeight.w600,
           ),
         )..show();

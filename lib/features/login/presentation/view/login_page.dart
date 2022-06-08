@@ -1,10 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:weather_app/core/generics/resource.dart';
 import 'package:weather_app/core/widgets/generic_text_button.dart';
 import 'package:weather_app/core/widgets/generic_text_field.dart';
 import 'package:weather_app/features/login/presentation/controller/login_controller.dart';

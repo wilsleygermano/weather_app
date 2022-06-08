@@ -7,7 +7,7 @@ abstract class LoginUserDataSource {
 class FirebaseLoginUserDataSource implements LoginUserDataSource {
   @override
   Future loginUserDataSource(String email, String password) async {
-    final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
