@@ -169,6 +169,38 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
+  late final _$temperatureUnitAtom = Atom(
+      name: '_FavoritePageControllerBase.temperatureUnit', context: context);
+
+  @override
+  String get temperatureUnit {
+    _$temperatureUnitAtom.reportRead();
+    return super.temperatureUnit;
+  }
+
+  @override
+  set temperatureUnit(String value) {
+    _$temperatureUnitAtom.reportWrite(value, super.temperatureUnit, () {
+      super.temperatureUnit = value;
+    });
+  }
+
+  late final _$initialLabelIndexAtom = Atom(
+      name: '_FavoritePageControllerBase.initialLabelIndex', context: context);
+
+  @override
+  int get initialLabelIndex {
+    _$initialLabelIndexAtom.reportRead();
+    return super.initialLabelIndex;
+  }
+
+  @override
+  set initialLabelIndex(int value) {
+    _$initialLabelIndexAtom.reportWrite(value, super.initialLabelIndex, () {
+      super.initialLabelIndex = value;
+    });
+  }
+
   late final _$returnCityValuesAsyncAction = AsyncAction(
       '_FavoritePageControllerBase.returnCityValues',
       context: context);
@@ -194,6 +226,42 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   }
 
   @override
+  void changeTemperatureUnitToMetric() {
+    final _$actionInfo =
+        _$_FavoritePageControllerBaseActionController.startAction(
+            name: '_FavoritePageControllerBase.changeTemperatureUnitToMetric');
+    try {
+      return super.changeTemperatureUnitToMetric();
+    } finally {
+      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeTemperatureUnitToImperial() {
+    final _$actionInfo =
+        _$_FavoritePageControllerBaseActionController.startAction(
+            name:
+                '_FavoritePageControllerBase.changeTemperatureUnitToImperial');
+    try {
+      return super.changeTemperatureUnitToImperial();
+    } finally {
+      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic removeAccents(String wordWithAccents) {
+    final _$actionInfo = _$_FavoritePageControllerBaseActionController
+        .startAction(name: '_FavoritePageControllerBase.removeAccents');
+    try {
+      return super.removeAccents(wordWithAccents);
+    } finally {
+      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 city: ${city},
@@ -205,7 +273,9 @@ humidity: ${humidity},
 windSpeed: ${windSpeed},
 dateTime: ${dateTime},
 cityName: ${cityName},
-countryName: ${countryName}
+countryName: ${countryName},
+temperatureUnit: ${temperatureUnit},
+initialLabelIndex: ${initialLabelIndex}
     ''';
   }
 }

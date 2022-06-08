@@ -6,7 +6,7 @@ import 'package:weather_app/features/favorite/data/api_call_error.dart';
 
 abstract class CallRemoteDataSource {
   Future<Resource<Map<String, dynamic>, ApiCallError>> returnCityValues(
-      String city);
+      String city, String temperatureUnit);
 }
 
 class ApiCallRemoteDataSource implements CallRemoteDataSource {
@@ -14,9 +14,9 @@ class ApiCallRemoteDataSource implements CallRemoteDataSource {
 
   @override
   Future<Resource<Map<String, dynamic>, ApiCallError>> returnCityValues(
-      String city) async {
+      String city, String temperatureUnit) async {
     final response = await _remoteClient
-        .get(ApiRoutes.urlApi + "q=$city" + ApiRoutes.apiKey);
+        .get(ApiRoutes.urlApi + "q=$city" + ApiRoutes.apiKey + "&units=$temperatureUnit");
     if (response.statusCode != 200) {
       return Resource.failed(error: ApiCallError.unknown);
     }
