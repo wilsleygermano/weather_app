@@ -59,6 +59,7 @@ class GenericTextField extends StatelessWidget {
       ),
       start: 0.3,
       end: 0.1,
+      borderRadius: 10,
     );
   }
 }
