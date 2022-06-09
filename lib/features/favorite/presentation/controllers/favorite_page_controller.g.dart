@@ -169,19 +169,131 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
-  late final _$temperatureUnitAtom = Atom(
-      name: '_FavoritePageControllerBase.temperatureUnit', context: context);
+  late final _$temperatureDay2Atom = Atom(
+      name: '_FavoritePageControllerBase.temperatureDay2', context: context);
 
   @override
-  String get temperatureUnit {
-    _$temperatureUnitAtom.reportRead();
-    return super.temperatureUnit;
+  num get temperatureDay2 {
+    _$temperatureDay2Atom.reportRead();
+    return super.temperatureDay2;
   }
 
   @override
-  set temperatureUnit(String value) {
-    _$temperatureUnitAtom.reportWrite(value, super.temperatureUnit, () {
-      super.temperatureUnit = value;
+  set temperatureDay2(num value) {
+    _$temperatureDay2Atom.reportWrite(value, super.temperatureDay2, () {
+      super.temperatureDay2 = value;
+    });
+  }
+
+  late final _$dateTimeDay2Atom =
+      Atom(name: '_FavoritePageControllerBase.dateTimeDay2', context: context);
+
+  @override
+  String get dateTimeDay2 {
+    _$dateTimeDay2Atom.reportRead();
+    return super.dateTimeDay2;
+  }
+
+  @override
+  set dateTimeDay2(String value) {
+    _$dateTimeDay2Atom.reportWrite(value, super.dateTimeDay2, () {
+      super.dateTimeDay2 = value;
+    });
+  }
+
+  late final _$temperatureDay3Atom = Atom(
+      name: '_FavoritePageControllerBase.temperatureDay3', context: context);
+
+  @override
+  num get temperatureDay3 {
+    _$temperatureDay3Atom.reportRead();
+    return super.temperatureDay3;
+  }
+
+  @override
+  set temperatureDay3(num value) {
+    _$temperatureDay3Atom.reportWrite(value, super.temperatureDay3, () {
+      super.temperatureDay3 = value;
+    });
+  }
+
+  late final _$dateTimeDay3Atom =
+      Atom(name: '_FavoritePageControllerBase.dateTimeDay3', context: context);
+
+  @override
+  String get dateTimeDay3 {
+    _$dateTimeDay3Atom.reportRead();
+    return super.dateTimeDay3;
+  }
+
+  @override
+  set dateTimeDay3(String value) {
+    _$dateTimeDay3Atom.reportWrite(value, super.dateTimeDay3, () {
+      super.dateTimeDay3 = value;
+    });
+  }
+
+  late final _$temperatureDay4Atom = Atom(
+      name: '_FavoritePageControllerBase.temperatureDay4', context: context);
+
+  @override
+  num get temperatureDay4 {
+    _$temperatureDay4Atom.reportRead();
+    return super.temperatureDay4;
+  }
+
+  @override
+  set temperatureDay4(num value) {
+    _$temperatureDay4Atom.reportWrite(value, super.temperatureDay4, () {
+      super.temperatureDay4 = value;
+    });
+  }
+
+  late final _$dateTimeDay4Atom =
+      Atom(name: '_FavoritePageControllerBase.dateTimeDay4', context: context);
+
+  @override
+  String get dateTimeDay4 {
+    _$dateTimeDay4Atom.reportRead();
+    return super.dateTimeDay4;
+  }
+
+  @override
+  set dateTimeDay4(String value) {
+    _$dateTimeDay4Atom.reportWrite(value, super.dateTimeDay4, () {
+      super.dateTimeDay4 = value;
+    });
+  }
+
+  late final _$temperatureDay5Atom = Atom(
+      name: '_FavoritePageControllerBase.temperatureDay5', context: context);
+
+  @override
+  num get temperatureDay5 {
+    _$temperatureDay5Atom.reportRead();
+    return super.temperatureDay5;
+  }
+
+  @override
+  set temperatureDay5(num value) {
+    _$temperatureDay5Atom.reportWrite(value, super.temperatureDay5, () {
+      super.temperatureDay5 = value;
+    });
+  }
+
+  late final _$dateTimeDay5Atom =
+      Atom(name: '_FavoritePageControllerBase.dateTimeDay5', context: context);
+
+  @override
+  String get dateTimeDay5 {
+    _$dateTimeDay5Atom.reportRead();
+    return super.dateTimeDay5;
+  }
+
+  @override
+  set dateTimeDay5(String value) {
+    _$dateTimeDay5Atom.reportWrite(value, super.dateTimeDay5, () {
+      super.dateTimeDay5 = value;
     });
   }
 
@@ -314,7 +426,14 @@ windSpeed: ${windSpeed},
 dateTime: ${dateTime},
 cityName: ${cityName},
 countryName: ${countryName},
-temperatureUnit: ${temperatureUnit},
+temperatureDay2: ${temperatureDay2},
+dateTimeDay2: ${dateTimeDay2},
+temperatureDay3: ${temperatureDay3},
+dateTimeDay3: ${dateTimeDay3},
+temperatureDay4: ${temperatureDay4},
+dateTimeDay4: ${dateTimeDay4},
+temperatureDay5: ${temperatureDay5},
+dateTimeDay5: ${dateTimeDay5},
 unitSymbol: ${unitSymbol},
 initialLabelIndex: ${initialLabelIndex}
     ''';

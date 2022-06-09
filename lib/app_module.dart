@@ -17,16 +17,17 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ModuleRoute(
-          Modular.initialRoute,
-          module: LoginModule(),
-        ),
-        ModuleRoute(
-          '/register/',
-          module: RegisterModule(),
-        ),
+        // ModuleRoute(
+        //   Modular.initialRoute,
+        //   module: LoginModule(),
+        // ),
+        // ModuleRoute(
+        //   '/register/',
+        //   module: RegisterModule(),
+        // ),
           ModuleRoute(
-          '/favorites/',
+          // '/favorites/',
+          Modular.initialRoute,
           module: FavoriteModule(),
         ),
         ModuleRoute(

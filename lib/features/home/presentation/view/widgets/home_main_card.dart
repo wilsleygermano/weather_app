@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:weather_app/core/widgets/custom_toggle_temperature.dart';
 import 'package:weather_app/core/widgets/glassmorphism.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/column_main_card.dart';
 
@@ -24,60 +26,61 @@ class HomeMainCard extends StatelessWidget {
     return GlassMorphism(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
+              child: Column(
                 children: [
-                  // Text(
-                  //   'toggle',
-                  //   style: Theme.of(context).textTheme.headline6,
-                  // ),
-                  Text(
-                    cityName,
-                    style: Theme.of(context).textTheme.headline6,
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    dateTime,
-                    style: Theme.of(context).textTheme.headline2,
-                  )
-                ],
-              ),
-              const SizedBox(height: 42),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    temperature.toString() + 'º',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(fontWeight: FontWeight.bold),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const CustomToggleTemperature(
+                        minWidth: 20.0,
+                        minHeight: 20.0,
+                      ),
+                      Text(
+                        cityName,
+                        style: Theme.of(context).textTheme.headline6,
+                      )
+                    ],
                   ),
-                ],
-              ),
-              const SizedBox(height: 42),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ColumnMainCard(
-                      valueName: 'Humidity', value: humidity, valueUnit: '%'),
-                  ColumnMainCard(
-                      valueName: 'Wind speed',
-                      value: windSpeed,
-                      valueUnit: ' km/h'),
-                  ColumnMainCard(
-                      valueName: 'Feels like',
-                      value: feelsLike,
-                      valueUnit: ' º'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        dateTime,
+                        style: Theme.of(context).textTheme.headline2,
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 42),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        temperature.toString() + 'º',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline1!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 42),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ColumnMainCard(
+                          valueName: 'Humidity', value: humidity, valueUnit: '%'),
+                      ColumnMainCard(
+                          valueName: 'Wind speed',
+                          value: windSpeed,
+                          valueUnit: ' km/h'),
+                      ColumnMainCard(
+                          valueName: 'Feels like',
+                          value: feelsLike,
+                          valueUnit: ' º'),
+                    ],
+                  )
                 ],
               )
-            ],
-          ),
         ),
         start: 0.3,
         end: 0.1,
