@@ -49,6 +49,9 @@ abstract class _FavoritePageControllerBase with Store {
   @observable
   String temperatureUnit = "imperial";
 
+  @observable
+  String unitSymbol = "ºF";
+
   @action
   void changeTemperatureUnitToMetric() {
     temperatureUnit = "metric";
@@ -60,6 +63,17 @@ abstract class _FavoritePageControllerBase with Store {
     temperatureUnit = "imperial";
     initialLabelIndex = 1;
 
+  }
+
+  @action
+  void changeUnitSymbolToMetric() {
+    unitSymbol = "ºC";
+  }
+
+
+@action
+  void changeUnitSymbolToImperial() {
+    unitSymbol = "ºF";
   }
 
 @observable

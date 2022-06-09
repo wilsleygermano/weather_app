@@ -65,10 +65,12 @@ class _FavoritePageState extends State<FavoritePage> {
                       if (index == 0) {
                         _controller.changeTemperatureUnitToMetric();
                         await _controller.returnCityValues(_controller.city);
+                        _controller.changeUnitSymbolToMetric();
                       }
                       if (index == 1) {
                         _controller.changeTemperatureUnitToImperial();
                         await _controller.returnCityValues(_controller.city);
+                        _controller.changeUnitSymbolToImperial();
                       }
                     },
                   ),
@@ -79,7 +81,7 @@ class _FavoritePageState extends State<FavoritePage> {
             CustomFavoriteCard(
               cityName: _controller.cityName,
               countryName: _controller.countryName,
-              temperature: _controller.temperature,
+              temperature: "${_controller.temperature.toInt()}" " ${_controller.unitSymbol}",
               onTap: () {
                 Modular.to.pushNamed('/home/');
               },

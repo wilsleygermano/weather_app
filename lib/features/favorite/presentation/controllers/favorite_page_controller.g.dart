@@ -185,6 +185,22 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
+  late final _$unitSymbolAtom =
+      Atom(name: '_FavoritePageControllerBase.unitSymbol', context: context);
+
+  @override
+  String get unitSymbol {
+    _$unitSymbolAtom.reportRead();
+    return super.unitSymbol;
+  }
+
+  @override
+  set unitSymbol(String value) {
+    _$unitSymbolAtom.reportWrite(value, super.unitSymbol, () {
+      super.unitSymbol = value;
+    });
+  }
+
   late final _$initialLabelIndexAtom = Atom(
       name: '_FavoritePageControllerBase.initialLabelIndex', context: context);
 
@@ -251,6 +267,30 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   }
 
   @override
+  void changeUnitSymbolToMetric() {
+    final _$actionInfo =
+        _$_FavoritePageControllerBaseActionController.startAction(
+            name: '_FavoritePageControllerBase.changeUnitSymbolToMetric');
+    try {
+      return super.changeUnitSymbolToMetric();
+    } finally {
+      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeUnitSymbolToImperial() {
+    final _$actionInfo =
+        _$_FavoritePageControllerBaseActionController.startAction(
+            name: '_FavoritePageControllerBase.changeUnitSymbolToImperial');
+    try {
+      return super.changeUnitSymbolToImperial();
+    } finally {
+      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic removeAccents(String wordWithAccents) {
     final _$actionInfo = _$_FavoritePageControllerBaseActionController
         .startAction(name: '_FavoritePageControllerBase.removeAccents');
@@ -275,6 +315,7 @@ dateTime: ${dateTime},
 cityName: ${cityName},
 countryName: ${countryName},
 temperatureUnit: ${temperatureUnit},
+unitSymbol: ${unitSymbol},
 initialLabelIndex: ${initialLabelIndex}
     ''';
   }
