@@ -97,44 +97,44 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
       ActionController(name: '_HomePageControllerBase', context: context);
 
   @override
-  dynamic fomartMainDate(String dateTime) {
+  dynamic formartMainDate(String dateTime) {
     final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
-        name: '_HomePageControllerBase.fomartMainDate');
+        name: '_HomePageControllerBase.formartMainDate');
     try {
-      return super.fomartMainDate(dateTime);
+      return super.formartMainDate(dateTime);
     } finally {
       _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic fomartFiveDaysForecastDate2(String dateTime) {
+  dynamic formartFiveDaysForecastDate2(String dateTime) {
     final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
-        name: '_HomePageControllerBase.fomartFiveDaysForecastDate2');
+        name: '_HomePageControllerBase.formartFiveDaysForecastDate2');
     try {
-      return super.fomartFiveDaysForecastDate2(dateTime);
+      return super.formartFiveDaysForecastDate2(dateTime);
     } finally {
       _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic fomartFiveDaysForecastDate3(String dateTime) {
+  dynamic formartFiveDaysForecastDate3(String dateTime) {
     final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
-        name: '_HomePageControllerBase.fomartFiveDaysForecastDate3');
+        name: '_HomePageControllerBase.formartFiveDaysForecastDate3');
     try {
-      return super.fomartFiveDaysForecastDate3(dateTime);
+      return super.formartFiveDaysForecastDate3(dateTime);
     } finally {
       _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic fomartFiveDaysForecastDate4(String dateTime) {
+  dynamic formartFiveDaysForecastDate4(String dateTime) {
     final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
-        name: '_HomePageControllerBase.fomartFiveDaysForecastDate4');
+        name: '_HomePageControllerBase.formartFiveDaysForecastDate4');
     try {
-      return super.fomartFiveDaysForecastDate4(dateTime);
+      return super.formartFiveDaysForecastDate4(dateTime);
     } finally {
       _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
     }

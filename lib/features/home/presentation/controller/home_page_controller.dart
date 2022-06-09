@@ -22,24 +22,24 @@ abstract class _HomePageControllerBase with Store {
   String fiveDaysForecastDate5 = " ";
 
   @action
-  fomartMainDate(String dateTime) {
+  formartMainDate(String dateTime) {
     return mainDate = DateFormat('EEEE, d').format(DateTime.parse(dateTime));
   }
 
   @action
-  fomartFiveDaysForecastDate2(String dateTime) {
+  formartFiveDaysForecastDate2(String dateTime) {
       return fiveDaysForecastDate2 =
           DateFormat('E, d').format(DateTime.parse(dateTime));
   }
 
   @action
-  fomartFiveDaysForecastDate3(String dateTime) {
+  formartFiveDaysForecastDate3(String dateTime) {
       return fiveDaysForecastDate3 =
           DateFormat('E, d').format(DateTime.parse(dateTime));
   }
 
   @action
-  fomartFiveDaysForecastDate4(String dateTime) {
+  formartFiveDaysForecastDate4(String dateTime) {
       return fiveDaysForecastDate4 =
           DateFormat('E, d').format(DateTime.parse(dateTime));
   }

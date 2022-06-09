@@ -23,10 +23,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _homeController.fomartMainDate(_controller.dateTime);
-    _homeController.fomartFiveDaysForecastDate2(_controller.dateTimeDay2);
-    _homeController.fomartFiveDaysForecastDate3(_controller.dateTimeDay3);
-    _homeController.fomartFiveDaysForecastDate4(_controller.dateTimeDay4);
+    _homeController.formartMainDate(_controller.dateTime);
+    _homeController.formartFiveDaysForecastDate2(_controller.dateTimeDay2);
+    _homeController.formartFiveDaysForecastDate3(_controller.dateTimeDay3);
+    _homeController.formartFiveDaysForecastDate4(_controller.dateTimeDay4);
     _homeController.fomartFiveDaysForecastDate5(_controller.dateTimeDay5);
     super.initState();
   }
