@@ -11,47 +11,46 @@ class HomeForecastNextDaysCard extends StatelessWidget {
   final num temperatureDay4;
   final String dateTimeDay5;
   final num temperatureDay5;
-  const HomeForecastNextDaysCard({Key? key,
-  required this.dateTimeDay2,
-  required this.temperatureDay2,
-  required this.dateTimeDay3,
-  required this.temperatureDay3,
-  required this.dateTimeDay4,
-  required this.temperatureDay4,
-  required this.dateTimeDay5,
-  required this.temperatureDay5,
+  const HomeForecastNextDaysCard({
+    Key? key,
+    required this.dateTimeDay2,
+    required this.temperatureDay2,
+    required this.dateTimeDay3,
+    required this.temperatureDay3,
+    required this.dateTimeDay4,
+    required this.temperatureDay4,
+    required this.dateTimeDay5,
+    required this.temperatureDay5,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 48, 16, 32),
-      child: GlassMorphism(
-          child: SizedBox(
-            height: 110,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+    return GlassMorphism(
+        child: SizedBox(
+          height: 110,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                    ColumnForecastNextDays(
-                    dateTime: dateTimeDay2, 
-                    temperature: temperatureDay2),
-                    ColumnForecastNextDays(
-                    dateTime: dateTimeDay3, 
-                    temperature: temperatureDay3),
-                    ColumnForecastNextDays(
-                    dateTime: dateTimeDay4, 
-                    temperature: temperatureDay4),
-                    ColumnForecastNextDays(
-                    dateTime: dateTimeDay5, 
-                    temperature: temperatureDay5,),
+                  ColumnForecastNextDays(
+                      dateTime: dateTimeDay2, temperature: temperatureDay2),
+                  ColumnForecastNextDays(
+                      dateTime: dateTimeDay3, temperature: temperatureDay3),
+                  ColumnForecastNextDays(
+                      dateTime: dateTimeDay4, temperature: temperatureDay4),
+                  ColumnForecastNextDays(
+                    dateTime: dateTimeDay5,
+                    temperature: temperatureDay5,
+                  ),
                 ],
               ),
             ),
           ),
-          start: 0.3,
-          end: 0.1,
-          borderRadius: 10),
-    );
+        ),
+        start: 0.3,
+        end: 0.1,
+        borderRadius: 10);
   }
 }
