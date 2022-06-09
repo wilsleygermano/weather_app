@@ -5,7 +5,7 @@ import 'package:weather_app/features/favorite/data/data_sources/call_data_source
 import 'package:weather_app/features/favorite/domain/entities/city_entity.dart';
 
 abstract class ApiCallRepository {
-  Future<Resource<CityEntity, ApiCallError>> returnCityValues(String city);
+  Future<Resource<CityEntity, ApiCallError>> returnCityValues(String city, String temperatureUnit);
 }
 
 class DefaultApiCall implements ApiCallRepository {
@@ -13,8 +13,8 @@ class DefaultApiCall implements ApiCallRepository {
 
   @override
   Future<Resource<CityEntity, ApiCallError>> returnCityValues(
-      String city) async {
-    final resource = await _dataSource.returnCityValues(city);
+      String city, String temperatureUnit) async {
+    final resource = await _dataSource.returnCityValues(city, temperatureUnit);
     if (resource.hasError) {
       return Resource.failed(error: resource.error);
     }

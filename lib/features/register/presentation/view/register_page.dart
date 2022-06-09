@@ -83,9 +83,15 @@ class RegisterPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  
-              GenericTextButton(buttonPressed: () => Navigator.pop(context), buttonText: "GO BACK"),
-              GenericTextButton(buttonPressed: () async {await _controller.registerUser(context);}, buttonText: "REGISTER")
+                  GenericTextButton(
+                      buttonPressed: () => Navigator.pop(context),
+                      buttonText: "GO BACK"),
+                  GenericTextButton(
+                      buttonPressed: () async {
+                        await _controller.registerUser(context);
+                        await Modular.to.pushNamed('/favorites/');
+                      },
+                      buttonText: "REGISTER")
                 ],
               )
             ],

@@ -43,7 +43,10 @@ dependencies:
   flutter_mobx: ^2.0.6+1
   animated_text_kit: ^4.2.1
   google_fonts: ^3.0.1
+  awesome_dialog: ^2.2.1
+  toggle_switch: ^2.0.1
 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

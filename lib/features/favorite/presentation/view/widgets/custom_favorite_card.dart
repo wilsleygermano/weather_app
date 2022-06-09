@@ -4,7 +4,7 @@ import 'package:weather_app/core/widgets/glassmorphism.dart';
 class CustomFavoriteCard extends StatelessWidget {
   final String cityName;
   final String countryName;
-  final num temperature;
+  final String temperature;
   final Function() onTap;
   const CustomFavoriteCard({
     Key? key,

@@ -6,6 +6,8 @@ import 'package:weather_app/core/widgets/generic_text_field.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/home_forecast_next_days_card.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/home_main_card.dart';
+import 'package:intl/intl.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({
