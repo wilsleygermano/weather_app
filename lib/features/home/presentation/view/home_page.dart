@@ -3,9 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather_app/core/design/my_colors.dart';
 import 'package:weather_app/core/widgets/generic_text_field.dart';
-import 'package:weather_app/core/widgets/glassmorphism.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
-import 'package:weather_app/features/home/presentation/view/widgets/custom_switch.dart';
+import 'package:weather_app/features/home/presentation/view/widgets/home_forecast_next_days_card.dart';
+import 'package:weather_app/features/home/presentation/view/widgets/home_main_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -18,15 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _controller = Modular.get<FavoritePageController>();
-  // Text(_controller.temperature.toString()),
-  // Text( _controller.feelsLike.toString()),
-  // Text(_controller.tempMin.toString()),
-  // Text(_controller.tempMax.toString()),
-  // Text(_controller.humidity.toString()),
-  // Text(_controller.windSpeed.toString()),
-  // Text(_controller.dateTime),
-  // Text(_controller.cityName),
-  // Text(_controller.countryName),
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,117 +36,23 @@ class _HomePageState extends State<HomePage> {
                     }),
               ),
               const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 16, left: 16),
-                child: GlassMorphism(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              // Text(
-                              //   'toggle',
-                              //   style: Theme.of(context).textTheme.headline6,
-                              // ),
-                              const CustomSwitch(),
-                              const Spacer(),
-                              Text(
-                                _controller.cityName,
-                                style: Theme.of(context).textTheme.headline6,
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                _controller.dateTime,
-                                style: Theme.of(context).textTheme.headline2,
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 42),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                _controller.temperature.toString() + 'º',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline1!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 42),
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    'Humidity:',
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
-                                  ),
-                                  Text(
-                                    _controller.humidity.toString() + '%',
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
-                                  )
-                                ],
-                              ),
-                              const Spacer(),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Wind speed:',
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
-                                  ),
-                                  Text(
-                                    _controller.windSpeed.toString() + 'km/h',
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
-                                  )
-                                ],
-                              ),
-                              const Spacer(),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Feels like:',
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
-                                  ),
-                                  Text(
-                                    _controller.feelsLike.toString() + 'º',
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
-                                  )
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    start: 0.3,
-                    end: 0.1,
-                    borderRadius: 20),
-              ),
+              HomeMainCard(
+                  cityName: _controller.cityName,
+                  dateTime: _controller.dateTime,
+                  temperature: _controller.temperature,
+                  humidity: _controller.humidity,
+                  windSpeed: _controller.windSpeed,
+                  feelsLike: _controller.feelsLike),
               const Spacer(),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(16, 48, 16, 32),
-                child: GlassMorphism(
-                    child: SizedBox(
-                      height: 110,
-                      width: 320,
-                    ),
-                    start: 0.3,
-                    end: 0.1,
-                    borderRadius: 10),
-              )
+              HomeForecastNextDaysCard(
+                dateTimeDay2: _controller.dateTimeDay2, 
+                temperatureDay2: _controller.temperatureDay2, 
+                dateTimeDay3: _controller.dateTimeDay3, 
+                temperatureDay3: _controller.temperatureDay3, 
+                dateTimeDay4: _controller.dateTimeDay4, 
+                temperatureDay4: _controller.temperatureDay4, 
+                dateTimeDay5: _controller.dateTimeDay5, 
+                temperatureDay5: _controller.temperatureDay5)
             ],
           );
         }));

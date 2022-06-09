@@ -46,6 +46,29 @@ abstract class _FavoritePageControllerBase with Store {
   @observable
   String countryName = '...';
 
+  @observable
+  num temperatureDay2 = 0;
+
+  @observable
+  String dateTimeDay2 = '';
+
+  @observable
+  num temperatureDay3 = 0;
+
+  @observable
+  String dateTimeDay3 = '';
+
+  @observable
+  num temperatureDay4 = 0;
+
+  @observable
+  String dateTimeDay4 = '';
+
+  @observable
+  num temperatureDay5 = 0;
+
+  @observable
+  String dateTimeDay5 = '';
 
   @action
   Future<Resource<void, ApiCallError>> returnCityValues(String city) async {
@@ -63,6 +86,18 @@ abstract class _FavoritePageControllerBase with Store {
     dateTime = cityModel.data!.dateTime!;
     cityName = cityModel.data!.cityName!;
     countryName = cityModel.data!.countryName!;
+
+    temperatureDay2 = cityModel.data!.temperatureDay2!;
+    dateTimeDay2 = cityModel.data!.dateTimeDay2!;
+
+    temperatureDay3 = cityModel.data!.temperatureDay3!;
+    dateTimeDay3 = cityModel.data!.dateTimeDay3!;
+
+    temperatureDay4 = cityModel.data!.temperatureDay4!;
+    dateTimeDay4 = cityModel.data!.dateTimeDay4!;
+    
+    temperatureDay5 = cityModel.data!.temperatureDay5!;
+    dateTimeDay5 = cityModel.data!.dateTimeDay5!;
     return Resource.success();
   }
 }
