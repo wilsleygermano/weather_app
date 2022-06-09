@@ -47,37 +47,28 @@ abstract class _FavoritePageControllerBase with Store {
   String countryName = '...';
 
   @observable
-  String temperatureUnit = "imperial";
+  num temperatureDay2 = 0;
 
   @observable
-  String unitSymbol = "ºF";
+  String dateTimeDay2 = '';
 
-  @action
-  void changeTemperatureUnitToMetric() {
-    temperatureUnit = "metric";
-    initialLabelIndex = 0;
-  }
+  @observable
+  num temperatureDay3 = 0;
 
-  @action
-  void changeTemperatureUnitToImperial() {
-    temperatureUnit = "imperial";
-    initialLabelIndex = 1;
+  @observable
+  String dateTimeDay3 = '';
 
-  }
+  @observable
+  num temperatureDay4 = 0;
 
-  @action
-  void changeUnitSymbolToMetric() {
-    unitSymbol = "ºC";
-  }
+  @observable
+  String dateTimeDay4 = '';
 
+  @observable
+  num temperatureDay5 = 0;
 
-@action
-  void changeUnitSymbolToImperial() {
-    unitSymbol = "ºF";
-  }
-
-@observable
-int initialLabelIndex = 1;
+  @observable
+  String dateTimeDay5 = '';
 
   @action
   removeAccents(String wordWithAccents) {
@@ -99,7 +90,8 @@ int initialLabelIndex = 1;
     final _newCity = _provisoryCity.replaceAll(" ", '%20').toLowerCase();
 
     final resource = await _useCase.returnCityValues(_newCity, temperatureUnit);
-    final cityModel = await _repository.returnCityValues(_newCity, temperatureUnit);
+    final cityModel =
+        await _repository.returnCityValues(_newCity, temperatureUnit);
     if (resource.hasError) {
       return Resource.failed(error: ApiCallError.apiError);
     }
@@ -112,6 +104,49 @@ int initialLabelIndex = 1;
     dateTime = cityModel.data!.dateTime!;
     cityName = cityModel.data!.cityName!;
     countryName = cityModel.data!.countryName!;
+
+    temperatureDay2 = cityModel.data!.temperatureDay2!;
+    dateTimeDay2 = cityModel.data!.dateTimeDay2!;
+
+    temperatureDay3 = cityModel.data!.temperatureDay3!;
+    dateTimeDay3 = cityModel.data!.dateTimeDay3!;
+
+    temperatureDay4 = cityModel.data!.temperatureDay4!;
+    dateTimeDay4 = cityModel.data!.dateTimeDay4!;
+
+    temperatureDay5 = cityModel.data!.temperatureDay5!;
+    dateTimeDay5 = cityModel.data!.dateTimeDay5!;
     return Resource.success();
+  }
+
+  @observable
+  int initialLabelIndex = 1;
+
+  @observable
+  String temperatureUnit = "imperial";
+
+  @observable
+  String unitSymbol = "ºF";
+
+  @action
+  void changeTemperatureUnitToImperial() {
+    temperatureUnit = "imperial";
+    initialLabelIndex = 1;
+  }
+
+  @action
+  void changeTemperatureUnitToMetric() {
+    temperatureUnit = "metric";
+    initialLabelIndex = 0;
+  }
+
+  @action
+  void changeUnitSymbolToMetric() {
+    unitSymbol = "ºC";
+  }
+
+  @action
+  void changeUnitSymbolToImperial() {
+    unitSymbol = "ºF";
   }
 }

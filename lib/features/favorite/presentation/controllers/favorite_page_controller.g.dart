@@ -169,6 +169,150 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
+  late final _$temperatureDay2Atom = Atom(
+      name: '_FavoritePageControllerBase.temperatureDay2', context: context);
+
+  @override
+  num get temperatureDay2 {
+    _$temperatureDay2Atom.reportRead();
+    return super.temperatureDay2;
+  }
+
+  @override
+  set temperatureDay2(num value) {
+    _$temperatureDay2Atom.reportWrite(value, super.temperatureDay2, () {
+      super.temperatureDay2 = value;
+    });
+  }
+
+  late final _$dateTimeDay2Atom =
+      Atom(name: '_FavoritePageControllerBase.dateTimeDay2', context: context);
+
+  @override
+  String get dateTimeDay2 {
+    _$dateTimeDay2Atom.reportRead();
+    return super.dateTimeDay2;
+  }
+
+  @override
+  set dateTimeDay2(String value) {
+    _$dateTimeDay2Atom.reportWrite(value, super.dateTimeDay2, () {
+      super.dateTimeDay2 = value;
+    });
+  }
+
+  late final _$temperatureDay3Atom = Atom(
+      name: '_FavoritePageControllerBase.temperatureDay3', context: context);
+
+  @override
+  num get temperatureDay3 {
+    _$temperatureDay3Atom.reportRead();
+    return super.temperatureDay3;
+  }
+
+  @override
+  set temperatureDay3(num value) {
+    _$temperatureDay3Atom.reportWrite(value, super.temperatureDay3, () {
+      super.temperatureDay3 = value;
+    });
+  }
+
+  late final _$dateTimeDay3Atom =
+      Atom(name: '_FavoritePageControllerBase.dateTimeDay3', context: context);
+
+  @override
+  String get dateTimeDay3 {
+    _$dateTimeDay3Atom.reportRead();
+    return super.dateTimeDay3;
+  }
+
+  @override
+  set dateTimeDay3(String value) {
+    _$dateTimeDay3Atom.reportWrite(value, super.dateTimeDay3, () {
+      super.dateTimeDay3 = value;
+    });
+  }
+
+  late final _$temperatureDay4Atom = Atom(
+      name: '_FavoritePageControllerBase.temperatureDay4', context: context);
+
+  @override
+  num get temperatureDay4 {
+    _$temperatureDay4Atom.reportRead();
+    return super.temperatureDay4;
+  }
+
+  @override
+  set temperatureDay4(num value) {
+    _$temperatureDay4Atom.reportWrite(value, super.temperatureDay4, () {
+      super.temperatureDay4 = value;
+    });
+  }
+
+  late final _$dateTimeDay4Atom =
+      Atom(name: '_FavoritePageControllerBase.dateTimeDay4', context: context);
+
+  @override
+  String get dateTimeDay4 {
+    _$dateTimeDay4Atom.reportRead();
+    return super.dateTimeDay4;
+  }
+
+  @override
+  set dateTimeDay4(String value) {
+    _$dateTimeDay4Atom.reportWrite(value, super.dateTimeDay4, () {
+      super.dateTimeDay4 = value;
+    });
+  }
+
+  late final _$temperatureDay5Atom = Atom(
+      name: '_FavoritePageControllerBase.temperatureDay5', context: context);
+
+  @override
+  num get temperatureDay5 {
+    _$temperatureDay5Atom.reportRead();
+    return super.temperatureDay5;
+  }
+
+  @override
+  set temperatureDay5(num value) {
+    _$temperatureDay5Atom.reportWrite(value, super.temperatureDay5, () {
+      super.temperatureDay5 = value;
+    });
+  }
+
+  late final _$dateTimeDay5Atom =
+      Atom(name: '_FavoritePageControllerBase.dateTimeDay5', context: context);
+
+  @override
+  String get dateTimeDay5 {
+    _$dateTimeDay5Atom.reportRead();
+    return super.dateTimeDay5;
+  }
+
+  @override
+  set dateTimeDay5(String value) {
+    _$dateTimeDay5Atom.reportWrite(value, super.dateTimeDay5, () {
+      super.dateTimeDay5 = value;
+    });
+  }
+
+  late final _$initialLabelIndexAtom = Atom(
+      name: '_FavoritePageControllerBase.initialLabelIndex', context: context);
+
+  @override
+  int get initialLabelIndex {
+    _$initialLabelIndexAtom.reportRead();
+    return super.initialLabelIndex;
+  }
+
+  @override
+  set initialLabelIndex(int value) {
+    _$initialLabelIndexAtom.reportWrite(value, super.initialLabelIndex, () {
+      super.initialLabelIndex = value;
+    });
+  }
+
   late final _$temperatureUnitAtom = Atom(
       name: '_FavoritePageControllerBase.temperatureUnit', context: context);
 
@@ -201,22 +345,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
-  late final _$initialLabelIndexAtom = Atom(
-      name: '_FavoritePageControllerBase.initialLabelIndex', context: context);
-
-  @override
-  int get initialLabelIndex {
-    _$initialLabelIndexAtom.reportRead();
-    return super.initialLabelIndex;
-  }
-
-  @override
-  set initialLabelIndex(int value) {
-    _$initialLabelIndexAtom.reportWrite(value, super.initialLabelIndex, () {
-      super.initialLabelIndex = value;
-    });
-  }
-
   late final _$returnCityValuesAsyncAction = AsyncAction(
       '_FavoritePageControllerBase.returnCityValues',
       context: context);
@@ -242,12 +370,11 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   }
 
   @override
-  void changeTemperatureUnitToMetric() {
-    final _$actionInfo =
-        _$_FavoritePageControllerBaseActionController.startAction(
-            name: '_FavoritePageControllerBase.changeTemperatureUnitToMetric');
+  dynamic removeAccents(String wordWithAccents) {
+    final _$actionInfo = _$_FavoritePageControllerBaseActionController
+        .startAction(name: '_FavoritePageControllerBase.removeAccents');
     try {
-      return super.changeTemperatureUnitToMetric();
+      return super.removeAccents(wordWithAccents);
     } finally {
       _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -261,6 +388,18 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
                 '_FavoritePageControllerBase.changeTemperatureUnitToImperial');
     try {
       return super.changeTemperatureUnitToImperial();
+    } finally {
+      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeTemperatureUnitToMetric() {
+    final _$actionInfo =
+        _$_FavoritePageControllerBaseActionController.startAction(
+            name: '_FavoritePageControllerBase.changeTemperatureUnitToMetric');
+    try {
+      return super.changeTemperatureUnitToMetric();
     } finally {
       _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -291,17 +430,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   }
 
   @override
-  dynamic removeAccents(String wordWithAccents) {
-    final _$actionInfo = _$_FavoritePageControllerBaseActionController
-        .startAction(name: '_FavoritePageControllerBase.removeAccents');
-    try {
-      return super.removeAccents(wordWithAccents);
-    } finally {
-      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 city: ${city},
@@ -314,9 +442,17 @@ windSpeed: ${windSpeed},
 dateTime: ${dateTime},
 cityName: ${cityName},
 countryName: ${countryName},
+temperatureDay2: ${temperatureDay2},
+dateTimeDay2: ${dateTimeDay2},
+temperatureDay3: ${temperatureDay3},
+dateTimeDay3: ${dateTimeDay3},
+temperatureDay4: ${temperatureDay4},
+dateTimeDay4: ${dateTimeDay4},
+temperatureDay5: ${temperatureDay5},
+dateTimeDay5: ${dateTimeDay5},
+initialLabelIndex: ${initialLabelIndex},
 temperatureUnit: ${temperatureUnit},
-unitSymbol: ${unitSymbol},
-initialLabelIndex: ${initialLabelIndex}
+unitSymbol: ${unitSymbol}
     ''';
   }
 }

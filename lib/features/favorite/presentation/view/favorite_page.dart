@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weather_app/core/design/my_colors.dart';
+import 'package:weather_app/core/widgets/custom_toggle_temperature.dart';
 import 'package:weather_app/core/widgets/generic_text_field.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 import 'package:weather_app/features/favorite/presentation/view/widgets/custom_favorite_card.dart';
@@ -46,34 +44,10 @@ class _FavoritePageState extends State<FavoritePage> {
                     'My Locations',
                     style: Theme.of(context).textTheme.headline4,
                   ),
-                  ToggleSwitch(
-                    borderColor: [
-                      Colors.white,
-                    ],
-                    borderWidth: 1,
+                  const CustomToggleTemperature(
                     minWidth: 40.0,
-                    cornerRadius: 20.0,
-                    activeBgColor: [Colors.purple],
-                    activeFgColor: Colors.white,
-                    inactiveBgColor: const Color(0XFFC2AFEC),
-                    inactiveFgColor: Colors.white,
-                    initialLabelIndex: _controller.initialLabelIndex,
-                    totalSwitches: 2,
-                    labels: ['ºC', 'ºF'],
-                    radiusStyle: true,
-                    onToggle: (index) async {
-                      if (index == 0) {
-                        _controller.changeTemperatureUnitToMetric();
-                        await _controller.returnCityValues(_controller.city);
-                        _controller.changeUnitSymbolToMetric();
-                      }
-                      if (index == 1) {
-                        _controller.changeTemperatureUnitToImperial();
-                        await _controller.returnCityValues(_controller.city);
-                        _controller.changeUnitSymbolToImperial();
-                      }
-                    },
-                  ),
+                    minHeight: 40.0,
+                  )
                 ],
               ),
             ),

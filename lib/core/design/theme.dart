@@ -8,7 +8,7 @@ ThemeData theme() {
       headline1: TextStyle(
         color: MyColors.primarywhite,
         fontWeight: FontWeight.normal,
-        fontSize: 32,
+        fontSize: 44,
         fontFamily: GoogleFonts.lato().fontFamily,
       ),
       headline2: TextStyle(
