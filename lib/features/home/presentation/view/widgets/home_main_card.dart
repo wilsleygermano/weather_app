@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:weather_app/core/widgets/custom_toggle_temperature.dart';
 import 'package:weather_app/core/widgets/glassmorphism.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/column_main_card.dart';
@@ -11,6 +10,7 @@ class HomeMainCard extends StatelessWidget {
   final num humidity;
   final num windSpeed;
   final num feelsLike;
+  final String unitSymbol;
   const HomeMainCard({
     Key? key,
     required this.cityName,
@@ -19,6 +19,7 @@ class HomeMainCard extends StatelessWidget {
     required this.humidity,
     required this.windSpeed,
     required this.feelsLike,
+    required this.unitSymbol,
   }) : super(key: key);
 
   @override
@@ -55,7 +56,7 @@ class HomeMainCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        temperature.toString() + 'º',
+                        "${temperature.toInt()} $unitSymbol",
                         style: Theme.of(context)
                             .textTheme
                             .headline1!

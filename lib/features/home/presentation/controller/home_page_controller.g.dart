@@ -25,20 +25,71 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
     });
   }
 
-  late final _$fiveDaysForecastDateAtom = Atom(
-      name: '_HomePageControllerBase.fiveDaysForecastDate', context: context);
+  late final _$fiveDaysForecastDate2Atom = Atom(
+      name: '_HomePageControllerBase.fiveDaysForecastDate2', context: context);
 
   @override
-  String get fiveDaysForecastDate {
-    _$fiveDaysForecastDateAtom.reportRead();
-    return super.fiveDaysForecastDate;
+  String get fiveDaysForecastDate2 {
+    _$fiveDaysForecastDate2Atom.reportRead();
+    return super.fiveDaysForecastDate2;
   }
 
   @override
-  set fiveDaysForecastDate(String value) {
-    _$fiveDaysForecastDateAtom.reportWrite(value, super.fiveDaysForecastDate,
+  set fiveDaysForecastDate2(String value) {
+    _$fiveDaysForecastDate2Atom.reportWrite(value, super.fiveDaysForecastDate2,
         () {
-      super.fiveDaysForecastDate = value;
+      super.fiveDaysForecastDate2 = value;
+    });
+  }
+
+  late final _$fiveDaysForecastDate3Atom = Atom(
+      name: '_HomePageControllerBase.fiveDaysForecastDate3', context: context);
+
+  @override
+  String get fiveDaysForecastDate3 {
+    _$fiveDaysForecastDate3Atom.reportRead();
+    return super.fiveDaysForecastDate3;
+  }
+
+  @override
+  set fiveDaysForecastDate3(String value) {
+    _$fiveDaysForecastDate3Atom.reportWrite(value, super.fiveDaysForecastDate3,
+        () {
+      super.fiveDaysForecastDate3 = value;
+    });
+  }
+
+  late final _$fiveDaysForecastDate4Atom = Atom(
+      name: '_HomePageControllerBase.fiveDaysForecastDate4', context: context);
+
+  @override
+  String get fiveDaysForecastDate4 {
+    _$fiveDaysForecastDate4Atom.reportRead();
+    return super.fiveDaysForecastDate4;
+  }
+
+  @override
+  set fiveDaysForecastDate4(String value) {
+    _$fiveDaysForecastDate4Atom.reportWrite(value, super.fiveDaysForecastDate4,
+        () {
+      super.fiveDaysForecastDate4 = value;
+    });
+  }
+
+  late final _$fiveDaysForecastDate5Atom = Atom(
+      name: '_HomePageControllerBase.fiveDaysForecastDate5', context: context);
+
+  @override
+  String get fiveDaysForecastDate5 {
+    _$fiveDaysForecastDate5Atom.reportRead();
+    return super.fiveDaysForecastDate5;
+  }
+
+  @override
+  set fiveDaysForecastDate5(String value) {
+    _$fiveDaysForecastDate5Atom.reportWrite(value, super.fiveDaysForecastDate5,
+        () {
+      super.fiveDaysForecastDate5 = value;
     });
   }
 
@@ -57,11 +108,44 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
   }
 
   @override
-  dynamic fomartFiveDaysForecastDate(String dateTime) {
+  dynamic fomartFiveDaysForecastDate2(String dateTime) {
     final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
-        name: '_HomePageControllerBase.fomartFiveDaysForecastDate');
+        name: '_HomePageControllerBase.fomartFiveDaysForecastDate2');
     try {
-      return super.fomartFiveDaysForecastDate(dateTime);
+      return super.fomartFiveDaysForecastDate2(dateTime);
+    } finally {
+      _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic fomartFiveDaysForecastDate3(String dateTime) {
+    final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
+        name: '_HomePageControllerBase.fomartFiveDaysForecastDate3');
+    try {
+      return super.fomartFiveDaysForecastDate3(dateTime);
+    } finally {
+      _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic fomartFiveDaysForecastDate4(String dateTime) {
+    final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
+        name: '_HomePageControllerBase.fomartFiveDaysForecastDate4');
+    try {
+      return super.fomartFiveDaysForecastDate4(dateTime);
+    } finally {
+      _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic fomartFiveDaysForecastDate5(String dateTime) {
+    final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
+        name: '_HomePageControllerBase.fomartFiveDaysForecastDate5');
+    try {
+      return super.fomartFiveDaysForecastDate5(dateTime);
     } finally {
       _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -71,7 +155,10 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
   String toString() {
     return '''
 mainDate: ${mainDate},
-fiveDaysForecastDate: ${fiveDaysForecastDate}
+fiveDaysForecastDate2: ${fiveDaysForecastDate2},
+fiveDaysForecastDate3: ${fiveDaysForecastDate3},
+fiveDaysForecastDate4: ${fiveDaysForecastDate4},
+fiveDaysForecastDate5: ${fiveDaysForecastDate5}
     ''';
   }
 }

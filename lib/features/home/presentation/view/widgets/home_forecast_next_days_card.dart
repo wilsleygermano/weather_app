@@ -11,6 +11,7 @@ class HomeForecastNextDaysCard extends StatelessWidget {
   final num temperatureDay4;
   final String dateTimeDay5;
   final num temperatureDay5;
+  final String unitSymbol;
   const HomeForecastNextDaysCard({
     Key? key,
     required this.dateTimeDay2,
@@ -21,6 +22,7 @@ class HomeForecastNextDaysCard extends StatelessWidget {
     required this.temperatureDay4,
     required this.dateTimeDay5,
     required this.temperatureDay5,
+    required this.unitSymbol,
   }) : super(key: key);
 
   @override
@@ -28,24 +30,24 @@ class HomeForecastNextDaysCard extends StatelessWidget {
     return GlassMorphism(
         child: SizedBox(
           height: 110,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  ColumnForecastNextDays(
-                      dateTime: dateTimeDay2, temperature: temperatureDay2),
-                  ColumnForecastNextDays(
-                      dateTime: dateTimeDay3, temperature: temperatureDay3),
-                  ColumnForecastNextDays(
-                      dateTime: dateTimeDay4, temperature: temperatureDay4),
-                  ColumnForecastNextDays(
-                    dateTime: dateTimeDay5,
-                    temperature: temperatureDay5,
-                  ),
-                ],
-              ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                ColumnForecastNextDays(
+                    dateTime: dateTimeDay2, temperature: temperatureDay2, unitSymbol: unitSymbol,),
+                ColumnForecastNextDays(
+                    dateTime: dateTimeDay3, temperature: temperatureDay3, unitSymbol: unitSymbol,),
+                ColumnForecastNextDays(
+                    dateTime: dateTimeDay4, temperature: temperatureDay4, unitSymbol: unitSymbol,),
+                ColumnForecastNextDays(
+                  dateTime: dateTimeDay5,
+                  temperature: temperatureDay5,
+                  unitSymbol: unitSymbol,
+                ),
+              ],
             ),
           ),
         ),

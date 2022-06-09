@@ -297,22 +297,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
-  late final _$unitSymbolAtom =
-      Atom(name: '_FavoritePageControllerBase.unitSymbol', context: context);
-
-  @override
-  String get unitSymbol {
-    _$unitSymbolAtom.reportRead();
-    return super.unitSymbol;
-  }
-
-  @override
-  set unitSymbol(String value) {
-    _$unitSymbolAtom.reportWrite(value, super.unitSymbol, () {
-      super.unitSymbol = value;
-    });
-  }
-
   late final _$initialLabelIndexAtom = Atom(
       name: '_FavoritePageControllerBase.initialLabelIndex', context: context);
 
@@ -326,6 +310,38 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   set initialLabelIndex(int value) {
     _$initialLabelIndexAtom.reportWrite(value, super.initialLabelIndex, () {
       super.initialLabelIndex = value;
+    });
+  }
+
+  late final _$temperatureUnitAtom = Atom(
+      name: '_FavoritePageControllerBase.temperatureUnit', context: context);
+
+  @override
+  String get temperatureUnit {
+    _$temperatureUnitAtom.reportRead();
+    return super.temperatureUnit;
+  }
+
+  @override
+  set temperatureUnit(String value) {
+    _$temperatureUnitAtom.reportWrite(value, super.temperatureUnit, () {
+      super.temperatureUnit = value;
+    });
+  }
+
+  late final _$unitSymbolAtom =
+      Atom(name: '_FavoritePageControllerBase.unitSymbol', context: context);
+
+  @override
+  String get unitSymbol {
+    _$unitSymbolAtom.reportRead();
+    return super.unitSymbol;
+  }
+
+  @override
+  set unitSymbol(String value) {
+    _$unitSymbolAtom.reportWrite(value, super.unitSymbol, () {
+      super.unitSymbol = value;
     });
   }
 
@@ -354,12 +370,11 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   }
 
   @override
-  void changeTemperatureUnitToMetric() {
-    final _$actionInfo =
-        _$_FavoritePageControllerBaseActionController.startAction(
-            name: '_FavoritePageControllerBase.changeTemperatureUnitToMetric');
+  dynamic removeAccents(String wordWithAccents) {
+    final _$actionInfo = _$_FavoritePageControllerBaseActionController
+        .startAction(name: '_FavoritePageControllerBase.removeAccents');
     try {
-      return super.changeTemperatureUnitToMetric();
+      return super.removeAccents(wordWithAccents);
     } finally {
       _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -373,6 +388,18 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
                 '_FavoritePageControllerBase.changeTemperatureUnitToImperial');
     try {
       return super.changeTemperatureUnitToImperial();
+    } finally {
+      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeTemperatureUnitToMetric() {
+    final _$actionInfo =
+        _$_FavoritePageControllerBaseActionController.startAction(
+            name: '_FavoritePageControllerBase.changeTemperatureUnitToMetric');
+    try {
+      return super.changeTemperatureUnitToMetric();
     } finally {
       _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -403,17 +430,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   }
 
   @override
-  dynamic removeAccents(String wordWithAccents) {
-    final _$actionInfo = _$_FavoritePageControllerBaseActionController
-        .startAction(name: '_FavoritePageControllerBase.removeAccents');
-    try {
-      return super.removeAccents(wordWithAccents);
-    } finally {
-      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 city: ${city},
@@ -434,8 +450,9 @@ temperatureDay4: ${temperatureDay4},
 dateTimeDay4: ${dateTimeDay4},
 temperatureDay5: ${temperatureDay5},
 dateTimeDay5: ${dateTimeDay5},
-unitSymbol: ${unitSymbol},
-initialLabelIndex: ${initialLabelIndex}
+initialLabelIndex: ${initialLabelIndex},
+temperatureUnit: ${temperatureUnit},
+unitSymbol: ${unitSymbol}
     ''';
   }
 }

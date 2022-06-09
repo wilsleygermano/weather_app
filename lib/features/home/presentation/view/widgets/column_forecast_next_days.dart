@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class ColumnForecastNextDays extends StatelessWidget {
   final String dateTime;
   final num temperature;
+  final String unitSymbol;
   const ColumnForecastNextDays({
     Key? key,
     required this.dateTime,
     required this.temperature,
+    required this.unitSymbol
   }) : super(key: key);
 
   @override
@@ -16,11 +18,11 @@ class ColumnForecastNextDays extends StatelessWidget {
       children: [
         Text(
           dateTime,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headline5,
         ),
         Text(
-          temperature.toString(),
-          style: Theme.of(context).textTheme.headline6,
+          "${temperature.toInt()} $unitSymbol",
+          style: Theme.of(context).textTheme.headline4!.copyWith(fontWeight: FontWeight.bold),
         ),
       ],
     );

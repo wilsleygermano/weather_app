@@ -34,16 +34,16 @@ class CityEntity {
     cityName = json['city']['name'];
     countryName = json['city']['country'];
 
-    temperatureDay2 = json['list'][1]['main']['temp'];
-    dateTimeDay2 = json['list'][1]['dt_txt'];
+    temperatureDay2 = json['list'][9]['main']['temp'];
+    dateTimeDay2 = json['list'][9]['dt_txt'];
 
-    temperatureDay3 = json['list'][2]['main']['temp'];
-    dateTimeDay3 = json['list'][2]['dt_txt'];
+    temperatureDay3 = json['list'][18]['main']['temp'];
+    dateTimeDay3 = json['list'][18]['dt_txt'];
 
-    temperatureDay4 = json['list'][3]['main']['temp'];
-    dateTimeDay4 = json['list'][3]['dt_txt'];
+    temperatureDay4 = json['list'][27]['main']['temp'];
+    dateTimeDay4 = json['list'][27]['dt_txt'];
 
-    temperatureDay5 = json['list'][4]['main']['temp'];
-    dateTimeDay5 = json['list'][4]['dt_txt'];
+    temperatureDay5 = json['list'][36]['main']['temp'];
+    dateTimeDay5 = json['list'][36]['dt_txt'];
   }
 }

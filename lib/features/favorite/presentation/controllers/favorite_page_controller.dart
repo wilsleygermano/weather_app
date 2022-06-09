@@ -70,38 +70,6 @@ abstract class _FavoritePageControllerBase with Store {
   @observable
   String dateTimeDay5 = '';
 
-  String temperatureUnit = "imperial";
-
-  @observable
-  String unitSymbol = "ºF";
-
-  @action
-  void changeTemperatureUnitToMetric() {
-    temperatureUnit = "metric";
-    initialLabelIndex = 0;
-  }
-
-  @action
-  void changeTemperatureUnitToImperial() {
-    temperatureUnit = "imperial";
-    initialLabelIndex = 1;
-
-  }
-
-  @action
-  void changeUnitSymbolToMetric() {
-    unitSymbol = "ºC";
-  }
-
-
-  @action
-  void changeUnitSymbolToImperial() {
-    unitSymbol = "ºF";
-  }
-
-  @observable
-  int initialLabelIndex = 1;
-
   @action
   removeAccents(String wordWithAccents) {
     var _comAcento =
@@ -122,7 +90,8 @@ abstract class _FavoritePageControllerBase with Store {
     final _newCity = _provisoryCity.replaceAll(" ", '%20').toLowerCase();
 
     final resource = await _useCase.returnCityValues(_newCity, temperatureUnit);
-    final cityModel = await _repository.returnCityValues(_newCity, temperatureUnit);
+    final cityModel =
+        await _repository.returnCityValues(_newCity, temperatureUnit);
     if (resource.hasError) {
       return Resource.failed(error: ApiCallError.apiError);
     }
@@ -144,9 +113,40 @@ abstract class _FavoritePageControllerBase with Store {
 
     temperatureDay4 = cityModel.data!.temperatureDay4!;
     dateTimeDay4 = cityModel.data!.dateTimeDay4!;
-    
+
     temperatureDay5 = cityModel.data!.temperatureDay5!;
     dateTimeDay5 = cityModel.data!.dateTimeDay5!;
     return Resource.success();
+  }
+
+  @observable
+  int initialLabelIndex = 1;
+
+  @observable
+  String temperatureUnit = "imperial";
+
+  @observable
+  String unitSymbol = "ºF";
+
+  @action
+  void changeTemperatureUnitToImperial() {
+    temperatureUnit = "imperial";
+    initialLabelIndex = 1;
+  }
+
+  @action
+  void changeTemperatureUnitToMetric() {
+    temperatureUnit = "metric";
+    initialLabelIndex = 0;
+  }
+
+  @action
+  void changeUnitSymbolToMetric() {
+    unitSymbol = "ºC";
+  }
+
+  @action
+  void changeUnitSymbolToImperial() {
+    unitSymbol = "ºF";
   }
 }
