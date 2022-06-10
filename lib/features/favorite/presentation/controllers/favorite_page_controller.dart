@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:weather_app/core/generics/resource.dart';
 import 'package:weather_app/features/favorite/data/api_call_error.dart';
-import 'package:weather_app/features/favorite/data/repositories/api_call_repository.dart';
 import 'package:weather_app/features/favorite/domain/entities/city_entity.dart';
 import 'package:weather_app/features/favorite/domain/use_cases/api_call_use_case.dart';
 part 'favorite_page_controller.g.dart';

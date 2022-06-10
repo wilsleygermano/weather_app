@@ -12,6 +12,11 @@ class HomeForecastNextDaysCard extends StatelessWidget {
   final String dateTimeDay5;
   final num temperatureDay5;
   final String unitSymbol;
+  final String weather2;
+  final String weather3;
+  final String weather4;
+  final String weather5;
+
   const HomeForecastNextDaysCard({
     Key? key,
     required this.dateTimeDay2,
@@ -23,6 +28,10 @@ class HomeForecastNextDaysCard extends StatelessWidget {
     required this.dateTimeDay5,
     required this.temperatureDay5,
     required this.unitSymbol,
+    required this.weather2,
+    required this.weather3,
+    required this.weather4,
+    required this.weather5,
   }) : super(key: key);
 
   @override
@@ -37,12 +46,25 @@ class HomeForecastNextDaysCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 ColumnForecastNextDays(
-                    dateTime: dateTimeDay2, temperature: temperatureDay2, unitSymbol: unitSymbol,),
+                  weather: weather2,
+                  dateTime: dateTimeDay2,
+                  temperature: temperatureDay2,
+                  unitSymbol: unitSymbol,
+                ),
                 ColumnForecastNextDays(
-                    dateTime: dateTimeDay3, temperature: temperatureDay3, unitSymbol: unitSymbol,),
+                  weather: weather3,
+                  dateTime: dateTimeDay3,
+                  temperature: temperatureDay3,
+                  unitSymbol: unitSymbol,
+                ),
                 ColumnForecastNextDays(
-                    dateTime: dateTimeDay4, temperature: temperatureDay4, unitSymbol: unitSymbol,),
+                  weather: weather4,
+                  dateTime: dateTimeDay4,
+                  temperature: temperatureDay4,
+                  unitSymbol: unitSymbol,
+                ),
                 ColumnForecastNextDays(
+                  weather: weather5,
                   dateTime: dateTimeDay5,
                   temperature: temperatureDay5,
                   unitSymbol: unitSymbol,

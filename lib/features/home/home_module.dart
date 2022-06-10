@@ -12,6 +12,8 @@ class HomeModule extends Module {
         Bind<ApiCallUseCase>((i) => DefaultApiCallUseCase()),
         Bind<ApiCallRepository>((i) => DefaultApiCall()),
         Bind<CallRemoteDataSource>((i) => ApiCallRemoteDataSource()),
+        Bind<HomePageController>((i) => HomePageController()),
+
       ];
 
   @override

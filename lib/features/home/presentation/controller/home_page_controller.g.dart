@@ -109,6 +109,54 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
     });
   }
 
+  late final _$temperatureUnitAtom =
+      Atom(name: '_HomePageControllerBase.temperatureUnit', context: context);
+
+  @override
+  String get temperatureUnit {
+    _$temperatureUnitAtom.reportRead();
+    return super.temperatureUnit;
+  }
+
+  @override
+  set temperatureUnit(String value) {
+    _$temperatureUnitAtom.reportWrite(value, super.temperatureUnit, () {
+      super.temperatureUnit = value;
+    });
+  }
+
+  late final _$cityAtom =
+      Atom(name: '_HomePageControllerBase.city', context: context);
+
+  @override
+  String get city {
+    _$cityAtom.reportRead();
+    return super.city;
+  }
+
+  @override
+  set city(String value) {
+    _$cityAtom.reportWrite(value, super.city, () {
+      super.city = value;
+    });
+  }
+
+  late final _$searchedCityAtom =
+      Atom(name: '_HomePageControllerBase.searchedCity', context: context);
+
+  @override
+  CityEntity get searchedCity {
+    _$searchedCityAtom.reportRead();
+    return super.searchedCity;
+  }
+
+  @override
+  set searchedCity(CityEntity value) {
+    _$searchedCityAtom.reportWrite(value, super.searchedCity, () {
+      super.searchedCity = value;
+    });
+  }
+
   late final _$checkIfACityIsFavoritedAsyncAction = AsyncAction(
       '_HomePageControllerBase.checkIfACityIsFavorited',
       context: context);
@@ -128,6 +176,15 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
       String cityName, dynamic countryName, dynamic temperature) {
     return _$favoriteButtonPressedAsyncAction.run(
         () => super.favoriteButtonPressed(cityName, countryName, temperature));
+  }
+
+  late final _$fetchSearchedCityAsyncAction = AsyncAction(
+      '_HomePageControllerBase.fetchSearchedCity',
+      context: context);
+
+  @override
+  Future<Resource<void, ApiCallError>> fetchSearchedCity() {
+    return _$fetchSearchedCityAsyncAction.run(() => super.fetchSearchedCity());
   }
 
   late final _$_HomePageControllerBaseActionController =
@@ -189,6 +246,28 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
   }
 
   @override
+  String removeAccents(String wordWithAccents) {
+    final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
+        name: '_HomePageControllerBase.removeAccents');
+    try {
+      return super.removeAccents(wordWithAccents);
+    } finally {
+      _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void storeCityTyped(String newValue) {
+    final _$actionInfo = _$_HomePageControllerBaseActionController.startAction(
+        name: '_HomePageControllerBase.storeCityTyped');
+    try {
+      return super.storeCityTyped(newValue);
+    } finally {
+      _$_HomePageControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 mainDate: ${mainDate},
@@ -196,7 +275,10 @@ fiveDaysForecastDate2: ${fiveDaysForecastDate2},
 fiveDaysForecastDate3: ${fiveDaysForecastDate3},
 fiveDaysForecastDate4: ${fiveDaysForecastDate4},
 fiveDaysForecastDate5: ${fiveDaysForecastDate5},
-isFavorited: ${isFavorited}
+isFavorited: ${isFavorited},
+temperatureUnit: ${temperatureUnit},
+city: ${city},
+searchedCity: ${searchedCity}
     ''';
   }
 }
