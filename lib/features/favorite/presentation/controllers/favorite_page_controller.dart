@@ -1,17 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:weather_app/core/generics/resource.dart';
 import 'package:weather_app/features/favorite/data/api_call_error.dart';
 import 'package:weather_app/features/favorite/data/repositories/api_call_repository.dart';
+import 'package:weather_app/features/favorite/domain/entities/favorite_city_entity.dart';
 import 'package:weather_app/features/favorite/domain/use_cases/api_call_use_case.dart';
 part 'favorite_page_controller.g.dart';
-
 class FavoritePageController = _FavoritePageControllerBase
     with _$FavoritePageController;
 
 abstract class _FavoritePageControllerBase with Store {
   final _useCase = Modular.get<ApiCallUseCase>();
   final _repository = Modular.get<ApiCallRepository>();
+  var currentUserId = FirebaseAuth.instance.currentUser!.uid;
 
   @observable
   String city = '';
@@ -148,5 +151,40 @@ abstract class _FavoritePageControllerBase with Store {
   @action
   void changeUnitSymbolToImperial() {
     unitSymbol = "ºF";
+  }
+
+  // @observable
+  // ObservableList favoriteCities= [].asObservable();
+ 
+
+  // Future deleteFavorite(String docId, String docName) async {
+  //   var dataBase = FirebaseFirestore.instance;
+
+  //   await dataBase
+  //       .collection("Users")
+  //       .doc(docId)
+  //       .collection("favorite_words")
+  //       .doc(docName)
+  //       .delete();
+  // }
+
+  // var currentUserId = FirebaseAuth.instance.currentUser!.uid;
+  Future<List<FavoriteCityEntity>> getFavoriteCities() async {
+    List<FavoriteCityEntity> favoriteCities = [];
+
+    final cities = await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(currentUserId)
+        .collection("favorite_places")
+        .get();
+
+    favoriteCities =
+        cities.docs.map((e) => FavoriteCityEntity.fromJson(e.data())).toList();
+    for (int i = 0; i < favoriteCities.length; i++) {
+      returnCityValues(favoriteCities[i].toString());
+
+    }
+      return favoriteCities;
+
   }
 }

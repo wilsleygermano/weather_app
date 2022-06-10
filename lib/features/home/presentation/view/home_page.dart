@@ -28,12 +28,14 @@ class _HomePageState extends State<HomePage> {
     _homeController.fomartFiveDaysForecastDate3(_controller.dateTimeDay3);
     _homeController.fomartFiveDaysForecastDate4(_controller.dateTimeDay4);
     _homeController.fomartFiveDaysForecastDate5(_controller.dateTimeDay5);
+    _homeController.checkIfACityIsFavorited(_controller.cityName);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         backgroundColor: MyColors.backgroundcolor,
         body: SafeArea(
           child: Center(
@@ -49,8 +51,9 @@ class _HomePageState extends State<HomePage> {
                           textInputAction: TextInputAction.done,
                           onChanged: _controller.storeCityTyped,
                           suffixIconButton: Icons.search,
-                          iconButtonPressed: () {
-                            _controller.returnCityValues(_controller.city);
+                          iconButtonPressed: () async{
+                            await _controller.returnCityValues(_controller.city);
+                            await _homeController.checkIfACityIsFavorited(_controller.cityName);
                           }),
                     ),
                     HomeMainCard(
@@ -61,6 +64,10 @@ class _HomePageState extends State<HomePage> {
                         windSpeed: _controller.windSpeed,
                         feelsLike: _controller.feelsLike,
                         unitSymbol: _controller.unitSymbol,
+                        onPressed: () async {
+                          await _homeController.favoriteButtonPressed(_controller.cityName, _controller.countryName, _controller.temperature);
+                        },
+                        isFavorited: _homeController.isFavorited,
                         ),
                     HomeForecastNextDaysCard(
                         dateTimeDay2: _homeController.fiveDaysForecastDate2,
