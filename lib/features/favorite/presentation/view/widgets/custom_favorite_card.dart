@@ -6,9 +6,12 @@ class CustomFavoriteCard extends StatelessWidget {
   final String cityName;
   final String countryName;
   final String temperature;
+  final void Function() onTap;
   const CustomFavoriteCard({
     Key? key,
     required this.cityName,
+    required this.onTap,
+
     required this.countryName,
     required this.temperature,
   }) : super(key: key);
@@ -75,9 +78,7 @@ class CustomFavoriteCard extends StatelessWidget {
           end: 0.1,
           borderRadius: 26,
         ),
-        onTap: (){
-          Modular.to.pushNamed('/home/');
-        },
+        onTap: onTap
       ),
     );
   }
