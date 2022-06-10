@@ -6,6 +6,7 @@ import 'package:weather_app/core/widgets/custom_toggle_temperature.dart';
 import 'package:weather_app/core/widgets/generic_text_field.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 import 'package:weather_app/features/favorite/presentation/view/widgets/custom_favorite_card.dart';
+import 'package:weather_app/features/home/presentation/controller/home_page_controller.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
@@ -18,20 +19,34 @@ class _FavoritePageState extends State<FavoritePage> {
   final _controller = Modular.get<FavoritePageController>();
 
   @override
+  void initState() {
+    _setupPage();
+    super.initState();
+  }
+
+  void _setupPage() async {
+    await _controller.getFavoriteCities();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundcolor,
-      body: Observer(builder: (context) {
-        return Column(
-          children: [
+        backgroundColor: MyColors.backgroundcolor,
+        body: Observer(builder: (context) {
+          return Column(children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 80, 120, 32),
               child: GenericTextField(
                 textInputAction: TextInputAction.done,
                 onChanged: _controller.storeCityTyped,
                 suffixIconButton: Icons.search,
-                iconButtonPressed: () {
-                  _controller.returnCityValues(_controller.city);
+                iconButtonPressed: () async {
+                  final resource = await _controller.fetchSearchedCity();
+                  if(resource.hasError) {
+                    //! fazer algo
+                    return;
+                  }
+                  await Modular.to.pushNamed('/home/', arguments: _controller.searchedCity);
                 },
               ),
             ),
@@ -52,17 +67,26 @@ class _FavoritePageState extends State<FavoritePage> {
               ),
             ),
             const SizedBox(height: 30),
-            CustomFavoriteCard(
-              cityName: _controller.cityName,
-              countryName: _controller.countryName,
-              temperature: "${_controller.temperature.toInt()}" " ${_controller.unitSymbol}",
-              onTap: () {
-                Modular.to.pushNamed('/home/');
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _controller.favoriteCities.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: CustomFavoriteCard(
+                      onTap: () {
+                        Modular.to.pushNamed('/home/', arguments: _controller.favoriteCities[index]);
+                      },
+                      cityName: _controller.favoriteCities[index].cityName!,
+                      countryName:
+                          _controller.favoriteCities[index].countryName!,
+                      temperature:
+                          _controller.favoriteCities[index].temperature.toString(),
+                    ));
               },
             )
-          ],
-        );
-      }),
-    );
+          ]);
+        }));
   }
 }

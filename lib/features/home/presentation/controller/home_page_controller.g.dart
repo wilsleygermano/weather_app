@@ -93,6 +93,43 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
     });
   }
 
+  late final _$isFavoritedAtom =
+      Atom(name: '_HomePageControllerBase.isFavorited', context: context);
+
+  @override
+  bool get isFavorited {
+    _$isFavoritedAtom.reportRead();
+    return super.isFavorited;
+  }
+
+  @override
+  set isFavorited(bool value) {
+    _$isFavoritedAtom.reportWrite(value, super.isFavorited, () {
+      super.isFavorited = value;
+    });
+  }
+
+  late final _$checkIfACityIsFavoritedAsyncAction = AsyncAction(
+      '_HomePageControllerBase.checkIfACityIsFavorited',
+      context: context);
+
+  @override
+  Future<dynamic> checkIfACityIsFavorited(String cityName) {
+    return _$checkIfACityIsFavoritedAsyncAction
+        .run(() => super.checkIfACityIsFavorited(cityName));
+  }
+
+  late final _$favoriteButtonPressedAsyncAction = AsyncAction(
+      '_HomePageControllerBase.favoriteButtonPressed',
+      context: context);
+
+  @override
+  Future<dynamic> favoriteButtonPressed(
+      String cityName, dynamic countryName, dynamic temperature) {
+    return _$favoriteButtonPressedAsyncAction.run(
+        () => super.favoriteButtonPressed(cityName, countryName, temperature));
+  }
+
   late final _$_HomePageControllerBaseActionController =
       ActionController(name: '_HomePageControllerBase', context: context);
 
@@ -158,7 +195,8 @@ mainDate: ${mainDate},
 fiveDaysForecastDate2: ${fiveDaysForecastDate2},
 fiveDaysForecastDate3: ${fiveDaysForecastDate3},
 fiveDaysForecastDate4: ${fiveDaysForecastDate4},
-fiveDaysForecastDate5: ${fiveDaysForecastDate5}
+fiveDaysForecastDate5: ${fiveDaysForecastDate5},
+isFavorited: ${isFavorited}
     ''';
   }
 }

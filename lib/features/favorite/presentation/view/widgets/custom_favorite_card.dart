@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather_app/core/widgets/glassmorphism.dart';
 
 class CustomFavoriteCard extends StatelessWidget {
   final String cityName;
   final String countryName;
   final String temperature;
-  final Function() onTap;
+  final void Function() onTap;
   const CustomFavoriteCard({
     Key? key,
     required this.cityName,
+    required this.onTap,
+
     required this.countryName,
     required this.temperature,
-    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -76,7 +78,7 @@ class CustomFavoriteCard extends StatelessWidget {
           end: 0.1,
           borderRadius: 26,
         ),
-        onTap: onTap,
+        onTap: onTap
       ),
     );
   }

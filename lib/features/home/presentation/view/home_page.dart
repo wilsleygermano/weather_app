@@ -3,14 +3,17 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather_app/core/design/my_colors.dart';
 import 'package:weather_app/core/widgets/generic_text_field.dart';
+import 'package:weather_app/features/favorite/domain/entities/city_entity.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 import 'package:weather_app/features/home/presentation/controller/home_page_controller.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/home_forecast_next_days_card.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/home_main_card.dart';
 
 class HomePage extends StatefulWidget {
+  final CityEntity city;
   const HomePage({
     Key? key,
+    required this.city
   }) : super(key: key);
 
   @override
@@ -23,17 +26,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _homeController.fomartMainDate(_controller.dateTime);
-    _homeController.fomartFiveDaysForecastDate2(_controller.dateTimeDay2);
-    _homeController.fomartFiveDaysForecastDate3(_controller.dateTimeDay3);
-    _homeController.fomartFiveDaysForecastDate4(_controller.dateTimeDay4);
-    _homeController.fomartFiveDaysForecastDate5(_controller.dateTimeDay5);
+    _homeController.fomartMainDate(widget.city.dateTime!);
+    _homeController.fomartFiveDaysForecastDate2(widget.city.dateTimeDay2!);
+    _homeController.fomartFiveDaysForecastDate3(widget.city.dateTimeDay3!);
+    _homeController.fomartFiveDaysForecastDate4(widget.city.dateTimeDay4!);
+    _homeController.fomartFiveDaysForecastDate5(widget.city.dateTimeDay5!);
+    _homeController.checkIfACityIsFavorited(widget.city.cityName!);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         backgroundColor: MyColors.backgroundcolor,
         body: SafeArea(
           child: Center(
@@ -49,28 +54,32 @@ class _HomePageState extends State<HomePage> {
                           textInputAction: TextInputAction.done,
                           onChanged: _controller.storeCityTyped,
                           suffixIconButton: Icons.search,
-                          iconButtonPressed: () {
-                            _controller.returnCityValues(_controller.city);
+                          iconButtonPressed: () async{
+                            await _homeController.checkIfACityIsFavorited(widget.city.cityName!);
                           }),
                     ),
                     HomeMainCard(
-                        cityName: _controller.cityName,
+                        cityName: widget.city.cityName!,
                         dateTime: _homeController.mainDate,
-                        temperature: _controller.temperature,
-                        humidity: _controller.humidity,
-                        windSpeed: _controller.windSpeed,
-                        feelsLike: _controller.feelsLike,
-                        unitSymbol: _controller.unitSymbol,
+                        temperature: widget.city.temperature!,
+                        humidity: widget.city.humidity!,
+                        windSpeed: widget.city.windSpeed!,
+                        feelsLike: widget.city.feelsLike!,
+                        unitSymbol: "C", //LIDAR COM ISSO
+                        onPressed: () async {
+                          await _homeController.favoriteButtonPressed(widget.city.cityName!, widget.city.countryName, widget.city.temperature);
+                        },
+                        isFavorited: _homeController.isFavorited,
                         ),
                     HomeForecastNextDaysCard(
                         dateTimeDay2: _homeController.fiveDaysForecastDate2,
-                        temperatureDay2: _controller.temperatureDay2,
+                        temperatureDay2: widget.city.temperatureDay2!,
                         dateTimeDay3: _homeController.fiveDaysForecastDate3,
-                        temperatureDay3: _controller.temperatureDay3,
+                        temperatureDay3: widget.city.temperatureDay3!,
                         dateTimeDay4: _homeController.fiveDaysForecastDate4,
-                        temperatureDay4: _controller.temperatureDay4,
+                        temperatureDay4: widget.city.temperatureDay4!,
                         dateTimeDay5: _homeController.fiveDaysForecastDate5,
-                        temperatureDay5: _controller.temperatureDay5,
+                        temperatureDay5: widget.city.temperatureDay5!,
                         unitSymbol: _controller.unitSymbol,
                         )
                   ],

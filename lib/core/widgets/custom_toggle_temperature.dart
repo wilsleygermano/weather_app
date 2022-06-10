@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:weather_app/core/design/my_colors.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 
 class CustomToggleTemperature extends StatelessWidget {
@@ -19,16 +20,16 @@ class CustomToggleTemperature extends StatelessWidget {
       builder: (context) {
         return ToggleSwitch(
           borderColor: const [
-            Colors.white,
+            MyColors.primarywhite,
           ],
           borderWidth: 1,
           minWidth: minWidth,
           minHeight: minHeight,
           cornerRadius: 20.0,
-          activeBgColor: const [Colors.purple],
-          activeFgColor: Colors.white,
+          activeBgColor: const [MyColors.primarypurple],
+          activeFgColor: MyColors.primarywhite,
           inactiveBgColor: const Color(0XFFC2AFEC),
-          inactiveFgColor: Colors.white,
+          inactiveFgColor: MyColors.primarywhite,
           initialLabelIndex: _controller.initialLabelIndex,
           totalSwitches: 2,
           labels: const ['ºC', 'ºF'],
@@ -36,12 +37,12 @@ class CustomToggleTemperature extends StatelessWidget {
           onToggle: (index) async {
             if (index == 0) {
               _controller.changeTemperatureUnitToMetric();
-              await _controller.returnCityValues(_controller.city);
+              // await _controller.returnCityValues(_controller.city); //LIDAR DEPOIS
               _controller.changeUnitSymbolToMetric();
             }
             if (index == 1) {
               _controller.changeTemperatureUnitToImperial();
-              await _controller.returnCityValues(_controller.city);
+              // await _controller.returnCityValues(_controller.city); //LIDAR DEPOIS
               _controller.changeUnitSymbolToImperial();
             }
           },
