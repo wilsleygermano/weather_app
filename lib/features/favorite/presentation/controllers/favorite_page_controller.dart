@@ -70,6 +70,21 @@ abstract class _FavoritePageControllerBase with Store {
   @observable
   String dateTimeDay5 = '';
 
+  @observable
+  String weatherIcon = " ";
+
+  @observable
+  String weatherIcon2 = " ";
+
+  @observable
+  String weatherIcon3 = " ";
+
+  @observable
+  String weatherIcon4 = " ";
+
+  @observable
+  String weatherIcon5 = " ";
+
   @action
   removeAccents(String wordWithAccents) {
     var _comAcento =
@@ -116,6 +131,13 @@ abstract class _FavoritePageControllerBase with Store {
 
     temperatureDay5 = cityModel.data!.temperatureDay5!;
     dateTimeDay5 = cityModel.data!.dateTimeDay5!;
+
+    weatherIcon = cityModel.data!.weather!;
+    weatherIcon2 = cityModel.data!.weather2!;
+    weatherIcon3 = cityModel.data!.weather3!;
+    weatherIcon4 = cityModel.data!.weather4!;
+    weatherIcon5 = cityModel.data!.weather5!;
+
     return Resource.success();
   }
 

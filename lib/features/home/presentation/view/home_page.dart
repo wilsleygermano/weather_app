@@ -61,6 +61,9 @@ class _HomePageState extends State<HomePage> {
                         windSpeed: _controller.windSpeed,
                         feelsLike: _controller.feelsLike,
                         unitSymbol: _controller.unitSymbol,
+                        dayHighest: _controller.tempMax.toInt(),
+                        dayLowest: _controller.tempMin.toInt(),
+                        weatherIcon: _controller.weatherIcon,
                         ),
                     HomeForecastNextDaysCard(
                         dateTimeDay2: _homeController.fiveDaysForecastDate2,

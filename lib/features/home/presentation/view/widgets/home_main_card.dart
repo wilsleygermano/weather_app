@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/widgets/custom_toggle_temperature.dart';
 import 'package:weather_app/core/widgets/glassmorphism.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/column_main_card.dart';
+import 'package:weather_app/features/home/presentation/view/widgets/high_low_field.dart';
 
 class HomeMainCard extends StatelessWidget {
   final String cityName;
@@ -11,6 +12,10 @@ class HomeMainCard extends StatelessWidget {
   final num windSpeed;
   final num feelsLike;
   final String unitSymbol;
+  final int dayHighest;
+  final int dayLowest;
+  final String weatherIcon;
+
   const HomeMainCard({
     Key? key,
     required this.cityName,
@@ -20,6 +25,9 @@ class HomeMainCard extends StatelessWidget {
     required this.windSpeed,
     required this.feelsLike,
     required this.unitSymbol,
+    required this.dayHighest,
+    required this.dayLowest,
+    required this.weatherIcon,
   }) : super(key: key);
 
   @override
@@ -69,8 +77,16 @@ class HomeMainCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 42),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Column(
+                      children: [
+                        HighLowField(
+                            dayHighAndLow: dayHighest, icon: Icons.arrow_upward),
+                        HighLowField(
+                            dayHighAndLow: dayLowest, icon: Icons.arrow_downward),
+                      ],
+                    ),
                     Text(
                       "${temperature.toInt()} $unitSymbol",
                       style: Theme.of(context)
@@ -78,6 +94,16 @@ class HomeMainCard extends StatelessWidget {
                           .headline1!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
+                    Container(
+                      height: 45,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image:
+                              AssetImage("lib/assets/weather_icons/$weatherIcon.png"),
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 const SizedBox(height: 42),
