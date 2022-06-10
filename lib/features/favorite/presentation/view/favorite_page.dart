@@ -6,6 +6,7 @@ import 'package:weather_app/core/widgets/custom_toggle_temperature.dart';
 import 'package:weather_app/core/widgets/generic_text_field.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 import 'package:weather_app/features/favorite/presentation/view/widgets/custom_favorite_card.dart';
+import 'package:weather_app/features/favorite/presentation/view/widgets/dropdown_menu.dart';
 import 'package:weather_app/features/home/presentation/controller/home_page_controller.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -34,21 +35,33 @@ class _FavoritePageState extends State<FavoritePage> {
         backgroundColor: MyColors.backgroundcolor,
         body: Observer(builder: (context) {
           return Column(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 80, 120, 32),
-              child: GenericTextField(
-                textInputAction: TextInputAction.done,
-                onChanged: _controller.storeCityTyped,
-                suffixIconButton: Icons.search,
-                iconButtonPressed: () async {
-                  final resource = await _controller.fetchSearchedCity();
-                  if(resource.hasError) {
-                    //! fazer algo
-                    return;
-                  }
-                  await Modular.to.pushNamed('/home/', arguments: _controller.searchedCity);
-                },
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 80, 80, 32),
+                    child: GenericTextField(
+                      textInputAction: TextInputAction.done,
+                      onChanged: _controller.storeCityTyped,
+                      suffixIconButton: Icons.search,
+                      iconButtonPressed: () async {
+                        final resource = await _controller.fetchSearchedCity();
+                        if (resource.hasError) {
+                          //! fazer algo
+                          return;
+                        }
+                        await Modular.to.pushNamed('/home/',
+                            arguments: _controller.searchedCity);
+                      },
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(right: 16, top: 48),
+                  child: DropdownMenu(),
+                )
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
@@ -59,10 +72,6 @@ class _FavoritePageState extends State<FavoritePage> {
                     'My Locations',
                     style: Theme.of(context).textTheme.headline4,
                   ),
-                  const CustomToggleTemperature(
-                    minWidth: 40.0,
-                    minHeight: 40.0,
-                  )
                 ],
               ),
             ),
@@ -76,13 +85,14 @@ class _FavoritePageState extends State<FavoritePage> {
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: CustomFavoriteCard(
                       onTap: () {
-                        Modular.to.pushNamed('/home/', arguments: _controller.favoriteCities[index]);
+                        Modular.to.pushNamed('/home/',
+                            arguments: _controller.favoriteCities[index]);
                       },
                       cityName: _controller.favoriteCities[index].cityName!,
                       countryName:
                           _controller.favoriteCities[index].countryName!,
-                      temperature:
-                          _controller.favoriteCities[index].temperature.toString(),
+                      temperature: _controller.favoriteCities[index].temperature
+                          .toString(),
                     ));
               },
             )
