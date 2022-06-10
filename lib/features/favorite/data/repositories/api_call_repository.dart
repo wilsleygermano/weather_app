@@ -20,7 +20,7 @@ class DefaultApiCall implements ApiCallRepository {
     }
 
     final cityMap = resource.data;
-    final cityEntity = CityEntity.fromJson(cityMap!);
+    final cityEntity = CityEntity.fromApi(cityMap!);
     return Resource.success(data: cityEntity);
   }
 }
