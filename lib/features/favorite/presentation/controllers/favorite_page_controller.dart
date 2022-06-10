@@ -169,8 +169,11 @@ abstract class _FavoritePageControllerBase with Store {
   // }
 
   // var currentUserId = FirebaseAuth.instance.currentUser!.uid;
-  Future<List<FavoriteCityEntity>> getFavoriteCities() async {
-    List<FavoriteCityEntity> favoriteCities = [];
+  @observable
+  ObservableList<FavoriteCityEntity> favoriteCities = ObservableList<FavoriteCityEntity>.of([]);
+
+  @action
+  Future<ObservableList<FavoriteCityEntity>> getFavoriteCities() async {
 
     final cities = await FirebaseFirestore.instance
         .collection("Users")
@@ -179,9 +182,9 @@ abstract class _FavoritePageControllerBase with Store {
         .get();
 
     favoriteCities =
-        cities.docs.map((e) => FavoriteCityEntity.fromJson(e.data())).toList();
+        cities.docs.map((e) => FavoriteCityEntity.fromJson(e.data())).toList().asObservable();
     for (int i = 0; i < favoriteCities.length; i++) {
-      returnCityValues(favoriteCities[i].toString());
+      await returnCityValues(favoriteCities[i].cityName.toString());
 
     }
       return favoriteCities;

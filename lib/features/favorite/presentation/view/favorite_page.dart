@@ -24,16 +24,21 @@ class _FavoritePageState extends State<FavoritePage> {
 
   @override
   void initState() {
-    _favoriteController.getFavoriteCities();
+    _setupPage();
     super.initState();
   }
+
+  void _setupPage()async {
+    await _controller.getFavoriteCities();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundcolor,
-      body: Observer(builder: (context) {
-        return Column(
-          children: [
+        backgroundColor: MyColors.backgroundcolor,
+        body: Observer(builder: (context) {
+          return Column(children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 80, 120, 32),
               child: GenericTextField(
@@ -64,61 +69,31 @@ class _FavoritePageState extends State<FavoritePage> {
               ),
             ),
             const SizedBox(height: 30),
-            CustomFavoriteCard(
-              cityName: _controller.cityName,
-              countryName: _controller.countryName,
-              temperature: "${_controller.temperature.toInt()}"
-                  " ${_controller.unitSymbol}",
-            ),
-            FutureBuilder<List<FavoriteCityEntity>>(
-              future: _controller.getFavoriteCities(),
-              builder: ((context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: snapshot.data!.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: CustomFavoriteCard(
-                            cityName: snapshot.data![index].cityName!,
-                            countryName: snapshot.data![index].countryName!,
-                            temperature: snapshot.data![index].temperature!.toString(),
-                          ));
-                    },
-                  );
-                }
-                if (snapshot.hasError) {
-                  // return CustomDialog(
-                  //   context,
-                  //   "Error",
-                  //   "Cannot display your favorite words",
-                  //   "OK",
-                  //   () => Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const MyHomePage(),
-                  //     ),
-                  //   ),
-                  // );
-                }
-                if (!snapshot.hasData) {
-                  return const Center(
-                    child: Text("You don't have favorite words yet"),
-                  );
-                }
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.purple,
-                    strokeWidth: 8.0,
-                  ),
-                );
-              }),
-            ),
-          ],
-        );
-      }),
-    );
+            // CustomFavoriteCard(
+            //   cityName: _controller.cityName,
+            //   countryName: _controller.countryName,
+            //   temperature: "${_controller.temperature.toInt()}"
+            //       " ${_controller.unitSymbol}",
+            // ),
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _controller.favoriteCities.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: CustomFavoriteCard(
+                      cityName: _controller.favoriteCities[index].cityName!,
+                      // cityName: _controller.cityName,
+                      countryName: _controller.favoriteCities[index].countryName!,
+                      // temperature: snapshot.data![index].temperature!.toString(),
+                      // temperature: _controller.temperature.toString(),
+                      temperature:
+                          _controller.favoriteCities[index].temperature!,
+                    ));
+              },
+            )
+          ]);
+        }));
   }
 }

@@ -345,6 +345,22 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
+  late final _$favoriteCitiesAtom = Atom(
+      name: '_FavoritePageControllerBase.favoriteCities', context: context);
+
+  @override
+  ObservableList<FavoriteCityEntity> get favoriteCities {
+    _$favoriteCitiesAtom.reportRead();
+    return super.favoriteCities;
+  }
+
+  @override
+  set favoriteCities(ObservableList<FavoriteCityEntity> value) {
+    _$favoriteCitiesAtom.reportWrite(value, super.favoriteCities, () {
+      super.favoriteCities = value;
+    });
+  }
+
   late final _$returnCityValuesAsyncAction = AsyncAction(
       '_FavoritePageControllerBase.returnCityValues',
       context: context);
@@ -353,6 +369,15 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   Future<Resource<void, ApiCallError>> returnCityValues(String city) {
     return _$returnCityValuesAsyncAction
         .run(() => super.returnCityValues(city));
+  }
+
+  late final _$getFavoriteCitiesAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.getFavoriteCities',
+      context: context);
+
+  @override
+  Future<ObservableList<FavoriteCityEntity>> getFavoriteCities() {
+    return _$getFavoriteCitiesAsyncAction.run(() => super.getFavoriteCities());
   }
 
   late final _$_FavoritePageControllerBaseActionController =
@@ -452,7 +477,8 @@ temperatureDay5: ${temperatureDay5},
 dateTimeDay5: ${dateTimeDay5},
 initialLabelIndex: ${initialLabelIndex},
 temperatureUnit: ${temperatureUnit},
-unitSymbol: ${unitSymbol}
+unitSymbol: ${unitSymbol},
+favoriteCities: ${favoriteCities}
     ''';
   }
 }

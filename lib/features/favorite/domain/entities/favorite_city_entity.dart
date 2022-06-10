@@ -1,7 +1,7 @@
 class FavoriteCityEntity {
   String? cityName;
   String? countryName;
-  num? temperature;
+  String? temperature;
 
   FavoriteCityEntity({
     this.cityName,
