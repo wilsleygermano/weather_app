@@ -8,7 +8,7 @@ class CityEntity {
   String? dateTime;
   String? cityName;
   String? countryName;
-  
+
   num? temperatureDay2;
   String? dateTimeDay2;
 
@@ -17,13 +17,13 @@ class CityEntity {
 
   num? temperatureDay4;
   String? dateTimeDay4;
-  
+
   num? temperatureDay5;
   String? dateTimeDay5;
 
   CityEntity({this.temperature, this.cityName, this.countryName});
 
-  CityEntity.fromJson(Map<String, dynamic> json) {
+  CityEntity.fromApi(Map<String, dynamic> json) {
     temperature = json['list'][0]['main']['temp'];
     feelsLike = json['list'][0]['main']['feels_like'];
     tempMin = json['list'][0]['main']['temp_min'];
@@ -34,16 +34,22 @@ class CityEntity {
     cityName = json['city']['name'];
     countryName = json['city']['country'];
 
-    temperatureDay2 = json['list'][9]['main']['temp'];
-    dateTimeDay2 = json['list'][9]['dt_txt'];
+    temperatureDay2 = json['list'][8]['main']['temp'];
+    dateTimeDay2 = json['list'][8]['dt_txt'];
 
-    temperatureDay3 = json['list'][18]['main']['temp'];
-    dateTimeDay3 = json['list'][18]['dt_txt'];
+    temperatureDay3 = json['list'][16]['main']['temp'];
+    dateTimeDay3 = json['list'][16]['dt_txt'];
 
-    temperatureDay4 = json['list'][27]['main']['temp'];
-    dateTimeDay4 = json['list'][27]['dt_txt'];
+    temperatureDay4 = json['list'][24]['main']['temp'];
+    dateTimeDay4 = json['list'][24]['dt_txt'];
 
-    temperatureDay5 = json['list'][36]['main']['temp'];
-    dateTimeDay5 = json['list'][36]['dt_txt'];
+    temperatureDay5 = json['list'][32]['main']['temp'];
+    dateTimeDay5 = json['list'][32]['dt_txt'];
+  }
+
+  CityEntity.fromFirestore(Map<String, dynamic> map) {
+    cityName = map['city_name'];
+    countryName = map['country_name'];
+    temperature = num.parse(map['temperature']);
   }
 }

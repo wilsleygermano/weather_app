@@ -37,12 +37,12 @@ class CustomToggleTemperature extends StatelessWidget {
           onToggle: (index) async {
             if (index == 0) {
               _controller.changeTemperatureUnitToMetric();
-              await _controller.returnCityValues(_controller.city);
+              // await _controller.returnCityValues(_controller.city); //LIDAR DEPOIS
               _controller.changeUnitSymbolToMetric();
             }
             if (index == 1) {
               _controller.changeTemperatureUnitToImperial();
-              await _controller.returnCityValues(_controller.city);
+              // await _controller.returnCityValues(_controller.city); //LIDAR DEPOIS
               _controller.changeUnitSymbolToImperial();
             }
           },
