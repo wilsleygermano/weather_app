@@ -137,22 +137,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
-  late final _$initialLabelIndexAtom = Atom(
-      name: '_FavoritePageControllerBase.initialLabelIndex', context: context);
-
-  @override
-  int get initialLabelIndex {
-    _$initialLabelIndexAtom.reportRead();
-    return super.initialLabelIndex;
-  }
-
-  @override
-  set initialLabelIndex(int value) {
-    _$initialLabelIndexAtom.reportWrite(value, super.initialLabelIndex, () {
-      super.initialLabelIndex = value;
-    });
-  }
-
   late final _$temperatureUnitAtom = Atom(
       name: '_FavoritePageControllerBase.temperatureUnit', context: context);
 
@@ -194,6 +178,46 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     return _$fetchSearchedCityAsyncAction.run(() => super.fetchSearchedCity());
   }
 
+  late final _$changeTemperatureUnitToImperialAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.changeTemperatureUnitToImperial',
+      context: context);
+
+  @override
+  Future<void> changeTemperatureUnitToImperial() {
+    return _$changeTemperatureUnitToImperialAsyncAction
+        .run(() => super.changeTemperatureUnitToImperial());
+  }
+
+  late final _$changeTemperatureUnitToMetricAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.changeTemperatureUnitToMetric',
+      context: context);
+
+  @override
+  Future<void> changeTemperatureUnitToMetric() {
+    return _$changeTemperatureUnitToMetricAsyncAction
+        .run(() => super.changeTemperatureUnitToMetric());
+  }
+
+  late final _$changeUnitSymbolToMetricAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.changeUnitSymbolToMetric',
+      context: context);
+
+  @override
+  Future<void> changeUnitSymbolToMetric() {
+    return _$changeUnitSymbolToMetricAsyncAction
+        .run(() => super.changeUnitSymbolToMetric());
+  }
+
+  late final _$changeUnitSymbolToImperialAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.changeUnitSymbolToImperial',
+      context: context);
+
+  @override
+  Future<void> changeUnitSymbolToImperial() {
+    return _$changeUnitSymbolToImperialAsyncAction
+        .run(() => super.changeUnitSymbolToImperial());
+  }
+
   late final _$getFavoriteCitiesAsyncAction = AsyncAction(
       '_FavoritePageControllerBase.getFavoriteCities',
       context: context);
@@ -229,55 +253,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   }
 
   @override
-  void changeTemperatureUnitToImperial() {
-    final _$actionInfo =
-        _$_FavoritePageControllerBaseActionController.startAction(
-            name:
-                '_FavoritePageControllerBase.changeTemperatureUnitToImperial');
-    try {
-      return super.changeTemperatureUnitToImperial();
-    } finally {
-      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void changeTemperatureUnitToMetric() {
-    final _$actionInfo =
-        _$_FavoritePageControllerBaseActionController.startAction(
-            name: '_FavoritePageControllerBase.changeTemperatureUnitToMetric');
-    try {
-      return super.changeTemperatureUnitToMetric();
-    } finally {
-      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void changeUnitSymbolToMetric() {
-    final _$actionInfo =
-        _$_FavoritePageControllerBaseActionController.startAction(
-            name: '_FavoritePageControllerBase.changeUnitSymbolToMetric');
-    try {
-      return super.changeUnitSymbolToMetric();
-    } finally {
-      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void changeUnitSymbolToImperial() {
-    final _$actionInfo =
-        _$_FavoritePageControllerBaseActionController.startAction(
-            name: '_FavoritePageControllerBase.changeUnitSymbolToImperial');
-    try {
-      return super.changeUnitSymbolToImperial();
-    } finally {
-      _$_FavoritePageControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 favoriteCities: ${favoriteCities},
@@ -288,7 +263,6 @@ weatherIcon2: ${weatherIcon2},
 weatherIcon3: ${weatherIcon3},
 weatherIcon4: ${weatherIcon4},
 weatherIcon5: ${weatherIcon5},
-initialLabelIndex: ${initialLabelIndex},
 temperatureUnit: ${temperatureUnit},
 unitSymbol: ${unitSymbol}
     ''';

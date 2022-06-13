@@ -72,10 +72,6 @@ abstract class _FavoritePageControllerBase with Store {
     return wordWithAccents;
   }
 
-
-  @observable
-  int initialLabelIndex = 1;
-
   @observable
   String temperatureUnit = "imperial";
 
@@ -83,24 +79,22 @@ abstract class _FavoritePageControllerBase with Store {
   String unitSymbol = "ºF";
 
   @action
-  void changeTemperatureUnitToImperial() {
+  Future<void> changeTemperatureUnitToImperial() async{
     temperatureUnit = "imperial";
-    // initialLabelIndex = 1;
   }
 
   @action
-  void changeTemperatureUnitToMetric() {
+  Future<void> changeTemperatureUnitToMetric() async{
     temperatureUnit = "metric";
-    // initialLabelIndex = 0;
   }
 
   @action
-  void changeUnitSymbolToMetric() {
+  Future<void> changeUnitSymbolToMetric() async{
     unitSymbol = "ºC";
   }
 
   @action
-  void changeUnitSymbolToImperial() {
+  Future<void> changeUnitSymbolToImperial() async{
     unitSymbol = "ºF";
   }
 
@@ -130,5 +124,19 @@ abstract class _FavoritePageControllerBase with Store {
     }
     favoriteCities = provisoryCityList;
     return favoriteCities;
+  }
+
+  Future<void> caseCelsius() async {
+    await changeTemperatureUnitToMetric();
+    await changeUnitSymbolToMetric();
+    await getFavoriteCities();
+    await fetchSearchedCity();
+  }
+
+  Future<void> caseFahrenheit() async {
+    await changeTemperatureUnitToImperial();
+    await changeUnitSymbolToImperial();
+    await getFavoriteCities();
+    await fetchSearchedCity();
   }
 }
