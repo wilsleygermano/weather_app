@@ -24,10 +24,14 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     _controller.searchedCity = widget.city;
     _controller.formartMainDate(_controller.searchedCity.dateTime!);
-    _controller.formartFiveDaysForecastDate2(_controller.searchedCity.dateTimeDay2!);
-    _controller.formartFiveDaysForecastDate3(_controller.searchedCity.dateTimeDay3!);
-    _controller.formartFiveDaysForecastDate4(_controller.searchedCity.dateTimeDay4!);
-    _controller.fomartFiveDaysForecastDate5(_controller.searchedCity.dateTimeDay5!);
+    _controller
+        .formartFiveDaysForecastDate2(_controller.searchedCity.dateTimeDay2!);
+    _controller
+        .formartFiveDaysForecastDate3(_controller.searchedCity.dateTimeDay3!);
+    _controller
+        .formartFiveDaysForecastDate4(_controller.searchedCity.dateTimeDay4!);
+    _controller
+        .fomartFiveDaysForecastDate5(_controller.searchedCity.dateTimeDay5!);
     _controller.checkIfACityIsFavorited(_controller.searchedCity.cityName!);
     super.initState();
   }
@@ -91,13 +95,17 @@ class _HomePageState extends State<HomePage> {
                       weather4: _controller.searchedCity.weather4!,
                       weather5: _controller.searchedCity.weather5!,
                       dateTimeDay2: _controller.fiveDaysForecastDate2,
-                      temperatureDay2: _controller.searchedCity.temperatureDay2!,
+                      temperatureDay2:
+                          _controller.searchedCity.temperatureDay2!,
                       dateTimeDay3: _controller.fiveDaysForecastDate3,
-                      temperatureDay3: _controller.searchedCity.temperatureDay3!,
+                      temperatureDay3:
+                          _controller.searchedCity.temperatureDay3!,
                       dateTimeDay4: _controller.fiveDaysForecastDate4,
-                      temperatureDay4: _controller.searchedCity.temperatureDay4!,
+                      temperatureDay4:
+                          _controller.searchedCity.temperatureDay4!,
                       dateTimeDay5: _controller.fiveDaysForecastDate5,
-                      temperatureDay5: _controller.searchedCity.temperatureDay5!,
+                      temperatureDay5:
+                          _controller.searchedCity.temperatureDay5!,
                       unitSymbol: "C", //! replace this
                     )
                   ],
