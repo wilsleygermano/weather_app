@@ -11,34 +11,31 @@ import 'package:weather_app/features/home/presentation/view/widgets/home_main_ca
 
 class HomePage extends StatefulWidget {
   final CityEntity city;
-  const HomePage({
-    Key? key,
-    required this.city
-  }) : super(key: key);
+  const HomePage({Key? key, required this.city}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final _controller = Modular.get<FavoritePageController>();
-  final _homeController = Modular.get<HomePageController>();
+  final _controller = Modular.get<HomePageController>();
 
   @override
   void initState() {
-    _homeController.fomartMainDate(widget.city.dateTime!);
-    _homeController.fomartFiveDaysForecastDate2(widget.city.dateTimeDay2!);
-    _homeController.fomartFiveDaysForecastDate3(widget.city.dateTimeDay3!);
-    _homeController.fomartFiveDaysForecastDate4(widget.city.dateTimeDay4!);
-    _homeController.fomartFiveDaysForecastDate5(widget.city.dateTimeDay5!);
-    _homeController.checkIfACityIsFavorited(widget.city.cityName!);
+    _controller.searchedCity = widget.city;
+    _controller.formartMainDate(_controller.searchedCity.dateTime!);
+    _controller.formartFiveDaysForecastDate2(_controller.searchedCity.dateTimeDay2!);
+    _controller.formartFiveDaysForecastDate3(_controller.searchedCity.dateTimeDay3!);
+    _controller.formartFiveDaysForecastDate4(_controller.searchedCity.dateTimeDay4!);
+    _controller.fomartFiveDaysForecastDate5(_controller.searchedCity.dateTimeDay5!);
+    _controller.checkIfACityIsFavorited(_controller.searchedCity.cityName!);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         backgroundColor: MyColors.backgroundcolor,
         body: SafeArea(
           child: Center(
@@ -54,34 +51,49 @@ class _HomePageState extends State<HomePage> {
                           textInputAction: TextInputAction.done,
                           onChanged: _controller.storeCityTyped,
                           suffixIconButton: Icons.search,
-                          iconButtonPressed: () async{
-                            await _homeController.checkIfACityIsFavorited(widget.city.cityName!);
+                          iconButtonPressed: () async {
+                            setState(() async{
+                              await _controller.fetchSearchedCity();
+                              await _controller
+                                .checkIfACityIsFavorited(_controller.searchedCity.cityName!);
+                            });
+                            
                           }),
                     ),
                     HomeMainCard(
-                        cityName: widget.city.cityName!,
-                        dateTime: _homeController.mainDate,
-                        temperature: widget.city.temperature!,
-                        humidity: widget.city.humidity!,
-                        windSpeed: widget.city.windSpeed!,
-                        feelsLike: widget.city.feelsLike!,
-                        unitSymbol: "C", //LIDAR COM ISSO
-                        onPressed: () async {
-                          await _homeController.favoriteButtonPressed(widget.city.cityName!, widget.city.countryName, widget.city.temperature);
-                        },
-                        isFavorited: _homeController.isFavorited,
-                        ),
+                      cityName: _controller.searchedCity.cityName!,
+                      dateTime: _controller.mainDate,
+                      temperature: _controller.searchedCity.temperature!,
+                      humidity: _controller.searchedCity.humidity!,
+                      windSpeed: _controller.searchedCity.windSpeed!,
+                      feelsLike: _controller.searchedCity.feelsLike!,
+                      unitSymbol: "C", //! LIDAR COM ISSO
+                      dayMaximum: _controller.searchedCity.tempMax!.toInt(),
+                      dayMinimum: _controller.searchedCity.tempMin!.toInt(),
+                      weather: _controller.searchedCity.weather!,
+                      onPressed: () async {
+                        await _controller.favoriteButtonPressed(
+                            _controller.searchedCity.cityName!,
+                            _controller.searchedCity.countryName,
+                            _controller.searchedCity.temperature);
+                      },
+                      isFavorited: _controller.isFavorited,
+                    ),
                     HomeForecastNextDaysCard(
-                        dateTimeDay2: _homeController.fiveDaysForecastDate2,
-                        temperatureDay2: widget.city.temperatureDay2!,
-                        dateTimeDay3: _homeController.fiveDaysForecastDate3,
-                        temperatureDay3: widget.city.temperatureDay3!,
-                        dateTimeDay4: _homeController.fiveDaysForecastDate4,
-                        temperatureDay4: widget.city.temperatureDay4!,
-                        dateTimeDay5: _homeController.fiveDaysForecastDate5,
-                        temperatureDay5: widget.city.temperatureDay5!,
-                        unitSymbol: _controller.unitSymbol,
-                        )
+                      weather2: _controller.searchedCity.weather2!,
+                      weather3: _controller.searchedCity.weather3!,
+                      weather4: _controller.searchedCity.weather4!,
+                      weather5: _controller.searchedCity.weather5!,
+                      dateTimeDay2: _controller.fiveDaysForecastDate2,
+                      temperatureDay2: _controller.searchedCity.temperatureDay2!,
+                      dateTimeDay3: _controller.fiveDaysForecastDate3,
+                      temperatureDay3: _controller.searchedCity.temperatureDay3!,
+                      dateTimeDay4: _controller.fiveDaysForecastDate4,
+                      temperatureDay4: _controller.searchedCity.temperatureDay4!,
+                      dateTimeDay5: _controller.fiveDaysForecastDate5,
+                      temperatureDay5: _controller.searchedCity.temperatureDay5!,
+                      unitSymbol: "C", //! replace this
+                    )
                   ],
                 ),
               );

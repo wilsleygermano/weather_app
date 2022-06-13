@@ -8,9 +8,10 @@ import 'package:weather_app/features/favorite/presentation/controllers/favorite_
 class CustomToggleTemperature extends StatelessWidget {
   final double minWidth;
   final double minHeight;
-  const CustomToggleTemperature({Key? key,
-  required this.minWidth,
-  required this.minHeight,
+  const CustomToggleTemperature({
+    Key? key,
+    required this.minWidth,
+    required this.minHeight,
   }) : super(key: key);
 
   @override

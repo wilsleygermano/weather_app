@@ -82,18 +82,18 @@ class _FavoritePageState extends State<FavoritePage> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: CustomFavoriteCard(
-                      onTap: () {
-                        Modular.to.pushNamed('/home/',
-                            arguments: _controller.favoriteCities[index]);
-                      },
-                      cityName: _controller.favoriteCities[index].cityName!,
-                      countryName:
-                          _controller.favoriteCities[index].countryName!,
-                      temperature: _controller.favoriteCities[index].temperature
-                          .toString(),
-                    ));
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: CustomFavoriteCard(
+                    onTap: () {
+                      Modular.to.pushNamed('/home/',
+                          arguments: _controller.favoriteCities[index]);
+                    },
+                    cityName: _controller.favoriteCities[index].cityName!,
+                    countryName: _controller.favoriteCities[index].countryName!,
+                    temperature: _controller.favoriteCities[index].temperature
+                        .toString(),
+                  ),
+                );
               },
             )
           ]);

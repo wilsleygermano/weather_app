@@ -41,6 +41,102 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
+  late final _$searchedCityAtom =
+      Atom(name: '_FavoritePageControllerBase.searchedCity', context: context);
+
+  @override
+  CityEntity get searchedCity {
+    _$searchedCityAtom.reportRead();
+    return super.searchedCity;
+  }
+
+  @override
+  set searchedCity(CityEntity value) {
+    _$searchedCityAtom.reportWrite(value, super.searchedCity, () {
+      super.searchedCity = value;
+    });
+  }
+
+  late final _$weatherIconAtom =
+      Atom(name: '_FavoritePageControllerBase.weatherIcon', context: context);
+
+  @override
+  String get weatherIcon {
+    _$weatherIconAtom.reportRead();
+    return super.weatherIcon;
+  }
+
+  @override
+  set weatherIcon(String value) {
+    _$weatherIconAtom.reportWrite(value, super.weatherIcon, () {
+      super.weatherIcon = value;
+    });
+  }
+
+  late final _$weatherIcon2Atom =
+      Atom(name: '_FavoritePageControllerBase.weatherIcon2', context: context);
+
+  @override
+  String get weatherIcon2 {
+    _$weatherIcon2Atom.reportRead();
+    return super.weatherIcon2;
+  }
+
+  @override
+  set weatherIcon2(String value) {
+    _$weatherIcon2Atom.reportWrite(value, super.weatherIcon2, () {
+      super.weatherIcon2 = value;
+    });
+  }
+
+  late final _$weatherIcon3Atom =
+      Atom(name: '_FavoritePageControllerBase.weatherIcon3', context: context);
+
+  @override
+  String get weatherIcon3 {
+    _$weatherIcon3Atom.reportRead();
+    return super.weatherIcon3;
+  }
+
+  @override
+  set weatherIcon3(String value) {
+    _$weatherIcon3Atom.reportWrite(value, super.weatherIcon3, () {
+      super.weatherIcon3 = value;
+    });
+  }
+
+  late final _$weatherIcon4Atom =
+      Atom(name: '_FavoritePageControllerBase.weatherIcon4', context: context);
+
+  @override
+  String get weatherIcon4 {
+    _$weatherIcon4Atom.reportRead();
+    return super.weatherIcon4;
+  }
+
+  @override
+  set weatherIcon4(String value) {
+    _$weatherIcon4Atom.reportWrite(value, super.weatherIcon4, () {
+      super.weatherIcon4 = value;
+    });
+  }
+
+  late final _$weatherIcon5Atom =
+      Atom(name: '_FavoritePageControllerBase.weatherIcon5', context: context);
+
+  @override
+  String get weatherIcon5 {
+    _$weatherIcon5Atom.reportRead();
+    return super.weatherIcon5;
+  }
+
+  @override
+  set weatherIcon5(String value) {
+    _$weatherIcon5Atom.reportWrite(value, super.weatherIcon5, () {
+      super.weatherIcon5 = value;
+    });
+  }
+
   late final _$initialLabelIndexAtom = Atom(
       name: '_FavoritePageControllerBase.initialLabelIndex', context: context);
 
@@ -87,6 +183,15 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     _$unitSymbolAtom.reportWrite(value, super.unitSymbol, () {
       super.unitSymbol = value;
     });
+  }
+
+  late final _$fetchSearchedCityAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.fetchSearchedCity',
+      context: context);
+
+  @override
+  Future<Resource<void, ApiCallError>> fetchSearchedCity() {
+    return _$fetchSearchedCityAsyncAction.run(() => super.fetchSearchedCity());
   }
 
   late final _$getFavoriteCitiesAsyncAction = AsyncAction(
@@ -177,6 +282,12 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     return '''
 favoriteCities: ${favoriteCities},
 city: ${city},
+searchedCity: ${searchedCity},
+weatherIcon: ${weatherIcon},
+weatherIcon2: ${weatherIcon2},
+weatherIcon3: ${weatherIcon3},
+weatherIcon4: ${weatherIcon4},
+weatherIcon5: ${weatherIcon5},
 initialLabelIndex: ${initialLabelIndex},
 temperatureUnit: ${temperatureUnit},
 unitSymbol: ${unitSymbol}
