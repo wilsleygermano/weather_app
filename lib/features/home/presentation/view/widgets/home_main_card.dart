@@ -8,7 +8,7 @@ import 'package:weather_app/features/home/presentation/view/widgets/favorite_but
 class HomeMainCard extends StatelessWidget {
   final String cityName;
   final String dateTime;
-  final num temperature;
+  final int temperature;
   final num humidity;
   final num windSpeed;
   final num feelsLike;

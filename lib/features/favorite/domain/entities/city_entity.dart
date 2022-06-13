@@ -88,7 +88,6 @@ class CityEntity {
   CityEntity.fromFirestore(Map<String, dynamic> map) {
     cityName = map['city_name'];
     countryName = map['country_name'];
-    // temperature = num.parse(map['temperature']);
-    // temperature = map['temperature'];
+    temperature = map['temperature'];
   }
 }
