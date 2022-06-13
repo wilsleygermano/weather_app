@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,8 +18,7 @@ abstract class _FavoritePageControllerBase with Store {
   var currentUserId = FirebaseAuth.instance.currentUser!.uid;
 
   @observable
-  ObservableList<CityEntity> favoriteCities =
-      ObservableList<CityEntity>.of([]);
+  ObservableList<CityEntity> favoriteCities = ObservableList<CityEntity>.of([]);
 
   @observable
   String city = '';
@@ -33,15 +34,15 @@ abstract class _FavoritePageControllerBase with Store {
     final cityWithoutAccents = removeAccents(city);
     cityWithoutAccents.replaceAll(" ", '%20').toLowerCase();
 
-    final resource = await _useCase.returnCityValues(cityWithoutAccents, temperatureUnit);
+    final resource =
+        await _useCase.returnCityValues(cityWithoutAccents, temperatureUnit);
 
-    if(resource.hasError) {
+    if (resource.hasError) {
       return Resource.failed(error: ApiCallError.badRequest);
     }
 
     searchedCity = resource.data!;
     return Resource.success();
-
   }
 
   @observable
@@ -71,7 +72,6 @@ abstract class _FavoritePageControllerBase with Store {
     }
     return wordWithAccents;
   }
-
 
   @observable
   int initialLabelIndex = 1;
@@ -104,31 +104,31 @@ abstract class _FavoritePageControllerBase with Store {
     unitSymbol = "ºF";
   }
 
-  @action
-  Future<ObservableList<CityEntity>> getFavoriteCities() async {
+
+  @observable
+  Stream<List<CityEntity>> streamFavoriteCities() async* {
     final cities = await FirebaseFirestore.instance
         .collection("Users")
         .doc(currentUserId)
         .collection("favorite_places")
         .get();
 
-    favoriteCities = cities.docs
-        .map((e) => CityEntity.fromFirestore(e.data()))
-        .toList()
-        .asObservable();
-
-    ObservableList<CityEntity> provisoryCityList = <CityEntity>[].asObservable();
-    for (var city in favoriteCities) {
+    final streamFavList = List<CityEntity>.from(
+        cities.docs.map((e) => CityEntity.fromFirestore(e.data())));
+    ObservableList<CityEntity> provisoryCityList =
+        <CityEntity>[].asObservable();
+    for (var city in streamFavList) {
       final newCity = city.cityName!.replaceAll(" ", '%20').toLowerCase();
       final cityWithoutAccents = removeAccents(newCity);
-      final resource = await _useCase.returnCityValues(cityWithoutAccents, temperatureUnit);
-      if(resource.hasError) {
+      final resource =
+          await _useCase.returnCityValues(cityWithoutAccents, temperatureUnit);
+      if (resource.hasError) {
         //fazer algo a respeito
       }
       final cityData = resource.data;
       provisoryCityList.add(cityData!);
     }
     favoriteCities = provisoryCityList;
-    return favoriteCities;
+    yield favoriteCities;
   }
 }

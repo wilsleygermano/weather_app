@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:weather_app/core/design/my_colors.dart';
-import 'package:weather_app/core/widgets/custom_toggle_temperature.dart';
 import 'package:weather_app/core/widgets/glassmorphism.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/column_main_card.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/favorite_button.dart';
@@ -82,7 +81,7 @@ class HomeMainCard extends StatelessWidget {
                                   "$dayMaximum",
                                   style: Theme.of(context).textTheme.headline3!,
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_upward_outlined,
                                   size: 16,
                                   color: MyColors.primarywhite,
@@ -95,7 +94,7 @@ class HomeMainCard extends StatelessWidget {
                                   "$dayMinimum",
                                   style: Theme.of(context).textTheme.headline3!,
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_downward_outlined,
                                   size: 16,
                                   color: MyColors.primarywhite,
