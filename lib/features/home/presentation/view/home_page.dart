@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                     HomeMainCard(
                       cityName: _controller.searchedCity.cityName!,
                       dateTime: _controller.mainDate,
-                      temperature: _controller.searchedCity.temperature!,
+                      temperature: _controller.searchedCity.temperature!.toInt(),
                       humidity: _controller.searchedCity.humidity!,
                       windSpeed: _controller.searchedCity.windSpeed!,
                       feelsLike: _controller.searchedCity.feelsLike!,
