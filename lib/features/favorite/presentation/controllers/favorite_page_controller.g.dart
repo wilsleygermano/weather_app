@@ -200,15 +200,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     return _$fetchSearchedCityAsyncAction.run(() => super.fetchSearchedCity());
   }
 
-  late final _$getFavoriteCitiesAsyncAction = AsyncAction(
-      '_FavoritePageControllerBase.getFavoriteCities',
-      context: context);
-
-  @override
-  Future<ObservableList<CityEntity>> getFavoriteCities() {
-    return _$getFavoriteCitiesAsyncAction.run(() => super.getFavoriteCities());
-  }
-
   late final _$_FavoritePageControllerBaseActionController =
       ActionController(name: '_FavoritePageControllerBase', context: context);
 

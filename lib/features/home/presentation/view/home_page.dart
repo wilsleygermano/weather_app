@@ -53,9 +53,11 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () =>
-                              Modular.to.pushReplacementNamed("/favorites/"),
-                          icon: Icon(Icons.arrow_back_ios),
+                          onPressed: () => Modular.to
+                              .pushReplacementNamed("/favorites/")
+                              .whenComplete(() =>
+                                  _favoriteController.streamFavoriteCities()),
+                          icon: const Icon(Icons.arrow_back_ios),
                           color: MyColors.primarywhite,
                         ),
                         Flexible(
@@ -90,10 +92,7 @@ class _HomePageState extends State<HomePage> {
                             _controller.searchedCity.cityName!,
                             _controller.searchedCity.countryName,
                             _controller.searchedCity.temperature);
-
-                        setState(() {
-                          _favoriteController.streamFavoriteCities();
-                        });
+                        _favoriteController.streamFavoriteCities();
                       },
                       isFavorited: _controller.isFavorited,
                     ),

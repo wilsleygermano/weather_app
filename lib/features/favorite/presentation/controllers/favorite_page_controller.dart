@@ -104,35 +104,6 @@ abstract class _FavoritePageControllerBase with Store {
     unitSymbol = "ºF";
   }
 
-  @action
-  Future<ObservableList<CityEntity>> getFavoriteCities() async {
-    final cities = await FirebaseFirestore.instance
-        .collection("Users")
-        .doc(currentUserId)
-        .collection("favorite_places")
-        .get();
-
-    favoriteCities = cities.docs
-        .map((e) => CityEntity.fromFirestore(e.data()))
-        .toList()
-        .asObservable();
-
-    ObservableList<CityEntity> provisoryCityList =
-        <CityEntity>[].asObservable();
-    for (var city in favoriteCities) {
-      final newCity = city.cityName!.replaceAll(" ", '%20').toLowerCase();
-      final cityWithoutAccents = removeAccents(newCity);
-      final resource =
-          await _useCase.returnCityValues(cityWithoutAccents, temperatureUnit);
-      if (resource.hasError) {
-        //fazer algo a respeito
-      }
-      final cityData = resource.data;
-      provisoryCityList.add(cityData!);
-    }
-    favoriteCities = provisoryCityList;
-    return favoriteCities;
-  }
 
   @observable
   Stream<List<CityEntity>> streamFavoriteCities() async* {
@@ -159,36 +130,5 @@ abstract class _FavoritePageControllerBase with Store {
     }
     favoriteCities = provisoryCityList;
     yield favoriteCities;
-  }
-
-  late final StreamController<List<CityEntity>> _streamController;
-  late final QuerySnapshot<Map<String, dynamic>> cities;
-  late final ObservableStream<List<CityEntity>> favoriteStream;
-
-  _favoriteStore() async* {
-    _streamController = StreamController<List<CityEntity>>();
-    cities = await FirebaseFirestore.instance
-        .collection("Users")
-        .doc(currentUserId)
-        .collection("favorite_places")
-        .get();
-    final streamFavList = List<CityEntity>.from(
-        cities.docs.map((e) => CityEntity.fromFirestore(e.data())));
-    ObservableList<CityEntity> provisoryCityList =
-        <CityEntity>[].asObservable();
-    for (var city in streamFavList) {
-      final newCity = city.cityName!.replaceAll(" ", '%20').toLowerCase();
-      final cityWithoutAccents = removeAccents(newCity);
-      final resource =
-          await _useCase.returnCityValues(cityWithoutAccents, temperatureUnit);
-      if (resource.hasError) {
-        //fazer algo a respeito
-      }
-      final cityData = resource.data;
-      provisoryCityList.add(cityData!);
-    }
-    favoriteCities = provisoryCityList;
-    _streamController.add(favoriteCities);
-    favoriteStream = ObservableStream(_streamController.stream);
   }
 }
