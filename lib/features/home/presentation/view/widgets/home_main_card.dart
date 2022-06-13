@@ -81,7 +81,7 @@ class HomeMainCard extends StatelessWidget {
                                   "$dayMaximum",
                                   style: Theme.of(context).textTheme.headline3!,
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_upward_outlined,
                                   size: 16,
                                   color: MyColors.primarywhite,
@@ -94,7 +94,7 @@ class HomeMainCard extends StatelessWidget {
                                   "$dayMinimum",
                                   style: Theme.of(context).textTheme.headline3!,
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_downward_outlined,
                                   size: 16,
                                   color: MyColors.primarywhite,

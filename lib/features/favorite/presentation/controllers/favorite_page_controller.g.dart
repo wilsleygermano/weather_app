@@ -169,6 +169,12 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
+  @override
+  ObservableStream<List<CityEntity>> streamFavoriteCities() {
+    final _$stream = super.streamFavoriteCities();
+    return ObservableStream<List<CityEntity>>(_$stream, context: context);
+  }
+
   late final _$fetchSearchedCityAsyncAction = AsyncAction(
       '_FavoritePageControllerBase.fetchSearchedCity',
       context: context);
@@ -216,15 +222,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   Future<void> changeUnitSymbolToImperial() {
     return _$changeUnitSymbolToImperialAsyncAction
         .run(() => super.changeUnitSymbolToImperial());
-  }
-
-  late final _$getFavoriteCitiesAsyncAction = AsyncAction(
-      '_FavoritePageControllerBase.getFavoriteCities',
-      context: context);
-
-  @override
-  Future<ObservableList<CityEntity>> getFavoriteCities() {
-    return _$getFavoriteCitiesAsyncAction.run(() => super.getFavoriteCities());
   }
 
   late final _$_FavoritePageControllerBaseActionController =
