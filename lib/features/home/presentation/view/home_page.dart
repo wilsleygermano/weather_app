@@ -45,20 +45,26 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(44, 0, 44, 0),
-                      child: GenericTextField(
-                          textInputAction: TextInputAction.done,
-                          onChanged: _controller.storeCityTyped,
-                          suffixIconButton: Icons.search,
-                          iconButtonPressed: () async {
-                            setState(() async{
-                              await _controller.fetchSearchedCity();
-                              await _controller
-                                .checkIfACityIsFavorited(_controller.searchedCity.cityName!);
-                            });
-                            
-                          }),
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () =>
+                                Modular.to.pushReplacementNamed("/favorites/"),
+                            icon: Icon(Icons.arrow_back_ios), color: MyColors.primarywhite,),
+                        Flexible(
+                          child: GenericTextField(
+                              textInputAction: TextInputAction.done,
+                              onChanged: _controller.storeCityTyped,
+                              suffixIconButton: Icons.search,
+                              iconButtonPressed: () async {
+                                setState(() async {
+                                  await _controller.fetchSearchedCity();
+                                  await _controller.checkIfACityIsFavorited(
+                                      _controller.searchedCity.cityName!);
+                                });
+                              }),
+                        ),
+                      ],
                     ),
                     HomeMainCard(
                       cityName: _controller.searchedCity.cityName!,

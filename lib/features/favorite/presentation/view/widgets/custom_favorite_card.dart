@@ -78,7 +78,7 @@ class CustomFavoriteCard extends StatelessWidget {
           end: 0.1,
           borderRadius: 26,
         ),
-        onTap: () => onTap,
+        onTap: onTap,
       ),
     );
   }
