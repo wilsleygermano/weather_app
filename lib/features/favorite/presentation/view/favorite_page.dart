@@ -31,12 +31,13 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyColors.backgroundcolor,
-        body: Observer(builder: (context) {
-          return Column(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 80, 120, 32),
-              child: GenericTextField(
+      backgroundColor: MyColors.backgroundcolor,
+      body: SingleChildScrollView(
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 80, 120, 32),
+            child: Observer(builder: (_) {
+              return GenericTextField(
                 textInputAction: TextInputAction.done,
                 onChanged: _controller.storeCityTyped,
                 suffixIconButton: Icons.search,
@@ -46,29 +47,31 @@ class _FavoritePageState extends State<FavoritePage> {
                     //! fazer algo
                     return;
                   }
-                  await Modular.to
-                      .pushNamed('/home/', arguments: _controller.searchedCity);
+                  await Modular.to.pushReplacementNamed('/home/',
+                      arguments: _controller.searchedCity);
                 },
-              ),
+              );
+            }),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'My Locations',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                const CustomToggleTemperature(
+                  minWidth: 40.0,
+                  minHeight: 40.0,
+                )
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'My Locations',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                  const CustomToggleTemperature(
-                    minWidth: 40.0,
-                    minHeight: 40.0,
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(height: 30),
-            ListView.builder(
+          ),
+          const SizedBox(height: 30),
+          Observer(builder: (_) {
+            return ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               itemCount: _controller.favoriteCities.length,
               shrinkWrap: true,
@@ -77,18 +80,20 @@ class _FavoritePageState extends State<FavoritePage> {
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: CustomFavoriteCard(
                     onTap: () {
-                      Modular.to.pushNamed('/home/',
+                      Modular.to.pushReplacementNamed('/home/',
                           arguments: _controller.favoriteCities[index]);
                     },
                     cityName: _controller.favoriteCities[index].cityName!,
                     countryName: _controller.favoriteCities[index].countryName!,
-                    temperature: _controller.favoriteCities[index].temperature
-                        .toString(),
+                    temperature:
+                        _controller.favoriteCities[index].temperature!.toInt(),
                   ),
                 );
               },
-            )
-          ]);
-        }));
+            );
+          })
+        ]),
+      ),
+    );
   }
 }
