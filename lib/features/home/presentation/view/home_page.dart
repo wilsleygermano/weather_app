@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _controller = Modular.get<HomePageController>();
+  final _favoriteController = Modular.get<FavoritePageController>();
 
   @override
   void initState() {
@@ -52,9 +53,11 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       children: [
                         IconButton(
-                            onPressed: () =>
-                                Modular.to.pushReplacementNamed("/favorites/"),
-                            icon: Icon(Icons.arrow_back_ios), color: MyColors.primarywhite,),
+                          onPressed: () =>
+                              Modular.to.pushReplacementNamed("/favorites/"),
+                          icon: Icon(Icons.arrow_back_ios),
+                          color: MyColors.primarywhite,
+                        ),
                         Flexible(
                           child: GenericTextField(
                               textInputAction: TextInputAction.done,
@@ -73,7 +76,8 @@ class _HomePageState extends State<HomePage> {
                     HomeMainCard(
                       cityName: _controller.searchedCity.cityName!,
                       dateTime: _controller.mainDate,
-                      temperature: _controller.searchedCity.temperature!.toInt(),
+                      temperature:
+                          _controller.searchedCity.temperature!.toInt(),
                       humidity: _controller.searchedCity.humidity!,
                       windSpeed: _controller.searchedCity.windSpeed!,
                       feelsLike: _controller.searchedCity.feelsLike!,
@@ -86,6 +90,10 @@ class _HomePageState extends State<HomePage> {
                             _controller.searchedCity.cityName!,
                             _controller.searchedCity.countryName,
                             _controller.searchedCity.temperature);
+
+                        setState(() {
+                          _favoriteController.streamFavoriteCities();
+                        });
                       },
                       isFavorited: _controller.isFavorited,
                     ),

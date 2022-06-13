@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobx/mobx.dart';
 import 'package:weather_app/core/design/my_colors.dart';
 import 'package:weather_app/core/widgets/custom_toggle_temperature.dart';
 import 'package:weather_app/core/widgets/generic_text_field.dart';
@@ -24,7 +25,7 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   final _controller = Modular.get<FavoritePageController>();
-  final _favoriteStreamController = Modular.get<FavoritePageStreamController>();
+  // final _favoriteStreamController = Modular.get<FavoritePageStreamController>();
 
   @override
   void initState() {
@@ -33,7 +34,7 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   _setupPage() async* {
-    yield _favoriteStreamController.streamFavoriteCities();
+    yield _controller.streamFavoriteCities();
   }
 
   @override
@@ -84,90 +85,94 @@ class _FavoritePageState extends State<FavoritePage> {
               ),
             ),
             const SizedBox(height: 30),
-            StreamBuilder<List<CityEntity>>(
-              stream: _favoriteStreamController.streamFavoriteCities(),
-              builder: ((context, snapshot) {
-                List<Widget> children;
-                if (snapshot.hasError) {
-                  return Center(child: Text("Something went wrong"));
-                } else {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      children = <Widget>[
-                        const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.purple,
-                            strokeWidth: 8.0,
-                          ),
-                        ),
-                      ];
-                      break;
+            Observer(
+              builder: (context) {
+                return StreamBuilder<List<CityEntity>>(
+                  stream: _controller.streamFavoriteCities(),
+                  builder: ((context, snapshot) {
+                    List<Widget> children;
+                    if (snapshot.hasError) {
+                      return Center(child: Text("Something went wrong"));
+                    } else {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                          children = <Widget>[
+                            const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.purple,
+                                strokeWidth: 8.0,
+                              ),
+                            ),
+                          ];
+                          break;
 
-                    case ConnectionState.none:
-                      children = <Widget>[
-                        const Center(child: Text("Don't know what happened"))
-                      ];
+                        case ConnectionState.none:
+                          children = <Widget>[
+                            const Center(child: Text("Don't know what happened"))
+                          ];
 
-                      break;
-                    case ConnectionState.done:
-                      children = <Widget>[
-                        ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: snapshot.data!.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: CustomFavoriteCard(
-                                    onTap: () async {
-                                      await Modular.to.pushReplacementNamed(
-                                          '/home/',
-                                          arguments: snapshot.data![index]);
-                                    },
-                                    cityName: snapshot.data![index].cityName!,
-                                    countryName:
-                                        snapshot.data![index].countryName!,
-                                    temperature: snapshot
-                                        .data![index].temperature!
-                                        .toInt(),
-                                  ));
-                            })
-                      ];
+                          break;
+                        case ConnectionState.done:
+                          children = <Widget>[
+                            ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: snapshot.data!.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                      padding: const EdgeInsets.only(bottom: 16.0),
+                                      child: CustomFavoriteCard(
+                                        onTap: () async {
+                                          await Modular.to.pushNamed(
+                                              '/home/',
+                                              arguments: snapshot.data![index]);
+                                        },
+                                        cityName: snapshot.data![index].cityName!,
+                                        countryName:
+                                            snapshot.data![index].countryName!,
+                                        temperature: snapshot
+                                            .data![index].temperature!
+                                            .toInt(),
+                                      ));
+                                })
+                          ];
 
-                      break;
-                    case ConnectionState.active:
-                      children = [
-                        const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.yellow,
-                            strokeWidth: 8.0,
-                          ),
-                        )
-                      ];
-                      break;
-                  }
-                }
+                          break;
+                        case ConnectionState.active:
+                          children = [
+                            const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.yellow,
+                                strokeWidth: 8.0,
+                              ),
+                            )
+                          ];
+                          break;
+                      }
+                    }
 
-                // if (snapshot.hasError) {
-                //   return Center(
-                //     child: Text("Error${snapshot.error}"),
-                //   );
-                // }
-                // if (snapshot.data == null) {
+                    // if (snapshot.hasError) {
+                    //   return Center(
+                    //     child: Text("Error${snapshot.error}"),
+                    //   );
+                    // }
+                    // if (snapshot.data == null) {
 
-                // }
-                // if (snapshot.connectionState == ConnectionState.waiting) {
+                    // }
+                    // if (snapshot.connectionState == ConnectionState.waiting) {
 
-                // }
-                // return const Center(
-                //   child: CircularProgressIndicator(
-                //     color: Colors.yellow,
-                //     strokeWidth: 8.0,
-                //   ));
-                return Column(
-                  children: children,
+                    // }
+                    // return const Center(
+                    //   child: CircularProgressIndicator(
+                    //     color: Colors.yellow,
+                    //     strokeWidth: 8.0,
+                    //   ));
+                    return Column(
+                      children: children,
+                    );
+                  }),
                 );
-              }),
+              }
             ),
           ],
         ),

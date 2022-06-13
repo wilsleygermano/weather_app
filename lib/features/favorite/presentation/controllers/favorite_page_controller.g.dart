@@ -185,6 +185,12 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
+  @override
+  ObservableStream<List<CityEntity>> streamFavoriteCities() {
+    final _$stream = super.streamFavoriteCities();
+    return ObservableStream<List<CityEntity>>(_$stream, context: context);
+  }
+
   late final _$fetchSearchedCityAsyncAction = AsyncAction(
       '_FavoritePageControllerBase.fetchSearchedCity',
       context: context);
