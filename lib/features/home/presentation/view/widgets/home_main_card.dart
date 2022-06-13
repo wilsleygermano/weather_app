@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:weather_app/core/design/my_colors.dart';
 import 'package:weather_app/core/widgets/custom_toggle_temperature.dart';
 import 'package:weather_app/core/widgets/glassmorphism.dart';
 import 'package:weather_app/features/home/presentation/view/widgets/column_main_card.dart';
@@ -15,6 +16,10 @@ class HomeMainCard extends StatelessWidget {
   final String unitSymbol;
   final Function() onPressed;
   final bool isFavorited;
+  final int dayMinimum;
+  final int dayMaximum;
+  final String weather;
+
   const HomeMainCard({
     Key? key,
     required this.cityName,
@@ -26,6 +31,9 @@ class HomeMainCard extends StatelessWidget {
     required this.unitSymbol,
     required this.onPressed,
     required this.isFavorited,
+    required this.dayMinimum,
+    required this.dayMaximum,
+    required this.weather,
   }) : super(key: key);
 
   @override
@@ -33,42 +41,69 @@ class HomeMainCard extends StatelessWidget {
     return GlassMorphism(
         child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Observer(
-              builder: (context) {
-                return Column(
-                  children: [
-                    Row(
+            child: Observer(builder: (context) {
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      FavoriteButton(
+                          onPressed: onPressed, isFavorited: isFavorited)
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            dateTime,
+                            style: Theme.of(context).textTheme.headline2,
+                          ),
+                          Text(
+                            cityName,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 42),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const CustomToggleTemperature(
-                          minWidth: 20.0,
-                          minHeight: 20.0,
-                        ),
-                        FavoriteButton(
-                            onPressed: onPressed, isFavorited: isFavorited)
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Column(
                           children: [
-                            Text(
-                              dateTime,
-                              style: Theme.of(context).textTheme.headline2,
+                            Row(
+                              children: [
+                                Text(
+                                  "$dayMaximum",
+                                  style: Theme.of(context).textTheme.headline3!,
+                                ),
+                                Icon(
+                                  Icons.arrow_upward_outlined,
+                                  size: 16,
+                                  color: MyColors.primarywhite,
+                                ),
+                              ],
                             ),
-                            Text(
-                              cityName,
-                              style: Theme.of(context).textTheme.headline6,
+                            Row(
+                              children: [
+                                Text(
+                                  "$dayMinimum",
+                                  style: Theme.of(context).textTheme.headline3!,
+                                ),
+                                Icon(
+                                  Icons.arrow_downward_outlined,
+                                  size: 16,
+                                  color: MyColors.primarywhite,
+                                ),
+                              ],
                             ),
                           ],
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 42),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                        ),
                         Text(
                           "${temperature.toInt()} $unitSymbol",
                           style: Theme.of(context)
@@ -76,28 +111,40 @@ class HomeMainCard extends StatelessWidget {
                               .headline1!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  "lib/assets/weather_icons/$weather.png"),
+                            ),
+                          ),
+                        )
                       ],
                     ),
-                    const SizedBox(height: 42),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ColumnMainCard(
-                            valueName: 'Humidity', value: humidity, valueUnit: '%'),
-                        ColumnMainCard(
-                            valueName: 'Wind speed',
-                            value: windSpeed,
-                            valueUnit: ' km/h'),
-                        ColumnMainCard(
-                            valueName: 'Feels like',
-                            value: feelsLike,
-                            valueUnit: ' º'),
-                      ],
-                    )
-                  ],
-                );
-              }
-            )),
+                  ),
+                  const SizedBox(height: 42),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ColumnMainCard(
+                          valueName: 'Humidity',
+                          value: humidity,
+                          valueUnit: '%'),
+                      ColumnMainCard(
+                          valueName: 'Wind speed',
+                          value: windSpeed,
+                          valueUnit: ' km/h'),
+                      ColumnMainCard(
+                          valueName: 'Feels like',
+                          value: feelsLike,
+                          valueUnit: ' º'),
+                    ],
+                  )
+                ],
+              );
+            })),
         start: 0.3,
         end: 0.1,
         borderRadius: 20);

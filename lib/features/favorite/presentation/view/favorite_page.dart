@@ -42,11 +42,12 @@ class _FavoritePageState extends State<FavoritePage> {
                 suffixIconButton: Icons.search,
                 iconButtonPressed: () async {
                   final resource = await _controller.fetchSearchedCity();
-                  if(resource.hasError) {
+                  if (resource.hasError) {
                     //! fazer algo
                     return;
                   }
-                  await Modular.to.pushNamed('/home/', arguments: _controller.searchedCity);
+                  await Modular.to
+                      .pushNamed('/home/', arguments: _controller.searchedCity);
                 },
               ),
             ),
@@ -73,17 +74,18 @@ class _FavoritePageState extends State<FavoritePage> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: CustomFavoriteCard(
-                      onTap: () {
-                        Modular.to.pushNamed('/home/', arguments: _controller.favoriteCities[index]);
-                      },
-                      cityName: _controller.favoriteCities[index].cityName!,
-                      countryName:
-                          _controller.favoriteCities[index].countryName!,
-                      temperature:
-                          _controller.favoriteCities[index].temperature.toString(),
-                    ));
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: CustomFavoriteCard(
+                    onTap: () {
+                      Modular.to.pushNamed('/home/',
+                          arguments: _controller.favoriteCities[index]);
+                    },
+                    cityName: _controller.favoriteCities[index].cityName!,
+                    countryName: _controller.favoriteCities[index].countryName!,
+                    temperature: _controller.favoriteCities[index].temperature
+                        .toString(),
+                  ),
+                );
               },
             )
           ]);
