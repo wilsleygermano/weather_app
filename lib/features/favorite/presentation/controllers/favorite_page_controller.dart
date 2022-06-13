@@ -71,13 +71,13 @@ abstract class _FavoritePageControllerBase with Store {
   @action
   void changeTemperatureUnitToImperial() {
     temperatureUnit = "imperial";
-    initialLabelIndex = 1;
+    // initialLabelIndex = 1;
   }
 
   @action
   void changeTemperatureUnitToMetric() {
     temperatureUnit = "metric";
-    initialLabelIndex = 0;
+    // initialLabelIndex = 0;
   }
 
   @action

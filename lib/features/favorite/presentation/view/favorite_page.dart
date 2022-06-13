@@ -57,9 +57,9 @@ class _FavoritePageState extends State<FavoritePage> {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 16, top: 48),
-                  child: DropdownMenu(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 16, top: 48),
+                  child: DropdownMenu(changeToCelsius: _controller.changeTemperatureUnitToMetric),
                 )
               ],
             ),
