@@ -137,8 +137,8 @@ abstract class _HomePageControllerBase with Store {
     return wordWithAccents;
   }
 
-  @observable
-  String temperatureUnit = "imperial";
+  // @observable
+  // String temperatureUnit = "imperial";
   
   @observable
   String city = '';
@@ -150,7 +150,7 @@ abstract class _HomePageControllerBase with Store {
   void storeCityTyped(String newValue) => city = newValue;
 
   @action
-  Future<Resource<void, ApiCallError>> fetchSearchedCity() async {
+  Future<Resource<void, ApiCallError>> fetchSearchedCity(String temperatureUnit) async {
     final cityWithoutAccents = removeAccents(city);
     cityWithoutAccents.replaceAll(" ", '%20').toLowerCase();
 

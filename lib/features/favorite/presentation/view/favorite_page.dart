@@ -82,7 +82,7 @@ class _FavoritePageState extends State<FavoritePage> {
               if (_controller.favoriteCities.isEmpty) {
                 return Center(
                   child: Text(
-                    "You still have no favorite locations to show.\n"
+                    "You still don't have favorite locations to show.\n"
                     "\n"
                     "Try searching for a place first.",
                     style: Theme.of(context).textTheme.headline6,

@@ -109,22 +109,6 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
     });
   }
 
-  late final _$temperatureUnitAtom =
-      Atom(name: '_HomePageControllerBase.temperatureUnit', context: context);
-
-  @override
-  String get temperatureUnit {
-    _$temperatureUnitAtom.reportRead();
-    return super.temperatureUnit;
-  }
-
-  @override
-  set temperatureUnit(String value) {
-    _$temperatureUnitAtom.reportWrite(value, super.temperatureUnit, () {
-      super.temperatureUnit = value;
-    });
-  }
-
   late final _$cityAtom =
       Atom(name: '_HomePageControllerBase.city', context: context);
 
@@ -183,8 +167,10 @@ mixin _$HomePageController on _HomePageControllerBase, Store {
       context: context);
 
   @override
-  Future<Resource<void, ApiCallError>> fetchSearchedCity() {
-    return _$fetchSearchedCityAsyncAction.run(() => super.fetchSearchedCity());
+  Future<Resource<void, ApiCallError>> fetchSearchedCity(
+      String temperatureUnit) {
+    return _$fetchSearchedCityAsyncAction
+        .run(() => super.fetchSearchedCity(temperatureUnit));
   }
 
   late final _$_HomePageControllerBaseActionController =
@@ -276,7 +262,6 @@ fiveDaysForecastDate3: ${fiveDaysForecastDate3},
 fiveDaysForecastDate4: ${fiveDaysForecastDate4},
 fiveDaysForecastDate5: ${fiveDaysForecastDate5},
 isFavorited: ${isFavorited},
-temperatureUnit: ${temperatureUnit},
 city: ${city},
 searchedCity: ${searchedCity}
     ''';

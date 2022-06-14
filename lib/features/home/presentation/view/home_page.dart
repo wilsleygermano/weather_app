@@ -44,45 +44,46 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: MyColors.backgroundcolor,
         body: SafeArea(
           child: Center(
-            child: Observer(builder: (context) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () => Modular.to
-                              .pushReplacementNamed("/favorites/")
-                              .whenComplete(() =>
-                                  _favoriteController.getFavoriteCities()),
-                          icon: const Icon(Icons.arrow_back_ios),
-                          color: MyColors.primarywhite,
-                        ),
-                        Flexible(
-                          child: GenericTextField(
-                              textInputAction: TextInputAction.done,
-                              onChanged: _controller.storeCityTyped,
-                              suffixIconButton: Icons.search,
-                              iconButtonPressed: () async {
-                                setState(() async {
-                                  await _controller.fetchSearchedCity();
-                                  await _controller.checkIfACityIsFavorited(
-                                      _controller.searchedCity.cityName!);
-                                });
-                              }),
-                        ),
-                      ],
-                    ),
-                    HomeMainCard(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Modular.to
+                            .pushReplacementNamed("/favorites/")
+                            .whenComplete(
+                                () => _favoriteController.getFavoriteCities()),
+                        icon: const Icon(Icons.arrow_back_ios),
+                        color: MyColors.primarywhite,
+                      ),
+                      Flexible(
+                        child: Observer(builder: (_) {
+                          return GenericTextField(
+                            textInputAction: TextInputAction.done,
+                            onChanged: _controller.storeCityTyped,
+                            suffixIconButton: Icons.search,
+                            iconButtonPressed: () async {
+                              await _controller.fetchSearchedCity(_favoriteController.temperatureUnit);
+                              await _controller.checkIfACityIsFavorited(
+                              _controller.searchedCity.cityName!);
+                            },
+                          );
+                        }),
+                      ),
+                    ],
+                  ),
+                  Observer(builder: (_) {
+                    return HomeMainCard(
                       cityName: _controller.searchedCity.cityName!,
                       dateTime: _controller.mainDate,
                       temperature:
                           _controller.searchedCity.temperature!.toInt(),
                       humidity: _controller.searchedCity.humidity!,
                       windSpeed: _controller.searchedCity.windSpeed!,
-                      feelsLike: _controller.searchedCity.feelsLike!,
+                      feelsLike: _controller.searchedCity.feelsLike!.toInt(),
                       unitSymbol: _favoriteController.unitSymbol,
                       dayMaximum: _controller.searchedCity.tempMax!.toInt(),
                       dayMinimum: _controller.searchedCity.tempMin!.toInt(),
@@ -95,8 +96,10 @@ class _HomePageState extends State<HomePage> {
                         _favoriteController.getFavoriteCities();
                       },
                       isFavorited: _controller.isFavorited,
-                    ),
-                    HomeForecastNextDaysCard(
+                    );
+                  }),
+                  Observer(builder: (_) {
+                    return HomeForecastNextDaysCard(
                       weather2: _controller.searchedCity.weather2!,
                       weather3: _controller.searchedCity.weather3!,
                       weather4: _controller.searchedCity.weather4!,
@@ -113,12 +116,12 @@ class _HomePageState extends State<HomePage> {
                       dateTimeDay5: _controller.fiveDaysForecastDate5,
                       temperatureDay5:
                           _controller.searchedCity.temperatureDay5!,
-                      unitSymbol: _favoriteController.unitSymbol, 
-                    )
-                  ],
-                ),
-              );
-            }),
+                      unitSymbol: _favoriteController.unitSymbol,
+                    );
+                  })
+                ],
+              ),
+            ),
           ),
         ));
   }
