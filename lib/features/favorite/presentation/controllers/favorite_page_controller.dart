@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:weather_app/core/generics/resource.dart';
@@ -80,64 +81,93 @@ abstract class _FavoritePageControllerBase with Store {
   String unitSymbol = "ºF";
 
   @action
-  Future<void> changeTemperatureUnitToImperial() async{
+  Future<void> changeTemperatureUnitToImperial() async {
     temperatureUnit = "imperial";
   }
 
   @action
-  Future<void> changeTemperatureUnitToMetric() async{
+  Future<void> changeTemperatureUnitToMetric() async {
     temperatureUnit = "metric";
   }
 
   @action
-  Future<void> changeUnitSymbolToMetric() async{
+  Future<void> changeUnitSymbolToMetric() async {
     unitSymbol = "ºC";
   }
 
   @action
-  Future<void> changeUnitSymbolToImperial() async{
+  Future<void> changeUnitSymbolToImperial() async {
     unitSymbol = "ºF";
   }
 
-
-  @observable
-  Stream<List<CityEntity>> streamFavoriteCities() async* {
+  @action
+  Future<ObservableList<CityEntity>> getFavoriteCities() async {
     final cities = await FirebaseFirestore.instance
         .collection("Users")
         .doc(currentUserId)
         .collection("favorite_places")
         .get();
 
-    final streamFavList = List<CityEntity>.from(
-        cities.docs.map((e) => CityEntity.fromFirestore(e.data())));
+    favoriteCities = cities.docs
+        .map((e) => CityEntity.fromFirestore(e.data()))
+        .toList()
+        .asObservable();
+
     ObservableList<CityEntity> provisoryCityList =
         <CityEntity>[].asObservable();
-    for (var city in streamFavList) {
+
+    for (var city in favoriteCities) {
       final newCity = city.cityName!.replaceAll(" ", '%20').toLowerCase();
       final cityWithoutAccents = removeAccents(newCity);
       final resource =
           await _useCase.returnCityValues(cityWithoutAccents, temperatureUnit);
       if (resource.hasError) {
-        //fazer algo a respeito
+        Center(
+          child: Text("${ApiCallError.apiError}"),
+        );
       }
+      if (resource.status == Status.loading) {
+        const Center(
+          child: CircularProgressIndicator(
+            color: Colors.purple,
+            strokeWidth: 8.0,
+          ),
+        );
+      }
+
       final cityData = resource.data;
       provisoryCityList.add(cityData!);
     }
+
     favoriteCities = provisoryCityList;
-    yield favoriteCities;
+
+    return favoriteCities;
   }
 
+  @action
   Future<void> caseCelsius() async {
     await changeTemperatureUnitToMetric();
+    await getFavoriteCities();
     await changeUnitSymbolToMetric();
-    streamFavoriteCities();
     await fetchSearchedCity();
   }
 
+  @action
   Future<void> caseFahrenheit() async {
     await changeTemperatureUnitToImperial();
     await changeUnitSymbolToImperial();
-    streamFavoriteCities();
+    await getFavoriteCities();
     await fetchSearchedCity();
   }
+
+  @action
+  Future<void> deleteFavoriteCard(String cityToDelete) async {
+    await FirebaseFirestore.instance
+            .collection("Users")
+            .doc(currentUserId)
+            .collection("favorite_places")
+            .doc(cityToDelete)
+            .delete();
+  }
+
 }

@@ -169,12 +169,6 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
     });
   }
 
-  @override
-  ObservableStream<List<CityEntity>> streamFavoriteCities() {
-    final _$stream = super.streamFavoriteCities();
-    return ObservableStream<List<CityEntity>>(_$stream, context: context);
-  }
-
   late final _$fetchSearchedCityAsyncAction = AsyncAction(
       '_FavoritePageControllerBase.fetchSearchedCity',
       context: context);
@@ -222,6 +216,42 @@ mixin _$FavoritePageController on _FavoritePageControllerBase, Store {
   Future<void> changeUnitSymbolToImperial() {
     return _$changeUnitSymbolToImperialAsyncAction
         .run(() => super.changeUnitSymbolToImperial());
+  }
+
+  late final _$getFavoriteCitiesAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.getFavoriteCities',
+      context: context);
+
+  @override
+  Future<ObservableList<CityEntity>> getFavoriteCities() {
+    return _$getFavoriteCitiesAsyncAction.run(() => super.getFavoriteCities());
+  }
+
+  late final _$caseCelsiusAsyncAction =
+      AsyncAction('_FavoritePageControllerBase.caseCelsius', context: context);
+
+  @override
+  Future<void> caseCelsius() {
+    return _$caseCelsiusAsyncAction.run(() => super.caseCelsius());
+  }
+
+  late final _$caseFahrenheitAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.caseFahrenheit',
+      context: context);
+
+  @override
+  Future<void> caseFahrenheit() {
+    return _$caseFahrenheitAsyncAction.run(() => super.caseFahrenheit());
+  }
+
+  late final _$deleteFavoriteCardAsyncAction = AsyncAction(
+      '_FavoritePageControllerBase.deleteFavoriteCard',
+      context: context);
+
+  @override
+  Future<void> deleteFavoriteCard(String cityToDelete) {
+    return _$deleteFavoriteCardAsyncAction
+        .run(() => super.deleteFavoriteCard(cityToDelete));
   }
 
   late final _$_FavoritePageControllerBaseActionController =

@@ -2,14 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:weather_app/core/design/my_colors.dart';
 import 'package:weather_app/core/widgets/generic_text_field.dart';
-import 'package:weather_app/features/favorite/domain/entities/city_entity.dart';
 import 'package:weather_app/features/favorite/presentation/controllers/favorite_page_controller.dart';
 import 'package:weather_app/features/favorite/presentation/view/widgets/custom_favorite_card.dart';
 import 'package:weather_app/features/favorite/presentation/view/widgets/dropdown_menu.dart';
-import 'package:weather_app/features/home/presentation/controller/home_page_controller.dart';
-import 'dart:async';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
@@ -20,24 +18,20 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   final _controller = Modular.get<FavoritePageController>();
-  // final _favoriteStreamController = Modular.get<FavoritePageStreamController>();
 
   @override
   void initState() {
-    _setupPage();
+    _controller.getFavoriteCities();
     super.initState();
-  }
-
-  _setupPage() async* {
-    yield _controller.streamFavoriteCities();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyColors.backgroundcolor,
-        body: SingleChildScrollView(
-          child: Column(children: [
+      backgroundColor: MyColors.backgroundcolor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -65,12 +59,9 @@ class _FavoritePageState extends State<FavoritePage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 16, top: 48),
-                  child: Observer(
-                    builder: (context) {
-                      return DropdownMenu(
-                        );
-                    }
-                  ),
+                  child: Observer(builder: (context) {
+                    return const DropdownMenu();
+                  }),
                 )
               ],
             ),
@@ -83,91 +74,150 @@ class _FavoritePageState extends State<FavoritePage> {
                     'My Locations',
                     style: Theme.of(context).textTheme.headline4,
                   ),
-                  IconButton(
-                      onPressed: () async {
-                        await FirebaseAuth.instance.signOut();
-                        await Modular.to.pushReplacementNamed("/");
-                      },
-                      icon: const Icon(Icons.exit_to_app))
                 ],
               ),
             ),
             const SizedBox(height: 30),
             Observer(builder: (context) {
-              return StreamBuilder<List<CityEntity>>(
-                stream: _controller.streamFavoriteCities(),
-                builder: ((context, snapshot) {
-                  List<Widget> children;
-                  if (snapshot.hasError) {
-                    return const Center(child: Text("Something went wrong"));
-                  } else {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        children = <Widget>[
-                          const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.purple,
-                              strokeWidth: 8.0,
-                            ),
+              if (_controller.favoriteCities.isEmpty) {
+                return Center(
+                  child: Text(
+                    "You still have no favorite locations to show.\n"
+                    "\n"
+                    "Try searching for a place first.",
+                    style: Theme.of(context).textTheme.headline6,
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: _controller.favoriteCities.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Slidable(
+                      key: const ValueKey(0),
+                      startActionPane: ActionPane(
+                        extentRatio: 0.2,
+                        motion: const StretchMotion(),
+                    
+                        children: [
+                          // A SlidableAction can have an icon and/or a label.
+                          SlidableAction(
+                            onPressed: (context) {
+                              _controller.deleteFavoriteCard(
+                                  _controller.favoriteCities[index].cityName!);
+                              setState(() {
+                                _controller.getFavoriteCities();
+                              });
+                            },
+                            backgroundColor: MyColors.primarywhite,
+                            foregroundColor: MyColors.backgroundcolor,
+                            icon: Icons.delete,
+                            label: 'Delete',
                           ),
-                        ];
-                        break;
-
-                      case ConnectionState.none:
-                        children = <Widget>[
-                          const Center(child: Text("Don't know what happened"))
-                        ];
-
-                        break;
-                      case ConnectionState.done:
-                        children = <Widget>[
-                          ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: snapshot.data!.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 16.0),
-                                    child: CustomFavoriteCard(
-                                      onTap: () async {
-                                        await Modular.to
-                                            .pushReplacementNamed('/home/',
-                                                arguments:
-                                                    snapshot.data![index])
-                                            .whenComplete(() => _controller
-                                                .streamFavoriteCities());
-                                      },
-                                      cityName: snapshot.data![index].cityName!,
-                                      countryName:
-                                          snapshot.data![index].countryName!,
-                                      temperature: snapshot
-                                          .data![index].temperature!
-                                          .toInt(),
-                                          unitSymbol: _controller.unitSymbol,
-                                    ));
-                              })
-                        ];
-
-                        break;
-                      case ConnectionState.active:
-                        children = [
-                          const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.yellow,
-                              strokeWidth: 8.0,
-                            ),
-                          )
-                        ];
-                        break;
-                    }
-                  }
-                  return Column(
-                    children: children,
+                        ],
+                      ),
+                      child: CustomFavoriteCard(
+                        onTap: () async {
+                          Future.delayed(Duration(seconds: 2));
+                          await Modular.to
+                              .pushReplacementNamed('/home/',
+                                  arguments: _controller.favoriteCities[index])
+                              .whenComplete(
+                                  () => _controller.getFavoriteCities());
+                        },
+                        cityName: _controller.favoriteCities[index].cityName!,
+                        countryName:
+                            _controller.favoriteCities[index].countryName!,
+                        temperature: _controller
+                            .favoriteCities[index].temperature!
+                            .toInt(),
+                        unitSymbol: _controller.unitSymbol,
+                      ),
+                    ),
                   );
-                }),
+                },
               );
-            }),
+            })
+
+            // Observer(builder: (context) {
+            //   return FutureBuilder<List<CityEntity>>(
+            //     future: _controller.getFavoriteCities(),
+            //     builder: ((context, snapshot) {
+            //       List<Widget> children;
+            //       if (snapshot.hasError) {
+            //         return const Center(child: Text("Something went wrong"));
+            //       } else {
+            //         switch (snapshot.connectionState) {
+            //           case ConnectionState.waiting:
+            //             children = <Widget>[
+            //               const Center(
+            //                 child: CircularProgressIndicator(
+            //                   color: Colors.purple,
+            //                   strokeWidth: 8.0,
+            //                 ),
+            //               ),
+            //             ];
+            //             break;
+
+            //           case ConnectionState.none:
+            //             children = <Widget>[
+            //               const Center(child: Text("Don't know what happened"))
+            //             ];
+
+            //             break;
+            //           case ConnectionState.done:
+            //             children = <Widget>[
+            //               ListView.builder(
+            //                   physics: const NeverScrollableScrollPhysics(),
+            //                   itemCount: snapshot.data!.length,
+            //                   shrinkWrap: true,
+            //                   itemBuilder: (context, index) {
+            //                     return Padding(
+            //                         padding:
+            //                             const EdgeInsets.only(bottom: 16.0),
+            //                         child: CustomFavoriteCard(
+            //                           onTap: () async {
+            //                             await Modular.to
+            //                                 .pushReplacementNamed('/home/',
+            //                                     arguments:
+            //                                         snapshot.data![index])
+            //                                 .whenComplete(() => _controller
+            //                                     .getFavoriteCities());
+            //                           },
+            //                           cityName: snapshot.data![index].cityName!,
+            //                           countryName:
+            //                               snapshot.data![index].countryName!,
+            //                           temperature: snapshot
+            //                               .data![index].temperature!
+            //                               .toInt(),
+            //                           unitSymbol: _controller.unitSymbol,
+            //                         ));
+            // //                   })
+            //             ];
+
+            //             break;
+            //           case ConnectionState.active:
+            //             children = [
+            //               const Center(
+            //                 child: CircularProgressIndicator(
+            //                   color: Colors.yellow,
+            //                   strokeWidth: 8.0,
+            //                 ),
+            //               )
+            //             ];
+            //             break;
+            //         }
+            //       }
+            //       return Column(
+            //         children: children,
+            //       );
+            //     }),
+            //   );
+            // }),
           ],
         ),
       ),
