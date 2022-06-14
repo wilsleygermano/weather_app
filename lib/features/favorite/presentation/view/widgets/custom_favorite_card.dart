@@ -6,13 +6,15 @@ class CustomFavoriteCard extends StatelessWidget {
   final String countryName;
   final int temperature;
   final void Function() onTap;
+
+  final String unitSymbol;
   const CustomFavoriteCard({
     Key? key,
     required this.cityName,
     required this.onTap,
-
     required this.countryName,
     required this.temperature,
+    required this.unitSymbol,
   }) : super(key: key);
 
   @override
@@ -64,7 +66,11 @@ class CustomFavoriteCard extends StatelessWidget {
                                 .textTheme
                                 .headline3!
                                 .copyWith(fontWeight: FontWeight.bold),
-                          )
+                          ),
+                          Text(
+                            unitSymbol,
+                            style: Theme.of(context).textTheme.headline5,
+                          ),
                         ],
                       ),
                     )

@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () => Modular.to
                               .pushReplacementNamed("/favorites/")
                               .whenComplete(() =>
-                                  _favoriteController.streamFavoriteCities()),
+                                  _favoriteController.getFavoriteCities()),
                           icon: const Icon(Icons.arrow_back_ios),
                           color: MyColors.primarywhite,
                         ),
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                       humidity: _controller.searchedCity.humidity!,
                       windSpeed: _controller.searchedCity.windSpeed!,
                       feelsLike: _controller.searchedCity.feelsLike!,
-                      unitSymbol: "C", //! LIDAR COM ISSO
+                      unitSymbol: _favoriteController.unitSymbol,
                       dayMaximum: _controller.searchedCity.tempMax!.toInt(),
                       dayMinimum: _controller.searchedCity.tempMin!.toInt(),
                       weather: _controller.searchedCity.weather!,
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                             _controller.searchedCity.cityName!,
                             _controller.searchedCity.countryName,
                             _controller.searchedCity.temperature);
-                        _favoriteController.streamFavoriteCities();
+                        _favoriteController.getFavoriteCities();
                       },
                       isFavorited: _controller.isFavorited,
                     ),
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                       dateTimeDay5: _controller.fiveDaysForecastDate5,
                       temperatureDay5:
                           _controller.searchedCity.temperatureDay5!,
-                      unitSymbol: "C", //! replace this
+                      unitSymbol: _favoriteController.unitSymbol, 
                     )
                   ],
                 ),
