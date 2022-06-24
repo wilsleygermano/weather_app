@@ -13,7 +13,7 @@ class AppModule extends Module {
         Bind<RemoteClient>(
           (i) => DioRemoteClient(),
         ),
-        Bind<FavoritePageController>((i) => FavoritePageController(),),
+        Bind<FavoritePageController>((i) => FavoritePageController(), isSingleton: false),
         Bind<HomePageController>((i) => HomePageController(),),
       ];
 

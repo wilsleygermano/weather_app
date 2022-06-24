@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       IconButton(
                         onPressed: () => Modular.to
-                            .pushReplacementNamed("/favorites/")
+                            .pushNamed("/favorites/")
                             .whenComplete(
                                 () => _favoriteController.getFavoriteCities()),
                         icon: const Icon(Icons.arrow_back_ios),
